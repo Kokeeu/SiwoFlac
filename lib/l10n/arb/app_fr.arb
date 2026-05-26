@@ -1896,7 +1896,7 @@
       }
     }
   },
-  "extensionsInstallPartialSuccess": "Installed {installed} of {attempted} extensions",
+  "extensionsInstallPartialSuccess": "{installed} extensions sur {attempted}",
   "@extensionsInstallPartialSuccess": {
     "description": "Message when installing multiple extensions partially succeeds",
     "placeholders": {
@@ -2150,23 +2150,23 @@
   "@albumFolderYearAlbumSubtitle": {
     "description": "Folder structure example"
   },
-  "albumFolderArtistAlbumSingles": "Artist / Album + Singles",
+  "albumFolderArtistAlbumSingles": "Artiste / Album + Singles",
   "@albumFolderArtistAlbumSingles": {
     "description": "Album folder option with singles inside artist"
   },
-  "albumFolderArtistAlbumSinglesSubtitle": "Artist/Album/ and Artist/Singles/",
+  "albumFolderArtistAlbumSinglesSubtitle": "Artiste/Album/ et Artiste/Singles/",
   "@albumFolderArtistAlbumSinglesSubtitle": {
     "description": "Folder structure example"
   },
-  "albumFolderArtistAlbumFlat": "Artist / Album (Singles flat)",
+  "albumFolderArtistAlbumFlat": "Artiste / Album (singles)",
   "@albumFolderArtistAlbumFlat": {
     "description": "Album folder option with singles directly in artist folder"
   },
-  "albumFolderArtistAlbumFlatSubtitle": "Artist/Album/ and Artist/song.flac",
+  "albumFolderArtistAlbumFlatSubtitle": "Artiste/Album/ et Artiste/titre.flac",
   "@albumFolderArtistAlbumFlatSubtitle": {
     "description": "Folder structure example for flat singles"
   },
-  "downloadedAlbumDeleteSelected": "Delete Selected",
+  "downloadedAlbumDeleteSelected": "Supprimer la sélection",
   "@downloadedAlbumDeleteSelected": {
     "description": "Button - delete selected tracks"
   },
@@ -2188,11 +2188,11 @@
       }
     }
   },
-  "downloadedAlbumAllSelected": "All tracks selected",
+  "downloadedAlbumAllSelected": "Tous les titres sélectionnés",
   "@downloadedAlbumAllSelected": {
     "description": "Status - all items selected"
   },
-  "downloadedAlbumTapToSelect": "Tap tracks to select",
+  "downloadedAlbumTapToSelect": "Appuyez sur les titres pour les sélectionner",
   "@downloadedAlbumTapToSelect": {
     "description": "Selection hint"
   },
@@ -2235,7 +2235,7 @@
   "@recentTypePlaylist": {
     "description": "Recent access item type - playlist"
   },
-  "recentEmpty": "No recent items yet",
+  "recentEmpty": "Aucun élément récent pour le moment",
   "@recentEmpty": {
     "description": "Empty state text for recent access list"
   },
@@ -2483,7 +2483,7 @@
   "@libraryScanSubtitle": {
     "description": "Subtitle for scan button"
   },
-  "libraryScanSelectFolderFirst": "Select a folder first",
+  "libraryScanSelectFolderFirst": "Sélectionnez d'abord un dossier",
   "@libraryScanSelectFolderFirst": {
     "description": "Message when trying to scan without folder"
   },
@@ -2495,15 +2495,15 @@
   "@libraryCleanupMissingFilesSubtitle": {
     "description": "Subtitle for cleanup button"
   },
-  "libraryClear": "Clear Library",
+  "libraryClear": "Vider la bibliothèque",
   "@libraryClear": {
     "description": "Button to clear all library entries"
   },
-  "libraryClearSubtitle": "Remove all scanned tracks",
+  "libraryClearSubtitle": "Supprimez tous les titres numérisés",
   "@libraryClearSubtitle": {
     "description": "Subtitle for clear button"
   },
-  "libraryClearConfirmTitle": "Clear Library",
+  "libraryClearConfirmTitle": "Vider la bibliothèque",
   "@libraryClearConfirmTitle": {
     "description": "Dialog title for clear confirmation"
   },
@@ -2583,7 +2583,7 @@
       }
     }
   },
-  "libraryCleared": "Library cleared",
+  "libraryCleared": "Bibliothèque vidée",
   "@libraryCleared": {
     "description": "Snackbar after clearing library"
   },
@@ -2765,23 +2765,23 @@
   "@tutorialDownloadDesc": {
     "description": "Tutorial download page description"
   },
-  "tutorialLibraryTitle": "Your Library",
+  "tutorialLibraryTitle": "Votre bibliothèque",
   "@tutorialLibraryTitle": {
     "description": "Tutorial library page title"
   },
-  "tutorialLibraryDesc": "All your downloaded music is organized in the Library tab.",
+  "tutorialLibraryDesc": "Toute votre musique téléchargée est classée dans l'onglet « Bibliothèque ».",
   "@tutorialLibraryDesc": {
     "description": "Tutorial library page description"
   },
-  "tutorialLibraryTip1": "View download progress and queue in the Library tab",
+  "tutorialLibraryTip1": "Afficher la progression du téléchargement et la file d'attente dans l'onglet « Bibliothèque »",
   "@tutorialLibraryTip1": {
     "description": "Tutorial library tip 1"
   },
-  "tutorialLibraryTip2": "Tap any track to play it with your music player",
+  "tutorialLibraryTip2": "Appuyez sur n'importe quel morceau pour l'écouter avec votre lecteur de musique",
   "@tutorialLibraryTip2": {
     "description": "Tutorial library tip 2"
   },
-  "tutorialLibraryTip3": "Switch between list and grid view for better browsing",
+  "tutorialLibraryTip3": "Passez de l'affichage sous forme de liste à celui sous forme de grille pour faciliter la navigation",
   "@tutorialLibraryTip3": {
     "description": "Tutorial library tip 3"
   },
@@ -2789,7 +2789,7 @@
   "@tutorialExtensionsTitle": {
     "description": "Tutorial extensions page title"
   },
-  "tutorialExtensionsDesc": "Extend the app's capabilities with community extensions.",
+  "tutorialExtensionsDesc": "Élargissez les fonctionnalités de l'application grâce aux extensions de la communauté.",
   "@tutorialExtensionsDesc": {
     "description": "Tutorial extensions page description"
   },
@@ -2797,11 +2797,11 @@
   "@tutorialExtensionsTip1": {
     "description": "Tutorial extensions tip 1"
   },
-  "tutorialExtensionsTip2": "Add new download providers or search sources",
+  "tutorialExtensionsTip2": "Ajouter de nouveaux fournisseurs de téléchargement ou de nouvelles sources de recherche",
   "@tutorialExtensionsTip2": {
     "description": "Tutorial extensions tip 2"
   },
-  "tutorialExtensionsTip3": "Get lyrics, enhanced metadata, and more features",
+  "tutorialExtensionsTip3": "Accédez aux paroles, à des métadonnées enrichies et à bien d'autres fonctionnalités",
   "@tutorialExtensionsTip3": {
     "description": "Tutorial extensions tip 3"
   },
@@ -2939,7 +2939,7 @@
   "@cacheCleanupUnusedDesc": {
     "description": "Description of what cleanup unused data does"
   },
-  "cacheNoData": "No cached data",
+  "cacheNoData": "Aucune donnée mise en cache",
   "@cacheNoData": {
     "description": "Label when cache category has no data"
   },
@@ -2964,7 +2964,7 @@
       }
     }
   },
-  "cacheEntries": "{count} entries",
+  "cacheEntries": "{count} entrées",
   "@cacheEntries": {
     "description": "Track cache entry count",
     "placeholders": {
@@ -2973,7 +2973,7 @@
       }
     }
   },
-  "cacheClearSuccess": "Cleared: {target}",
+  "cacheClearSuccess": "Effacé : {target}",
   "@cacheClearSuccess": {
     "description": "Snackbar after clearing selected cache",
     "placeholders": {
@@ -2982,7 +2982,7 @@
       }
     }
   },
-  "cacheClearConfirmTitle": "Clear cache?",
+  "cacheClearConfirmTitle": "Vider le cache ?",
   "@cacheClearConfirmTitle": {
     "description": "Dialog title before clearing one cache category"
   },
@@ -2995,7 +2995,7 @@
       }
     }
   },
-  "cacheClearAllConfirmTitle": "Clear all cache?",
+  "cacheClearAllConfirmTitle": "Vider tout le cache ?",
   "@cacheClearAllConfirmTitle": {
     "description": "Dialog title before clearing all caches"
   },
@@ -3003,11 +3003,11 @@
   "@cacheClearAllConfirmMessage": {
     "description": "Dialog message before clearing all caches"
   },
-  "cacheClearAll": "Clear all cache",
+  "cacheClearAll": "Vider tout le cache",
   "@cacheClearAll": {
     "description": "Button label to clear all caches"
   },
-  "cacheCleanupUnused": "Cleanup unused data",
+  "cacheCleanupUnused": "Nettoyer les données inutilisées",
   "@cacheCleanupUnused": {
     "description": "Action title for cleaning unused entries"
   },
