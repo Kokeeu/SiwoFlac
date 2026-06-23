@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spotiflac_android/constants/app_info.dart';
-import 'package:spotiflac_android/screens/main_shell.dart';
-import 'package:spotiflac_android/screens/setup_screen.dart';
-import 'package:spotiflac_android/screens/tutorial_screen.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/theme/dynamic_color_wrapper.dart';
-import 'package:spotiflac_android/l10n/app_localizations.dart';
+import 'package:neroflac/constants/app_info.dart';
+import 'package:neroflac/screens/main_shell.dart';
+import 'package:neroflac/screens/setup_screen.dart';
+import 'package:neroflac/screens/tutorial_screen.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/theme/dynamic_color_wrapper.dart';
+import 'package:neroflac/l10n/app_localizations.dart';
 
 final _routerProvider = Provider<GoRouter>((ref) {
   final isFirstLaunch = ref.watch(
@@ -76,10 +76,10 @@ Locale _resolveSupportedLocale(
   return _fallbackLocale(supportedLocales);
 }
 
-class SpotiFLACApp extends ConsumerWidget {
+class NeroFlacApp extends ConsumerWidget {
   final bool disableOverscrollEffects;
 
-  const SpotiFLACApp({super.key, this.disableOverscrollEffects = false});
+  const NeroFlacApp({super.key, this.disableOverscrollEffects = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

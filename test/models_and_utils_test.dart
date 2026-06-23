@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:spotiflac_android/models/download_item.dart';
-import 'package:spotiflac_android/models/settings.dart';
-import 'package:spotiflac_android/models/theme_settings.dart';
-import 'package:spotiflac_android/models/track.dart';
-import 'package:spotiflac_android/services/app_remote_config_service.dart';
-import 'package:spotiflac_android/services/download_request_payload.dart';
-import 'package:spotiflac_android/utils/artist_utils.dart';
-import 'package:spotiflac_android/utils/audio_conversion_utils.dart';
-import 'package:spotiflac_android/utils/mime_utils.dart';
-import 'package:spotiflac_android/utils/path_match_keys.dart';
-import 'package:spotiflac_android/utils/string_utils.dart';
+import 'package:neroflac/models/download_item.dart';
+import 'package:neroflac/models/settings.dart';
+import 'package:neroflac/models/theme_settings.dart';
+import 'package:neroflac/models/track.dart';
+import 'package:neroflac/services/app_remote_config_service.dart';
+import 'package:neroflac/services/download_request_payload.dart';
+import 'package:neroflac/utils/artist_utils.dart';
+import 'package:neroflac/utils/audio_conversion_utils.dart';
+import 'package:neroflac/utils/mime_utils.dart';
+import 'package:neroflac/utils/path_match_keys.dart';
+import 'package:neroflac/utils/string_utils.dart';
 
 void main() {
   group('Track', () {

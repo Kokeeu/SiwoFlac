@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/providers/store_provider.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/utils/nav_bar_inset.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/providers/store_provider.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/utils/nav_bar_inset.dart';
 
 class ExtensionDetailsScreen extends ConsumerStatefulWidget {
   final StoreExtension extension;

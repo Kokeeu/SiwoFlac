@@ -1,183 +1,105 @@
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/banner-readme-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="assets/readme/banner-readme-light.png">
-  <img alt="SpotiFLAC Mobile" src="assets/readme/banner-readme-light.png" width="650" height="auto">
-</picture>
+# NeroFlac
 
-<p align="center">
-  <a href="https://trendshift.io/repositories/25971" target="_blank">
-    <img src="https://trendshift.io/api/badge/repositories/25971" alt="spotiflacapp%2FSpotiFLAC-Mobile | Trendshift" width="250" height="55">
-  </a>
-</p>
+**Mobile music utility built with Flutter and Go.**  
+High-quality audio management for your personal library.  
+Open source, no ads, no subscription.
+
+> Fork personalizado de [SpotiFLAC Mobile](https://github.com/zarzet/SpotiFLAC-Mobile) por [Kokeeu](https://github.com/Kokeeu).
 
 </div>
 
-<div align="center">
-
-[![GitHub Release](https://img.shields.io/github/v/release/zarzet/SpotiFLAC-Mobile?style=for-the-badge&logo=github)](https://github.com/zarzet/SpotiFLAC-Mobile/releases)
-[![VirusTotal](https://img.shields.io/badge/VirusTotal-Safe-brightgreen?style=for-the-badge&logo=virustotal)](https://www.virustotal.com/gui/file/31d1bf3c3b2015c13e83c4f909a7c6093a9423e3e702f0c582a3e0035c849424)
-[![Crowdin](https://img.shields.io/badge/HELP%20TRANSLATE%20ON-CROWDIN-%2321252b?style=for-the-badge&logo=crowdin)](https://crowdin.com/project/spotiflac-mobile)
-
-[![Telegram Channel](https://img.shields.io/badge/CHANNEL-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/spotiflac)
-[![Telegram Community](https://img.shields.io/badge/COMMUNITY-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/spotiflac_chat)
-
-</div>
-
-## Screenshots
-
-<p align="center">
-  <img src="assets/readme/1.jpg?v=2" width="200" />
-  <img src="assets/readme/2.jpg?v=2" width="200" />
-  <img src="assets/readme/3.jpg?v=2" width="200" />
-  <img src="assets/readme/4.jpg?v=2" width="200" />
-</p>
-
 ---
 
-## Extensions
+## Sobre este fork
 
-Extensions let the community add new music sources and features without waiting for app updates. When a streaming service API changes or a new source becomes available, extensions can be updated independently.
+NeroFlac es un fork no oficial de **SpotiFLAC Mobile** (mantenido originalmente por [@zarzet](https://github.com/zarzet)). Todo el crédito por el diseño, la arquitectura y la implementación original va al equipo de SpotiFLAC. Este fork solo cambia:
 
-### Installing Extensions
+- Identidad de la app (nombre, package, label, ícono, color seed)
+- Repositorio por defecto de extensiones
+- Metadatos del autor (`Kokeeu` en lugar de `zarzet`)
 
-1. Open the **Store** tab in the app
-2. On first launch, enter an **Extension Repository URL** when prompted
-3. Browse and install extensions with one tap
-4. Or download a `.spotiflac-ext` file and install manually via **Settings > Extensions**
-5. Configure extension settings if needed
-6. Set provider priority under **Settings > Extensions > Provider Priority**
+**El código fuente, la lógica de descarga, el sistema de extensiones, los providers de letras y la integración con FFmpeg permanecen intactos y son功劳 del proyecto original.**
 
-### Developing Extensions
+## Diferencias con upstream
 
-> [!NOTE]
-> Want to build your own extension? The [Extension Development Guide](https://zarzet.github.io/SpotiFLAC-Mobile/docs) has everything you need.
+| | SpotiFLAC Mobile | NeroFlac |
+|---|---|---|
+| App name | SpotiFLAC Mobile | NeroFlac |
+| Package | `com.zarz.spotiflac` | `com.kokeeu.neroflac` |
+| Author | zarzet | Kokeeu |
+| Default extension repo | api.zarz.moe | `spotiflacapp/SpotiFLAC-Extension` |
+| Seed color | Spotify green (`#1DB954`) | Violet (`#7C3AED`) |
+| Flutter version | 3.41.5 | 3.44.3 |
 
----
+## Instalación
 
-## Related Projects
+### Android
+1. Descarga el APK desde la página de [Releases](https://github.com/Kokeeu/NeroFlac/releases)
+2. Habilita "Instalar apps de orígenes desconocidos" en Ajustes
+3. Instala el APK
+4. Abre NeroFlac y concede permisos de almacenamiento cuando se soliciten
 
-### [SpotiFLAC (Desktop)](https://github.com/afkarxyz/SpotiFLAC)
-Download music in true lossless FLAC from extension-provided sources on Windows, macOS & Linux.
+### Compilar desde el código fuente
 
-### [SpotiFLAC (Python Module)](https://github.com/ShuShuzinhuu/SpotiFLAC-Module-Version)
-Python library for SpotiFLAC integration, maintained by [@ShuShuzinhuu](https://github.com/ShuShuzinhuu).
+Requisitos: **Flutter 3.44.3** (FVM recomendado), **Go 1.25+**, **Android SDK 36**, **NDK 29.0.14206865**, **Java 17**.
 
----
+```bash
+# Clonar
+git clone https://github.com/Kokeeu/NeroFlac.git
+cd NeroFlac
 
-## FAQ
+# Setup Flutter via FVM
+fvm install && fvm use
 
-<details>
-<summary><b>Why does the Store tab ask me to enter a URL?</b></summary>
-<br>
+# Backend Go -> AAR
+cd go_backend
+gomobile bind -target=android -androidapi 24 -o ../android/app/libs/gobackend.aar .
+cd ..
 
-Starting from version 3.8.0, SpotiFLAC uses a decentralized extension repository system extensions are hosted on GitHub repositories rather than a built-in server, so anyone can create and host their own. Enter a repository URL in the Store tab to browse and install extensions.
+# Dependencias y código generado
+flutter pub get
+dart run build_runner build
 
-</details>
-
-<details>
-<summary><b>Why is my download failing with "Song not found"?</b></summary>
-<br>
-
-The track may not be available from your enabled providers. Try enabling more providers under **Settings > Extensions > Provider Priority**, or install additional download extensions from the Store.
-
-</details>
-
-<details>
-<summary><b>Why are some tracks downloading in lower quality?</b></summary>
-<br>
-
-Quality depends on what's available from the source and the installed download extension. Check each extension's quality options and service notes in the app.
-
-</details>
-
-<details>
-<summary><b>Can I download playlists?</b></summary>
-<br>
-
-Yes! Just paste the playlist URL in the search bar. The app will fetch all tracks and queue them for download.
-
-</details>
-
-<details>
-<summary><b>Why do I need to grant storage permission?</b></summary>
-<br>
-
-The app needs permission to save downloaded files to your device. On Android 13+, you may need to grant **All files access** under **Settings > Apps > SpotiFLAC > Permissions**.
-
-</details>
-
-<details>
-<summary><b>Is this app safe?</b></summary>
-<br>
-
-Yes SpotiFLAC is open source and you can verify the code yourself. Each release is also scanned with VirusTotal (see badge above).
-
-</details>
-
-<details>
-<summary><b>Why is downloading not working in my country?</b></summary>
-<br>
-
-Some countries have restricted access to certain streaming service APIs. If downloads are failing, try using a VPN to connect through a different region.
-
-</details>
-
-<details>
-<summary><b>Can I add SpotiFLAC to AltStore or SideStore?</b></summary>
-<br>
-
-Yes! Add the official source to receive updates directly within the app. Copy this link:
-
-```
-https://raw.githubusercontent.com/zarzet/SpotiFLAC-Mobile/refs/heads/main/apps.json
+# Compilar APK debug
+flutter build apk --debug
 ```
 
-In AltStore/SideStore, go to **Browse > Sources**, tap **+**, and paste the link.
+## Características (heredadas de SpotiFLAC)
 
-</details>
+- **Descarga en FLAC lossless** desde múltiples fuentes vía extensiones
+- **Sistema de extensiones descentralizado** — la comunidad mantiene sus propios repositorios de extensiones
+- **Metadata + letras** de Apple Music, LRCLib, Musixmatch, NetEase, Paxsenix, QQ Music, etc.
+- **Múltiples calidades** (FLAC, MP3, etc.) y conversión con FFmpeg integrado
+- **Dynamic color** + tema Material 3 Expressive + modo AMOLED
+- **Multilenguaje** (vía Crowdin)
 
-> [!NOTE]
-> If SpotiFLAC is useful to you, consider supporting development:
->
-> [![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/zarzet)
+## Créditos
 
----
+- **Autor original de SpotiFLAC Mobile**: [@zarzet](https://github.com/zarzet)  
+- **SpotiFLAC Desktop original**: [@afkarxyz](https://github.com/afkarxyz)  
+- **Este fork**: [@Kokeeu](https://github.com/Kokeeu)
 
-## Contributors
-
-Thanks to everyone who has contributed to SpotiFLAC Mobile!
-
-<a href="https://github.com/zarzet/SpotiFLAC-Mobile/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=zarzet/SpotiFLAC-Mobile" />
-</a>
-
-We also appreciate everyone who helped with [translations on Crowdin](https://crowdin.com/project/spotiflac-mobile), reported bugs, suggested features, and spread the word.
-
-Interested in contributing? Check out the [Contributing Guide](CONTRIBUTING.md) to get started!
-
----
-
-## API Credits
+### APIs externas utilizadas
 
 | | | | | |
 |---|---|---|---|---|
 | [MusicDL](https://www.musicdl.me) | [LRCLib](https://lrclib.net) | [Paxsenix](https://lyrics.paxsenix.org) | [Cobalt](https://cobalt.tools) | [Song.link](https://song.link) |
-| [IDHS](https://github.com/sjdonado/idonthavespotify) |  |  |  |  |
-
----
+| [IDHS](https://github.com/sjdonado/idonthavespotify) | | | | |
 
 ## Disclaimer
 
-This repository and its contents are provided strictly for educational and research purposes. The software is provided "as-is" without warranty of any kind, express or implied, as stated in the [MIT License](LICENSE).
+Este repositorio y su contenido se proporcionan estrictamente con fines educativos y de investigación. El software se proporciona "tal cual", sin garantía de ningún tipo, expresa o implícita, según se establece en la [Licencia MIT](LICENSE).
 
-- No copyrighted content is hosted, stored, mirrored, or distributed by this repository.
-- Users must ensure that their use of this software is properly authorized and complies with all applicable laws, regulations, and third-party terms of service.
-- This software is provided free of charge by the maintainer. If you paid a third party for access to this software in its original form from this repository, you may have been misled or scammed. Any redistribution or commercial use by third parties must comply with the terms of the repository license. No affiliation, endorsement, or support by the maintainer is implied unless explicitly stated in writing.
-- SpotiFLAC Mobile is an independent project. It is not affiliated with, endorsed by, or connected to any other project or version on other platforms that may share a similar name. The maintainer of this repository has no control over or responsibility for third-party projects.
-- The author(s) disclaim all liability for any direct, indirect, incidental, or consequential damages arising from the use or misuse of this software. Users assume all risk associated with its use.
-- If you are a copyright holder or authorized representative and believe this repository infringes upon your rights, please contact the maintainer with sufficient detail (including relevant URLs and proof of ownership). The matter will be promptly investigated and appropriate action will be taken, which may include removal of the referenced material.
+- **No** se aloja, almacena, refleja ni distribuye contenido con derechos de autor en este repositorio.
+- Los usuarios deben asegurarse de que el uso que hagan de este software esté debidamente autorizado y cumpla con todas las leyes, regulaciones y términos de servicio de terceros aplicables.
+- Si eres titular de derechos de autor o representante autorizado y crees que este repositorio infringe tus derechos, contacta al mantenedor con detalles suficientes (incluidas las URL pertinentes y prueba de propiedad). El asunto será investigado de inmediato y se tomarán las medidas apropiadas.
 
-> [!TIP]
-> **Star the repo** to get notified about all new releases directly from GitHub.
+---
+
+<div align="center">
+
+**[Original repo](https://github.com/zarzet/SpotiFLAC-Mobile)** · **[Releases](https://github.com/Kokeeu/NeroFlac/releases)** · **[Reportar bug](../../issues)**
+
+</div>

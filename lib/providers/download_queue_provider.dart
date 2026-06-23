@@ -6,24 +6,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spotiflac_android/models/download_item.dart';
-import 'package:spotiflac_android/models/settings.dart';
-import 'package:spotiflac_android/models/track.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/services/app_state_database.dart';
-import 'package:spotiflac_android/services/platform_bridge.dart';
-import 'package:spotiflac_android/services/download_request_payload.dart';
-import 'package:spotiflac_android/services/ffmpeg_service.dart';
-import 'package:spotiflac_android/services/notification_service.dart';
-import 'package:spotiflac_android/services/history_database.dart';
-import 'package:spotiflac_android/utils/logger.dart' hide log;
-import 'package:spotiflac_android/utils/file_access.dart';
-import 'package:spotiflac_android/utils/string_utils.dart';
-import 'package:spotiflac_android/utils/artist_utils.dart';
-import 'package:spotiflac_android/utils/int_utils.dart';
+import 'package:neroflac/models/download_item.dart';
+import 'package:neroflac/models/settings.dart';
+import 'package:neroflac/models/track.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/services/app_state_database.dart';
+import 'package:neroflac/services/platform_bridge.dart';
+import 'package:neroflac/services/download_request_payload.dart';
+import 'package:neroflac/services/ffmpeg_service.dart';
+import 'package:neroflac/services/notification_service.dart';
+import 'package:neroflac/services/history_database.dart';
+import 'package:neroflac/utils/logger.dart' hide log;
+import 'package:neroflac/utils/file_access.dart';
+import 'package:neroflac/utils/string_utils.dart';
+import 'package:neroflac/utils/artist_utils.dart';
+import 'package:neroflac/utils/int_utils.dart';
 
-export 'package:spotiflac_android/services/history_database.dart'
+export 'package:neroflac/services/history_database.dart'
     show HistoryLookupRequest, HistoryBatchLookupRequest;
 
 final _log = AppLogger('DownloadQueue');

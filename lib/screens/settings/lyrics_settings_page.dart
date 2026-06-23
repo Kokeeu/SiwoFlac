@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/utils/app_bar_layout.dart';
-import 'package:spotiflac_android/screens/settings/lyrics_provider_priority_page.dart';
-import 'package:spotiflac_android/widgets/settings_group.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/utils/app_bar_layout.dart';
+import 'package:neroflac/screens/settings/lyrics_provider_priority_page.dart';
+import 'package:neroflac/widgets/settings_group.dart';
 
 class LyricsSettingsPage extends ConsumerWidget {
   const LyricsSettingsPage({super.key});

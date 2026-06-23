@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:spotiflac_android/services/app_remote_config_service.dart';
-import 'package:spotiflac_android/utils/app_bar_layout.dart';
-import 'package:spotiflac_android/widgets/donate_icons.dart';
+import 'package:neroflac/services/app_remote_config_service.dart';
+import 'package:neroflac/utils/app_bar_layout.dart';
+import 'package:neroflac/widgets/donate_icons.dart';
 
 class DonatePage extends StatefulWidget {
   const DonatePage({super.key});

@@ -1,4 +1,4 @@
-package com.zarz.spotiflac
+package com.kokeeu.neroflac
 
 import android.content.Context
 import android.net.Uri

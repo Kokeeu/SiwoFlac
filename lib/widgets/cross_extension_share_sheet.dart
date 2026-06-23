@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/services/cross_extension_share_service.dart';
-import 'package:spotiflac_android/services/share_intent_service.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/services/cross_extension_share_service.dart';
+import 'package:neroflac/services/share_intent_service.dart';
 
 class CrossExtensionShareSheet extends ConsumerStatefulWidget {
   final String name;

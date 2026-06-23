@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:spotiflac_android/services/app_remote_config_service.dart';
+import 'package:neroflac/services/app_remote_config_service.dart';
 
 class AppAnnouncementDialog extends StatelessWidget {
   final RemoteAnnouncement announcement;

@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotiflac_android/models/track.dart';
-import 'package:spotiflac_android/providers/download_queue_provider.dart';
-import 'package:spotiflac_android/providers/local_library_provider.dart';
-import 'package:spotiflac_android/services/library_database.dart';
-import 'package:spotiflac_android/utils/file_access.dart';
-import 'package:spotiflac_android/utils/logger.dart';
+import 'package:neroflac/models/track.dart';
+import 'package:neroflac/providers/download_queue_provider.dart';
+import 'package:neroflac/providers/local_library_provider.dart';
+import 'package:neroflac/services/library_database.dart';
+import 'package:neroflac/utils/file_access.dart';
+import 'package:neroflac/utils/logger.dart';
 
 final _log = AppLogger('PlaybackProvider');
 

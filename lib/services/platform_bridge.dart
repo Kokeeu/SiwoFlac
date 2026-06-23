@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spotiflac_android/services/download_request_payload.dart';
-import 'package:spotiflac_android/utils/logger.dart';
+import 'package:neroflac/services/download_request_payload.dart';
+import 'package:neroflac/utils/logger.dart';
 
 final _log = AppLogger('PlatformBridge');
 

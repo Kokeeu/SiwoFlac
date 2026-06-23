@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spotiflac_android/app.dart';
-import 'package:spotiflac_android/providers/download_queue_provider.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/providers/library_collections_provider.dart';
-import 'package:spotiflac_android/providers/local_library_provider.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/services/notification_service.dart';
-import 'package:spotiflac_android/services/share_intent_service.dart';
-import 'package:spotiflac_android/services/cover_cache_manager.dart';
-import 'package:spotiflac_android/utils/local_library_scan_prefs.dart';
-import 'package:spotiflac_android/utils/logger.dart';
+import 'package:neroflac/app.dart';
+import 'package:neroflac/providers/download_queue_provider.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/providers/library_collections_provider.dart';
+import 'package:neroflac/providers/local_library_provider.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/services/notification_service.dart';
+import 'package:neroflac/services/share_intent_service.dart';
+import 'package:neroflac/services/cover_cache_manager.dart';
+import 'package:neroflac/utils/local_library_scan_prefs.dart';
+import 'package:neroflac/utils/logger.dart';
 
 final _log = AppLogger('Main');
 
@@ -42,7 +42,7 @@ void main() {
       runApp(
         ProviderScope(
           child: _EagerInitialization(
-            child: SpotiFLACApp(
+            child: NeroFlacApp(
               disableOverscrollEffects: runtimeProfile.disableOverscrollEffects,
             ),
           ),

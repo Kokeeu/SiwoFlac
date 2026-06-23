@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:spotiflac_android/models/track.dart';
-import 'package:spotiflac_android/services/library_collections_database.dart';
+import 'package:neroflac/models/track.dart';
+import 'package:neroflac/services/library_collections_database.dart';
 
 String trackCollectionKey(Track track) {
   final isrc = track.isrc?.trim();

@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:http/http.dart' as http;
-import 'package:spotiflac_android/constants/app_info.dart';
-import 'package:spotiflac_android/utils/logger.dart';
+import 'package:neroflac/constants/app_info.dart';
+import 'package:neroflac/utils/logger.dart';
 
 final _log = AppLogger('UpdateChecker');
 

@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spotiflac_android/constants/app_info.dart';
-import 'package:spotiflac_android/services/platform_bridge.dart';
-import 'package:spotiflac_android/utils/logger.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
+import 'package:neroflac/constants/app_info.dart';
+import 'package:neroflac/services/platform_bridge.dart';
+import 'package:neroflac/utils/logger.dart';
+import 'package:neroflac/providers/extension_provider.dart';
 
 final _log = AppLogger('StoreProvider');
 final RegExp _leadingVersionPrefix = RegExp(r'^v');
@@ -230,7 +230,11 @@ class StoreNotifier extends Notifier<StoreState> {
     if (state.isInitialized) return;
 
     final prefs = await SharedPreferences.getInstance();
-    final savedUrl = prefs.getString(_registryUrlPrefKey) ?? '';
+    const defaultRegistryUrl = 'https://github.com/spotiflacapp/SpotiFLAC-Extension';
+    final savedUrl = prefs.getString(_registryUrlPrefKey) ?? defaultRegistryUrl;
+    if (!prefs.containsKey(_registryUrlPrefKey)) {
+      await prefs.setString(_registryUrlPrefKey, defaultRegistryUrl);
+    }
 
     state = state.copyWith(
       isLoading: true,

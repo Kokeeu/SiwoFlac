@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/l10n/l10n.dart';
 
 class DownloadServicePicker extends ConsumerStatefulWidget {
   final String? trackName;

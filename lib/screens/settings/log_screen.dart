@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart' show ShareParams, SharePlus;
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/utils/app_bar_layout.dart';
-import 'package:spotiflac_android/utils/logger.dart';
-import 'package:spotiflac_android/widgets/settings_group.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/utils/app_bar_layout.dart';
+import 'package:neroflac/utils/logger.dart';
+import 'package:neroflac/widgets/settings_group.dart';
 
 final RegExp _domainPattern = RegExp(
   r'domain:\s*([^\s,]+)',

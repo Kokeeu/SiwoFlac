@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotiflac_android/models/track.dart';
-import 'package:spotiflac_android/services/platform_bridge.dart';
-import 'package:spotiflac_android/utils/logger.dart';
-import 'package:spotiflac_android/utils/string_utils.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
+import 'package:neroflac/models/track.dart';
+import 'package:neroflac/services/platform_bridge.dart';
+import 'package:neroflac/utils/logger.dart';
+import 'package:neroflac/utils/string_utils.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/providers/extension_provider.dart';
 
 final _log = AppLogger('TrackProvider');
 const _extensionInitRetryTimeout = Duration(seconds: 30);

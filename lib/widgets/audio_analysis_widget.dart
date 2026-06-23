@@ -10,10 +10,10 @@ import 'package:ffmpeg_kit_flutter_new_full/level.dart';
 import 'package:ffmpeg_kit_flutter_new_full/return_code.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:spotiflac_android/widgets/settings_group.dart';
+import 'package:neroflac/widgets/settings_group.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/services/platform_bridge.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/services/platform_bridge.dart';
 
 class AudioAnalysisData {
   static const cacheVersion = 4;

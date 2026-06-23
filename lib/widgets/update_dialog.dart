@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:spotiflac_android/constants/app_info.dart';
-import 'package:spotiflac_android/services/update_checker.dart';
-import 'package:spotiflac_android/services/apk_downloader.dart';
-import 'package:spotiflac_android/services/notification_service.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
+import 'package:neroflac/constants/app_info.dart';
+import 'package:neroflac/services/update_checker.dart';
+import 'package:neroflac/services/apk_downloader.dart';
+import 'package:neroflac/services/notification_service.dart';
+import 'package:neroflac/l10n/l10n.dart';
 
 class UpdateDialog extends StatefulWidget {
   final UpdateInfo updateInfo;

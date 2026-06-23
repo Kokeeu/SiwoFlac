@@ -5,8 +5,8 @@ const String kUseDynamicColorKey = 'use_dynamic_color';
 const String kSeedColorKey = 'seed_color';
 const String kUseAmoledKey = 'use_amoled';
 
-/// Default Spotify green color for fallback
-const int kDefaultSeedColor = 0xFF1DB954;
+/// Default NeroFlac brand color (deep violet/black accent)
+const int kDefaultSeedColor = 0xFF7C3AED;
 
 class ThemeSettings {
   final ThemeMode themeMode;

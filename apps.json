@@ -1,17 +1,17 @@
 {
-  "name": "SpotiFLAC Mobile Source",
-  "identifier": "com.zarzet.spotiflac.source",
+  "name": "NeroFlac Source",
+  "identifier": "com.kokeeu.neroflac.source",
   "subtitle": "FLAC Downloader for iOS",
   "apps": [
     {
-      "name": "SpotiFLAC Mobile",
-      "bundleIdentifier": "com.zarzet.spotiflac",
-      "developerName": "zarzet",
+      "name": "NeroFlac",
+      "bundleIdentifier": "com.kokeeu.neroflac",
+      "developerName": "Kokeeu",
       "version": "4.6.0",
-      "versionDate": "2026-06-13",
-      "downloadURL": "https://github.com/zarzet/SpotiFLAC-Mobile/releases/download/v4.6.0/SpotiFLAC-v4.6.0-ios-unsigned.ipa",
-      "localizedDescription": "SpotiFLAC Mobile is written in Flutter. Download tracks in true FLAC from Tidal, Qobuz, & Amazon Music.",
-      "iconURL": "https://raw.githubusercontent.com/zarzet/SpotiFLAC-Mobile/main/assets/images/logo.png",
+      "versionDate": "2026-06-22",
+      "downloadURL": "https://github.com/Kokeeu/NeroFlac/releases/download/v4.6.0/NeroFlac-v4.6.0-ios-unsigned.ipa",
+      "localizedDescription": "NeroFlac is a fork of SpotiFLAC Mobile. Written in Flutter. Download tracks in true FLAC from extension-provided sources.",
+      "iconURL": "https://raw.githubusercontent.com/Kokeeu/NeroFlac/main/assets/images/logo.png",
       "size": 34347687
     }
   ]

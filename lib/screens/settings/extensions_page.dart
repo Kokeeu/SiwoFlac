@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/models/settings.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/providers/explore_provider.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/screens/settings/download_fallback_extensions_page.dart';
-import 'package:spotiflac_android/screens/settings/extension_detail_page.dart';
-import 'package:spotiflac_android/screens/settings/metadata_provider_priority_page.dart';
-import 'package:spotiflac_android/screens/settings/provider_priority_page.dart';
-import 'package:spotiflac_android/utils/app_bar_layout.dart';
-import 'package:spotiflac_android/widgets/settings_group.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/models/settings.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/providers/explore_provider.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/screens/settings/download_fallback_extensions_page.dart';
+import 'package:neroflac/screens/settings/extension_detail_page.dart';
+import 'package:neroflac/screens/settings/metadata_provider_priority_page.dart';
+import 'package:neroflac/screens/settings/provider_priority_page.dart';
+import 'package:neroflac/utils/app_bar_layout.dart';
+import 'package:neroflac/widgets/settings_group.dart';
 
 class ExtensionsPage extends ConsumerStatefulWidget {
   const ExtensionsPage({super.key});

@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/providers/store_provider.dart';
-import 'package:spotiflac_android/services/platform_bridge.dart';
-import 'package:spotiflac_android/utils/app_bar_layout.dart';
-import 'package:spotiflac_android/widgets/settings_group.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/providers/store_provider.dart';
+import 'package:neroflac/services/platform_bridge.dart';
+import 'package:neroflac/utils/app_bar_layout.dart';
+import 'package:neroflac/widgets/settings_group.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ExtensionDetailPage extends ConsumerStatefulWidget {

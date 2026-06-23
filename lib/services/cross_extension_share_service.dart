@@ -1,4 +1,4 @@
-import 'package:spotiflac_android/services/platform_bridge.dart';
+import 'package:neroflac/services/platform_bridge.dart';
 
 class CrossExtensionShareResult {
   final String extensionId;

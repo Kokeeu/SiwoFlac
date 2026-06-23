@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:spotiflac_android/utils/logger.dart';
-import 'package:spotiflac_android/utils/file_access.dart';
-import 'package:spotiflac_android/services/history_database.dart';
-import 'package:spotiflac_android/utils/path_match_keys.dart';
+import 'package:neroflac/utils/logger.dart';
+import 'package:neroflac/utils/file_access.dart';
+import 'package:neroflac/services/history_database.dart';
+import 'package:neroflac/utils/path_match_keys.dart';
 
 final _log = AppLogger('LibraryDatabase');
 

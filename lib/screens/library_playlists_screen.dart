@@ -4,13 +4,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/providers/library_collections_provider.dart';
-import 'package:spotiflac_android/screens/library_tracks_folder_screen.dart';
-import 'package:spotiflac_android/services/cover_cache_manager.dart';
-import 'package:spotiflac_android/widgets/bottom_sheet_option_tile.dart';
-import 'package:spotiflac_android/utils/app_bar_layout.dart';
-import 'package:spotiflac_android/utils/nav_bar_inset.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/providers/library_collections_provider.dart';
+import 'package:neroflac/screens/library_tracks_folder_screen.dart';
+import 'package:neroflac/services/cover_cache_manager.dart';
+import 'package:neroflac/widgets/bottom_sheet_option_tile.dart';
+import 'package:neroflac/utils/app_bar_layout.dart';
+import 'package:neroflac/utils/nav_bar_inset.dart';
 
 class LibraryPlaylistsScreen extends ConsumerWidget {
   const LibraryPlaylistsScreen({super.key});

@@ -1,17 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/services/platform_bridge.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/screens/artist_screen.dart';
-import 'package:spotiflac_android/screens/album_screen.dart';
-import 'package:spotiflac_android/screens/home_tab.dart'
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/services/platform_bridge.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/screens/artist_screen.dart';
+import 'package:neroflac/screens/album_screen.dart';
+import 'package:neroflac/screens/home_tab.dart'
     show ExtensionArtistScreen, ExtensionAlbumScreen;
-import 'package:spotiflac_android/services/shell_navigation_service.dart';
-import 'package:spotiflac_android/utils/artist_utils.dart';
-import 'package:spotiflac_android/utils/logger.dart';
+import 'package:neroflac/services/shell_navigation_service.dart';
+import 'package:neroflac/utils/artist_utils.dart';
+import 'package:neroflac/utils/logger.dart';
 
 final _log = AppLogger('ClickableMetadata');
 

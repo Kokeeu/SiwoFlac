@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/models/track.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/providers/track_provider.dart';
-import 'package:spotiflac_android/providers/download_queue_provider.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/widgets/track_collection_quick_actions.dart';
-import 'package:spotiflac_android/widgets/animation_utils.dart';
-import 'package:spotiflac_android/utils/clickable_metadata.dart';
-import 'package:spotiflac_android/widgets/audio_quality_badges.dart';
-import 'package:spotiflac_android/widgets/cached_cover_image.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/models/track.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/providers/track_provider.dart';
+import 'package:neroflac/providers/download_queue_provider.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/widgets/track_collection_quick_actions.dart';
+import 'package:neroflac/widgets/animation_utils.dart';
+import 'package:neroflac/utils/clickable_metadata.dart';
+import 'package:neroflac/widgets/audio_quality_badges.dart';
+import 'package:neroflac/widgets/cached_cover_image.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   final String query;

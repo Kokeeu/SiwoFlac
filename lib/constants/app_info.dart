@@ -7,19 +7,19 @@ class AppInfo {
 
   static String get displayVersion => kDebugMode ? 'Internal' : version;
 
-  static const String appName = 'SpotiFLAC Mobile';
-  static const String copyright = '© 2026 SpotiFLAC';
+  static const String appName = 'NeroFlac';
+  static const String copyright = '© 2026 NeroFlac';
 
-  static const String mobileAuthor = 'zarzet';
+  static const String mobileAuthor = 'Kokeeu';
   static const String originalAuthor = 'afkarxyz';
 
-  static const String githubRepo = 'zarzet/SpotiFLAC-Mobile';
+  static const String githubRepo = 'Kokeeu/NeroFlac';
   static const String githubUrl = 'https://github.com/$githubRepo';
   static const String originalGithubUrl =
       'https://github.com/afkarxyz/SpotiFLAC';
   static const String remoteConfigApiUrl =
-      'https://api.zarz.moe/v1/spotiflac-mobile/config';
+      'https://raw.githubusercontent.com/Kokeeu/NeroFlac/main/config.json';
 
-  static const String kofiUrl = 'https://ko-fi.com/zarzet';
-  static const String githubSponsorsUrl = 'https://github.com/sponsors/zarzet/';
+  static const String kofiUrl = '';
+  static const String githubSponsorsUrl = '';
 }

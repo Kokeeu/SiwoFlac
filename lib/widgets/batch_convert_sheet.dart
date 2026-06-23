@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/utils/audio_conversion_utils.dart';
-import 'package:spotiflac_android/widgets/settings_group.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/utils/audio_conversion_utils.dart';
+import 'package:neroflac/widgets/settings_group.dart';
 
 /// Modern, card-based batch convert sheet shared by the queue and album
 /// screens, matching the single-track convert sheet styling.

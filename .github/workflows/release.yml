@@ -152,16 +152,16 @@ jobs:
           VERSION=${{ needs.get-version.outputs.version }}
           cd build/app/outputs/flutter-apk
           # Signed files have -signed suffix
-          mv app-arm64-v8a-release-signed.apk SpotiFLAC-${VERSION}-arm64.apk || mv app-arm64-v8a-release.apk SpotiFLAC-${VERSION}-arm64.apk || true
-          mv app-armeabi-v7a-release-signed.apk SpotiFLAC-${VERSION}-arm32.apk || mv app-armeabi-v7a-release.apk SpotiFLAC-${VERSION}-arm32.apk || true
-          mv app-release-signed.apk SpotiFLAC-${VERSION}-universal.apk || mv app-release.apk SpotiFLAC-${VERSION}-universal.apk || true
+          mv app-arm64-v8a-release-signed.apk NeroFlac-${VERSION}-arm64.apk || mv app-arm64-v8a-release.apk NeroFlac-${VERSION}-arm64.apk || true
+          mv app-armeabi-v7a-release-signed.apk NeroFlac-${VERSION}-arm32.apk || mv app-armeabi-v7a-release.apk NeroFlac-${VERSION}-arm32.apk || true
+          mv app-release-signed.apk NeroFlac-${VERSION}-universal.apk || mv app-release.apk NeroFlac-${VERSION}-universal.apk || true
           ls -la
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v6
         with:
           name: android-apk
-          path: build/app/outputs/flutter-apk/SpotiFLAC-*.apk
+          path: build/app/outputs/flutter-apk/NeroFlac-*.apk
 
   build-ios:
     runs-on: macos-15
@@ -296,14 +296,14 @@ jobs:
           mkdir Payload
           cp -r Runner.app Payload/
           # Use absolute path to avoid relative path issues
-          zip -r $GITHUB_WORKSPACE/build/ios/ipa/SpotiFLAC-${VERSION}-ios-unsigned.ipa Payload
+          zip -r $GITHUB_WORKSPACE/build/ios/ipa/NeroFlac-${VERSION}-ios-unsigned.ipa Payload
           rm -rf Payload
 
       - name: Verify IPA created
         run: |
           ls -la build/ios/ipa/
           VERSION=${{ needs.get-version.outputs.version }}
-          if [ ! -f "build/ios/ipa/SpotiFLAC-${VERSION}-ios-unsigned.ipa" ]; then
+          if [ ! -f "build/ios/ipa/NeroFlac-${VERSION}-ios-unsigned.ipa" ]; then
             echo "ERROR: IPA not created!"
             exit 1
           fi
@@ -312,7 +312,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: ios-ipa
-          path: build/ios/ipa/SpotiFLAC-*.ipa
+          path: build/ios/ipa/NeroFlac-*.ipa
 
   create-release:
     runs-on: ubuntu-latest
@@ -379,17 +379,17 @@ jobs:
           ### Downloads
 
           #### Android
-          - **arm64**: \`SpotiFLAC-${VERSION}-arm64.apk\` (recommended for modern devices)
-          - **arm32**: \`SpotiFLAC-${VERSION}-arm32.apk\` (older devices)
+          - **arm64**: \`NeroFlac-${VERSION}-arm64.apk\` (recommended for modern devices)
+          - **arm32**: \`NeroFlac-${VERSION}-arm32.apk\` (older devices)
 
           #### iOS
-          - **iOS**: \`SpotiFLAC-${VERSION}-ios-unsigned.ipa\` (sideload required)
+          - **iOS**: \`NeroFlac-${VERSION}-ios-unsigned.ipa\` (sideload required)
 
           ### Installation
           **Android**: Enable "Install from unknown sources" and install the APK
           **iOS**: Use AltStore, Sideloadly, or similar tools to sideload the IPA
 
-          ![arm64](https://img.shields.io/github/downloads/${REPO_OWNER}/${REPO_NAME}/${VERSION}/SpotiFLAC-${VERSION}-arm64.apk?style=flat-square&logo=android&label=arm64&color=3DDC84) ![arm32](https://img.shields.io/github/downloads/${REPO_OWNER}/${REPO_NAME}/${VERSION}/SpotiFLAC-${VERSION}-arm32.apk?style=flat-square&logo=android&label=arm32&color=3DDC84) ![iOS](https://img.shields.io/github/downloads/${REPO_OWNER}/${REPO_NAME}/${VERSION}/SpotiFLAC-${VERSION}-ios-unsigned.ipa?style=flat-square&logo=apple&label=iOS&color=0078D6)
+          ![arm64](https://img.shields.io/github/downloads/${REPO_OWNER}/${REPO_NAME}/${VERSION}/NeroFlac-${VERSION}-arm64.apk?style=flat-square&logo=android&label=arm64&color=3DDC84) ![arm32](https://img.shields.io/github/downloads/${REPO_OWNER}/${REPO_NAME}/${VERSION}/NeroFlac-${VERSION}-arm32.apk?style=flat-square&logo=android&label=arm32&color=3DDC84) ![iOS](https://img.shields.io/github/downloads/${REPO_OWNER}/${REPO_NAME}/${VERSION}/NeroFlac-${VERSION}-ios-unsigned.ipa?style=flat-square&logo=apple&label=iOS&color=0078D6)
           FOOTER
 
           echo "Release body:"
@@ -399,7 +399,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.get-version.outputs.version }}
-          name: SpotiFLAC ${{ needs.get-version.outputs.version }}
+          name: NeroFlac ${{ needs.get-version.outputs.version }}
           body_path: /tmp/release_body.txt
           files: ./release/*
           draft: false
@@ -447,7 +447,7 @@ jobs:
 
           jq --arg ver "$VERSION_NUM" \
              --arg date "$DATE" \
-             --arg url "https://github.com/zarzet/SpotiFLAC-Mobile/releases/download/${VERSION}/SpotiFLAC-${VERSION}-ios-unsigned.ipa" \
+             --arg url "https://github.com/Kokeeu/NeroFlac/releases/download/${VERSION}/NeroFlac-${VERSION}-ios-unsigned.ipa" \
              --argjson size "$IPA_SIZE" \
              '.apps[0].version = $ver | .apps[0].versionDate = $date | .apps[0].downloadURL = $url | .apps[0].size = $size' \
              apps.json > apps.json.tmp && mv apps.json.tmp apps.json
@@ -540,7 +540,7 @@ jobs:
           
           # Prepare message with changelog (HTML format)
           printf '%s\n' \
-            "<b>SpotiFLAC Mobile ${VERSION} Released!</b>" \
+            "<b>NeroFlac ${VERSION} Released!</b>" \
             "" \
             "<b>What's New:</b>" \
             "${CHANGELOG}" \
@@ -565,7 +565,7 @@ jobs:
             curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
               -F chat_id="${TELEGRAM_CHANNEL_ID}" \
               -F document=@"${ARM64_APK}" \
-              -F caption="SpotiFLAC ${VERSION} - arm64 (recommended)"
+              -F caption="NeroFlac ${VERSION} - arm64 (recommended)"
           fi
 
           # Upload arm32 APK to channel
@@ -574,7 +574,7 @@ jobs:
             curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
               -F chat_id="${TELEGRAM_CHANNEL_ID}" \
               -F document=@"${ARM32_APK}" \
-              -F caption="SpotiFLAC ${VERSION} - arm32"
+              -F caption="NeroFlac ${VERSION} - arm32"
           fi
 
           # Upload iOS IPA to channel
@@ -584,7 +584,7 @@ jobs:
             curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
               -F chat_id="${TELEGRAM_CHANNEL_ID}" \
               -F document=@"${IOS_IPA}" \
-              -F caption="SpotiFLAC ${VERSION} - iOS (unsigned, sideload required)"
+              -F caption="NeroFlac ${VERSION} - iOS (unsigned, sideload required)"
           fi
 
           echo "Telegram notification sent!"

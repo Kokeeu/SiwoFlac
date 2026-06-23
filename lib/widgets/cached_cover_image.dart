@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:spotiflac_android/services/cover_cache_manager.dart';
+import 'package:neroflac/services/cover_cache_manager.dart';
 
 class CachedCoverImage extends StatelessWidget {
   static const int _defaultMinCacheExtent = 64;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/providers/store_provider.dart';
-import 'package:spotiflac_android/widgets/settings_group.dart';
-import 'package:spotiflac_android/widgets/animation_utils.dart';
-import 'package:spotiflac_android/screens/store/extension_details_screen.dart';
-import 'package:spotiflac_android/utils/app_bar_layout.dart';
-import 'package:spotiflac_android/utils/nav_bar_inset.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/providers/store_provider.dart';
+import 'package:neroflac/widgets/settings_group.dart';
+import 'package:neroflac/widgets/animation_utils.dart';
+import 'package:neroflac/screens/store/extension_details_screen.dart';
+import 'package:neroflac/utils/app_bar_layout.dart';
+import 'package:neroflac/utils/nav_bar_inset.dart';
 
 class RepoTab extends ConsumerStatefulWidget {
   const RepoTab({super.key});

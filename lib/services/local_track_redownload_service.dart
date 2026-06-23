@@ -1,8 +1,8 @@
-import 'package:spotiflac_android/models/settings.dart';
-import 'package:spotiflac_android/models/track.dart';
-import 'package:spotiflac_android/providers/extension_provider.dart';
-import 'package:spotiflac_android/services/library_database.dart';
-import 'package:spotiflac_android/services/platform_bridge.dart';
+import 'package:neroflac/models/settings.dart';
+import 'package:neroflac/models/track.dart';
+import 'package:neroflac/providers/extension_provider.dart';
+import 'package:neroflac/services/library_database.dart';
+import 'package:neroflac/services/platform_bridge.dart';
 
 class LocalTrackRedownloadResolution {
   final LocalLibraryItem localItem;

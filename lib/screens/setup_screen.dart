@@ -6,12 +6,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:spotiflac_android/providers/settings_provider.dart';
-import 'package:spotiflac_android/l10n/l10n.dart';
-import 'package:spotiflac_android/l10n/supported_locales.dart';
-import 'package:spotiflac_android/services/platform_bridge.dart';
-import 'package:spotiflac_android/utils/file_access.dart';
-import 'package:spotiflac_android/utils/logger.dart';
+import 'package:neroflac/providers/settings_provider.dart';
+import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/l10n/supported_locales.dart';
+import 'package:neroflac/services/platform_bridge.dart';
+import 'package:neroflac/utils/file_access.dart';
+import 'package:neroflac/utils/logger.dart';
 
 final _log = AppLogger('SetupScreen');
 
