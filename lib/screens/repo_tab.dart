@@ -8,6 +8,7 @@ import 'package:neroflac/widgets/animation_utils.dart';
 import 'package:neroflac/screens/store/extension_details_screen.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class RepoTab extends ConsumerStatefulWidget {
   const RepoTab({super.key});
@@ -421,7 +422,7 @@ class _RepoTabState extends ConsumerState<RepoTab> {
 
   void _showChangeRepoDialog(String currentUrl) {
     final changeUrlController = TextEditingController(text: currentUrl);
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.storeRepoDialogTitle),

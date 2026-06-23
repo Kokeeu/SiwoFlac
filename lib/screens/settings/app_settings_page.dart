@@ -5,6 +5,7 @@ import 'package:neroflac/providers/download_queue_provider.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class AppSettingsPage extends ConsumerWidget {
   const AppSettingsPage({super.key});
@@ -180,7 +181,7 @@ class AppSettingsPage extends ConsumerWidget {
     WidgetRef ref,
     ColorScheme colorScheme,
   ) {
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.dialogDisableHistoryTitle),
@@ -214,7 +215,7 @@ class AppSettingsPage extends ConsumerWidget {
     WidgetRef ref,
     ColorScheme colorScheme,
   ) {
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.dialogClearHistoryTitle),
@@ -246,7 +247,7 @@ class AppSettingsPage extends ConsumerWidget {
     BuildContext context,
     WidgetRef ref,
   ) async {
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(

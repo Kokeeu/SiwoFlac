@@ -6,6 +6,7 @@ import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/artist_utils.dart';
 import 'package:neroflac/screens/settings/metadata_provider_priority_page.dart';
 import 'package:neroflac/widgets/settings_group.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class MetadataSettingsPage extends ConsumerWidget {
   const MetadataSettingsPage({super.key});
@@ -185,14 +186,11 @@ class MetadataSettingsPage extends ConsumerWidget {
     String currentMode,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (context) => SafeArea(
+builder: (context) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

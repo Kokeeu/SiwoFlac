@@ -29,6 +29,7 @@ import 'package:neroflac/utils/nav_bar_inset.dart';
 import 'package:neroflac/widgets/audio_analysis_widget.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
 import 'package:neroflac/widgets/settings_group.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 part 'track_metadata_edit_sheet.dart';
 
@@ -1558,10 +1559,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
                         horizontal: 16,
                         vertical: 10,
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
+),
                   );
                 },
               ),
@@ -3254,10 +3252,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
             label: Text(context.l10n.trackMetadataPlay),
             style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
+),
           ),
         ),
         const SizedBox(width: 12),
@@ -3272,10 +3267,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
             ),
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              side: BorderSide(color: colorScheme.error.withValues(alpha: 0.5)),
+side: BorderSide(color: colorScheme.error.withValues(alpha: 0.5)),
             ),
           ),
         ),
@@ -3288,14 +3280,11 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
     WidgetRef ref,
     ColorScheme colorScheme,
   ) {
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: screenContext,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      isScrollControlled: true,
+isScrollControlled: true,
       builder: (sheetContext) {
         final l10n = sheetContext.l10n;
 
@@ -3745,13 +3734,10 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
     String selectedBitrate = defaultBitrateForFormat(selectedFormat);
     bool isLosslessTarget = isLosslessConversionTarget(selectedFormat);
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (sheetContext) {
+builder: (sheetContext) {
         return StatefulBuilder(
           builder: (context, setSheetState) {
             final colorScheme = Theme.of(context).colorScheme;
@@ -3969,10 +3955,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
                         icon: const Icon(Icons.swap_horiz),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                        ),
+),
                         label: Text(
                           isLosslessTarget
                               ? '$currentFormat  →  $selectedFormat (Lossless)'
@@ -4037,14 +4020,11 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
 
       if (!mounted) return;
 
-      showModalBottomSheet<void>(
+      showGlassModalBottomSheet<void>(
         context: this.context,
         useRootNavigator: true,
         isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        builder: (sheetContext) {
+builder: (sheetContext) {
           final colorScheme = Theme.of(sheetContext).colorScheme;
           return SafeArea(
             child: Padding(
@@ -4170,10 +4150,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
                       label: Text(sheetContext.l10n.cueSplitButton),
                       style: FilledButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
+),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -4200,7 +4177,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
     required String date,
     required List<CueSplitTrackInfo> tracks,
   }) {
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
@@ -4449,7 +4426,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
     required String bitrate,
   }) {
     final isLossless = isLosslessConversionTarget(targetFormat);
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
@@ -4821,15 +4798,12 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
 
     if (!context.mounted) return;
 
-    final saved = await showModalBottomSheet<bool>(
+    final saved = await showGlassModalBottomSheet<bool>(
       context: context,
       useRootNavigator: true,
       isScrollControlled: true,
       backgroundColor: colorScheme.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (sheetContext) => _EditMetadataSheet(
+builder: (sheetContext) => _EditMetadataSheet(
         colorScheme: colorScheme,
         initialValues: initialValues,
         filePath: cleanFilePath,
@@ -4879,7 +4853,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
     WidgetRef ref,
     ColorScheme colorScheme,
   ) {
-    showDialog<void>(
+    showGlassDialog<void>(
       context: screenContext,
       useRootNavigator: true,
       builder: (dialogContext) => AlertDialog(

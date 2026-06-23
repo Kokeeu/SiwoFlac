@@ -5,6 +5,8 @@ import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/providers/store_provider.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
+import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class ExtensionDetailsScreen extends ConsumerStatefulWidget {
   final StoreExtension extension;
@@ -83,7 +85,8 @@ class _ExtensionDetailsScreenState
     StoreExtension ext,
     ColorScheme colorScheme,
   ) {
-    return SliverAppBar(
+    return GlassSliverAppBar(
+      child: SliverAppBar(
       expandedHeight: 200,
       pinned: true,
       stretch: true,
@@ -126,6 +129,7 @@ class _ExtensionDetailsScreenState
         tooltip: MaterialLocalizations.of(context).backButtonTooltip,
         icon: const Icon(Icons.arrow_back),
         onPressed: () => Navigator.pop(context),
+      ),
       ),
     );
   }
@@ -561,7 +565,7 @@ class _ExtensionDetailsScreenState
   }
 
   Future<void> _uninstallExtension(StoreExtension ext) async {
-    final confirm = await showDialog<bool>(
+    final confirm = await showGlassDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.dialogUninstallExtension),

@@ -7,6 +7,7 @@ import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/services/cross_extension_share_service.dart';
 import 'package:neroflac/services/share_intent_service.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class CrossExtensionShareSheet extends ConsumerStatefulWidget {
   final String name;
@@ -30,15 +31,12 @@ class CrossExtensionShareSheet extends ConsumerStatefulWidget {
     required String sourceExtensionId,
   }) {
     final colorScheme = Theme.of(context).colorScheme;
-    return showModalBottomSheet<void>(
+    return showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       isScrollControlled: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (_) => CrossExtensionShareSheet(
+builder: (_) => CrossExtensionShareSheet(
         name: name,
         artists: artists,
         type: type,

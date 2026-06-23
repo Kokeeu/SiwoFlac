@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class DownloadServicePicker extends ConsumerStatefulWidget {
   final String? trackName;
@@ -35,14 +36,11 @@ class DownloadServicePicker extends ConsumerStatefulWidget {
   }) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      isScrollControlled: true,
+isScrollControlled: true,
       builder: (context) => DownloadServicePicker(
         trackName: trackName,
         artistName: artistName,

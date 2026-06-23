@@ -27,6 +27,11 @@ class AppTheme {
     },
   );
 
+  // Dope Security radii
+  static const double _radiusCards = 19.2;
+  static const double _radiusBadgesInputs = 8;
+  static const double _radiusPill = 9999;
+
   static ThemeData light({ColorScheme? dynamicScheme, Color? seedColor}) {
     final scheme =
         dynamicScheme ??
@@ -49,13 +54,14 @@ class AppTheme {
       inputDecorationTheme: _inputDecorationTheme(scheme),
       listTileTheme: _listTileTheme(scheme),
       dialogTheme: _dialogTheme(scheme),
+      bottomSheetTheme: _bottomSheetTheme(scheme),
       navigationBarTheme: _navigationBarTheme(scheme),
       snackBarTheme: _snackBarTheme(scheme),
       progressIndicatorTheme: _progressIndicatorTheme(scheme),
       switchTheme: _switchTheme(scheme),
       chipTheme: _chipTheme(scheme),
       dividerTheme: _dividerTheme(scheme),
-      fontFamily: 'Google Sans Flex',
+      fontFamily: 'Inter',
     );
   }
 
@@ -75,7 +81,7 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: scheme,
       pageTransitionsTheme: _pageTransitionsTheme,
-      scaffoldBackgroundColor: isAmoled ? Colors.black : null,
+      scaffoldBackgroundColor: isAmoled ? const Color(kColorVoid) : null,
       appBarTheme: _appBarTheme(scheme, isAmoled: isAmoled),
       cardTheme: _cardTheme(scheme),
       elevatedButtonTheme: _elevatedButtonTheme(scheme),
@@ -86,13 +92,14 @@ class AppTheme {
       inputDecorationTheme: _inputDecorationTheme(scheme),
       listTileTheme: _listTileTheme(scheme),
       dialogTheme: _dialogTheme(scheme),
+      bottomSheetTheme: _bottomSheetTheme(scheme),
       navigationBarTheme: _navigationBarTheme(scheme, isAmoled: isAmoled),
       snackBarTheme: _snackBarTheme(scheme),
       progressIndicatorTheme: _progressIndicatorTheme(scheme),
       switchTheme: _switchTheme(scheme),
       chipTheme: _chipTheme(scheme),
       dividerTheme: _dividerTheme(scheme),
-      fontFamily: 'Google Sans Flex',
+      fontFamily: 'Inter',
     );
   }
 
@@ -101,15 +108,16 @@ class AppTheme {
     bool isAmoled = false,
   }) => AppBarTheme(
     elevation: 0,
-    scrolledUnderElevation: isAmoled ? 0 : 3,
-    backgroundColor: isAmoled ? Colors.black : scheme.surface,
+    scrolledUnderElevation: 0,
+    backgroundColor: Colors.transparent,
     foregroundColor: scheme.onSurface,
-    surfaceTintColor: isAmoled ? Colors.transparent : scheme.surfaceTint,
+    surfaceTintColor: Colors.transparent,
     centerTitle: true,
     titleTextStyle: TextStyle(
       color: scheme.onSurface,
       fontSize: 22,
       fontWeight: FontWeight.w500,
+      fontFamily: 'Inter',
     ),
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -117,7 +125,7 @@ class AppTheme {
           ? Brightness.light
           : Brightness.dark,
       systemNavigationBarColor: isAmoled
-          ? Colors.black
+          ? const Color(kColorVoid)
           : scheme.surfaceContainer,
       systemNavigationBarIconBrightness: scheme.brightness == Brightness.dark
           ? Brightness.light
@@ -127,7 +135,13 @@ class AppTheme {
 
   static CardThemeData _cardTheme(ColorScheme scheme) => CardThemeData(
     elevation: 0,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(_radiusCards),
+      side: BorderSide(
+        color: scheme.outline.withValues(alpha: 0.3),
+        width: 1,
+      ),
+    ),
     color: scheme.surfaceContainerLow,
     surfaceTintColor: scheme.surfaceTint,
   );
@@ -137,9 +151,13 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           elevation: 1,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(_radiusBadgesInputs),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          textStyle: const TextStyle(
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w500,
+          ),
         ),
       );
 
@@ -147,9 +165,13 @@ class AppTheme {
       FilledButtonThemeData(
         style: FilledButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(_radiusPill),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          textStyle: const TextStyle(
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w500,
+          ),
         ),
       );
 
@@ -157,9 +179,13 @@ class AppTheme {
       OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(_radiusBadgesInputs),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          textStyle: const TextStyle(
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w500,
+          ),
         ),
       );
 
@@ -167,16 +193,20 @@ class AppTheme {
       TextButtonThemeData(
         style: TextButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(_radiusBadgesInputs),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          textStyle: const TextStyle(
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w500,
+          ),
         ),
       );
 
   static FloatingActionButtonThemeData _fabTheme(ColorScheme scheme) =>
       FloatingActionButtonThemeData(
         elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusCards)),
         backgroundColor: scheme.primaryContainer,
         foregroundColor: scheme.onPrimaryContainer,
       );
@@ -186,57 +216,96 @@ class AppTheme {
         filled: true,
         fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.3),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(_radiusBadgesInputs),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(_radiusBadgesInputs),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(_radiusBadgesInputs),
           borderSide: BorderSide(color: scheme.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(_radiusBadgesInputs),
           borderSide: BorderSide(color: scheme.error, width: 1),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 16,
         ),
+        labelStyle: const TextStyle(fontFamily: 'Inter'),
+        hintStyle: const TextStyle(fontFamily: 'Inter'),
       );
 
   static ListTileThemeData _listTileTheme(ColorScheme scheme) =>
       ListTileThemeData(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusBadgesInputs)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        titleTextStyle: const TextStyle(fontFamily: 'Inter'),
+        subtitleTextStyle: const TextStyle(fontFamily: 'Inter'),
       );
 
   static DialogThemeData _dialogTheme(ColorScheme scheme) => DialogThemeData(
-    elevation: 6,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-    backgroundColor: scheme.surfaceContainerHigh,
-    surfaceTintColor: scheme.surfaceTint,
+    elevation: 0,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusCards)),
+    backgroundColor: scheme.surfaceContainerHigh.withValues(alpha: 0.78),
+    surfaceTintColor: Colors.transparent,
+    barrierColor: Colors.black.withValues(alpha: 0.45),
+    titleTextStyle: TextStyle(
+      color: scheme.onSurface,
+      fontFamily: 'Inter',
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
+    ),
+    contentTextStyle: TextStyle(
+      color: scheme.onSurface,
+      fontFamily: 'Inter',
+      fontSize: 14,
+    ),
   );
+
+  static BottomSheetThemeData _bottomSheetTheme(ColorScheme scheme) =>
+      BottomSheetThemeData(
+        elevation: 0,
+        modalElevation: 0,
+        showDragHandle: false,
+        backgroundColor: scheme.surfaceContainerHigh.withValues(alpha: 0.85),
+        surfaceTintColor: Colors.transparent,
+        modalBackgroundColor: scheme.surfaceContainerHigh.withValues(alpha: 0.85),
+        modalBarrierColor: Colors.black.withValues(alpha: 0.4),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(_radiusCards)),
+        ),
+      );
 
   static NavigationBarThemeData _navigationBarTheme(
     ColorScheme scheme, {
     bool isAmoled = false,
   }) => NavigationBarThemeData(
     elevation: 0,
-    backgroundColor: isAmoled ? Colors.black : scheme.surfaceContainer,
+    backgroundColor: isAmoled ? const Color(kColorVoid) : scheme.surfaceContainer,
     indicatorColor: scheme.secondaryContainer,
     surfaceTintColor: isAmoled ? Colors.transparent : scheme.surfaceTint,
     labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+    labelTextStyle: WidgetStateProperty.all(
+      const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500),
+    ),
   );
 
   static SnackBarThemeData _snackBarTheme(ColorScheme scheme) =>
       SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        backgroundColor: scheme.inverseSurface,
-        contentTextStyle: TextStyle(color: scheme.onInverseSurface),
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusBadgesInputs)),
+        backgroundColor: scheme.inverseSurface.withValues(alpha: 0.78),
+        contentTextStyle: TextStyle(
+          color: scheme.onInverseSurface,
+          fontFamily: 'Inter',
+        ),
+        actionTextColor: scheme.inversePrimary,
+        disabledActionTextColor: scheme.onInverseSurface.withValues(alpha: 0.4),
       );
 
   static ProgressIndicatorThemeData _progressIndicatorTheme(
@@ -269,9 +338,10 @@ class AppTheme {
   );
 
   static ChipThemeData _chipTheme(ColorScheme scheme) => ChipThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusBadgesInputs)),
     backgroundColor: scheme.surfaceContainerLow,
     selectedColor: scheme.secondaryContainer,
+    labelStyle: const TextStyle(fontFamily: 'Inter'),
   );
 
   static DividerThemeData _dividerTheme(ColorScheme scheme) =>

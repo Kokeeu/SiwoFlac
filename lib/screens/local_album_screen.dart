@@ -13,6 +13,8 @@ import 'package:neroflac/utils/file_access.dart';
 import 'package:neroflac/utils/image_cache_utils.dart';
 import 'package:neroflac/utils/lyrics_metadata_helper.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
+import 'package:neroflac/widgets/glass/glass_appbar.dart';
+import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
 import 'package:neroflac/services/library_database.dart';
 import 'package:neroflac/services/ffmpeg_service.dart';
 import 'package:neroflac/services/replaygain_service.dart';
@@ -24,6 +26,7 @@ import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/providers/local_library_provider.dart';
 import 'package:neroflac/providers/playback_provider.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class LocalAlbumScreen extends ConsumerStatefulWidget {
   final String albumName;
@@ -167,7 +170,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
 
   Future<void> _deleteSelected(List<LocalLibraryItem> currentTracks) async {
     final count = _selectedIds.length;
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.downloadedAlbumDeleteSelected),
@@ -258,7 +261,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
 
     if (tracks.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text(widget.albumName)),
+        appBar: GlassAppBar(child: AppBar(title: Text(widget.albumName))),
         body: Center(child: Text(context.l10n.noTracksFoundForAlbum)),
       );
     }
@@ -317,7 +320,8 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
     final expandedHeight = _calculateExpandedHeight(context);
     final commonQuality = _commonQualityCache;
 
-    return SliverAppBar(
+    return GlassSliverAppBar(
+      child: SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
       stretch: true,
@@ -531,6 +535,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
         ),
         onPressed: () => Navigator.pop(context),
       ),
+      ),
     );
   }
 
@@ -672,10 +677,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
             : Colors.transparent,
         margin: const EdgeInsets.symmetric(vertical: 2),
         child: ListTile(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          onTap: _isSelectionMode
+onTap: _isSelectionMode
               ? () => _toggleSelection(track.id)
               : () => _openFile(track),
           onLongPress: _isSelectionMode
@@ -959,7 +961,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
       return;
     }
 
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.queueFlacAction),
@@ -1224,13 +1226,10 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
       _selectedIds.length,
     );
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (sheetContext) => BatchConvertSheet(
+builder: (sheetContext) => BatchConvertSheet(
         formats: formats,
         title: sheetTitle,
         confirmLabel: sheetConfirmLabel,
@@ -1280,7 +1279,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
     }
 
     final isLossless = isLosslessConversionTarget(targetFormat);
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.selectionBatchConvertConfirmTitle),
@@ -1545,7 +1544,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
 
     if (selected.isEmpty) return;
 
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(ctx.l10n.replayGainBatchConfirmTitle),
@@ -1790,10 +1789,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
                         ? colorScheme.onError
                         : colorScheme.onSurfaceVariant,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
+),
                 ),
               ),
             ],

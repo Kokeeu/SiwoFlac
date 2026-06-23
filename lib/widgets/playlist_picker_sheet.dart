@@ -7,6 +7,7 @@ import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/models/track.dart';
 import 'package:neroflac/providers/library_collections_provider.dart';
 import 'package:neroflac/services/cover_cache_manager.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 Future<void> showAddTrackToPlaylistSheet(
   BuildContext context,
@@ -26,7 +27,7 @@ Future<void> showAddTracksToPlaylistSheet(
 
   if (!context.mounted) return;
 
-  await showModalBottomSheet<void>(
+  await showGlassModalBottomSheet<void>(
     context: context,
     useRootNavigator: true,
     showDragHandle: true,

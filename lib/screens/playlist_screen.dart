@@ -18,8 +18,10 @@ import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/playlist_picker_sheet.dart';
 import 'package:neroflac/widgets/track_collection_quick_actions.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
+import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
 import 'package:neroflac/widgets/audio_quality_badges.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class PlaylistScreen extends ConsumerStatefulWidget {
   final String playlistName;
@@ -266,7 +268,8 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
   Widget _buildAppBar(BuildContext context, ColorScheme colorScheme) {
     final expandedHeight = _calculateExpandedHeight(context);
 
-    return SliverAppBar(
+    return GlassSliverAppBar(
+      child: SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
       stretch: true,
@@ -483,6 +486,7 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
           child: const Icon(Icons.arrow_back, color: Colors.white),
         ),
         onPressed: () => Navigator.pop(context),
+      ),
       ),
     );
   }
@@ -706,7 +710,7 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
 
   void _confirmDownloadAll(BuildContext context) {
     if (_tracks.isEmpty) return;
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       builder: (dialogContext) {
         final colorScheme = Theme.of(dialogContext).colorScheme;

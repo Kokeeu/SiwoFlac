@@ -22,9 +22,11 @@ import 'package:neroflac/screens/home_tab.dart'
 import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/track_collection_quick_actions.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
+import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
 import 'package:neroflac/utils/clickable_metadata.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
 import 'package:neroflac/widgets/cross_extension_share_sheet.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class _ArtistCache {
   static final Map<String, _CacheEntry> _cache = {};
@@ -796,14 +798,11 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
     );
     final singleTracks = singles.fold<int>(0, (sum, a) => sum + a.totalTracks);
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (context) => SafeArea(
+builder: (context) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Column(
@@ -957,7 +956,7 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
     }
 
     final progressDialogKey = GlobalKey<_FetchingProgressDialogState>();
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (ctx) => _FetchingProgressDialog(
@@ -1149,7 +1148,8 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
       ),
     );
 
-    return SliverAppBar(
+    return GlassSliverAppBar(
+      child: SliverAppBar(
       expandedHeight: hasDiscography ? 420 : 380,
       pinned: true,
       stretch: true,
@@ -1354,6 +1354,7 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
           ),
         ),
       ],
+      ),
     );
   }
 
@@ -1999,8 +2000,7 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
       return Card(
         elevation: 0,
         color: colorScheme.errorContainer,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: Padding(
+child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
@@ -2037,8 +2037,7 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
     return Card(
       elevation: 0,
       color: colorScheme.errorContainer.withValues(alpha: 0.5),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
+child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
@@ -2132,8 +2131,7 @@ class _FetchingProgressDialogState extends State<_FetchingProgressDialog> {
 
     return AlertDialog(
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-      content: Column(
+content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 8),

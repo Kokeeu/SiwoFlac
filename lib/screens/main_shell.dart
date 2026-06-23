@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:ui' show ImageFilter;
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,8 +23,9 @@ import 'package:neroflac/services/update_checker.dart';
 import 'package:neroflac/widgets/app_announcement_dialog.dart';
 import 'package:neroflac/widgets/update_dialog.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/settings_group.dart';
 import 'package:neroflac/utils/logger.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/glass/glass.dart';
 
 final _log = AppLogger('MainShell');
 
@@ -200,7 +200,7 @@ class _MainShellState extends ConsumerState<MainShell>
 
     final colorScheme = Theme.of(context).colorScheme;
 
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
@@ -573,32 +573,22 @@ class _MainShellState extends ConsumerState<MainShell>
             );
           },
         ),
-        bottomNavigationBar: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-            child: DecoratedBox(
-              position: DecorationPosition.foreground,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.outlineVariant.withValues(alpha: 0.5),
-                  ),
-                ),
-              ),
-              child: NavigationBar(
-                selectedIndex: _currentIndex.clamp(0, maxIndex),
-                onDestinationSelected: _onNavTap,
-                animationDuration: const Duration(milliseconds: 500),
-                elevation: 0,
-                height: 64,
-                backgroundColor: settingsGroupColor(
-                  context,
-                ).withValues(alpha: 0.72),
-                destinations: destinations,
-              ),
-            ),
+        bottomNavigationBar: GlassSurface(
+          blur: 50,
+          opacity: 0.42,
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(24),
+          ),
+          showShadow: true,
+          child: NavigationBar(
+            selectedIndex: _currentIndex.clamp(0, maxIndex),
+            onDestinationSelected: _onNavTap,
+            animationDuration: const Duration(milliseconds: 500),
+            elevation: 0,
+            height: 64,
+            backgroundColor: Colors.transparent,
+            surfaceTintColor: Colors.transparent,
+            destinations: destinations,
           ),
         ),
       ),

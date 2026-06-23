@@ -10,6 +10,7 @@ import 'package:neroflac/providers/local_library_provider.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class LibrarySettingsPage extends ConsumerStatefulWidget {
   const LibrarySettingsPage({super.key});
@@ -80,7 +81,7 @@ class _LibrarySettingsPageState extends ConsumerState<LibrarySettingsPage> {
       return true;
     } else if (status.isPermanentlyDenied) {
       if (mounted) {
-        final shouldOpen = await showDialog<bool>(
+        final shouldOpen = await showGlassDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
             title: Text(context.l10n.libraryStorageAccessRequired),
@@ -178,7 +179,7 @@ class _LibrarySettingsPageState extends ConsumerState<LibrarySettingsPage> {
   }
 
   Future<void> _clearLibrary() async {
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.libraryClearConfirmTitle),
@@ -240,14 +241,11 @@ class _LibrarySettingsPageState extends ConsumerState<LibrarySettingsPage> {
 
   void _showAutoScanPicker(BuildContext context, String current) {
     final colorScheme = Theme.of(context).colorScheme;
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (context) => SafeArea(
+builder: (context) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

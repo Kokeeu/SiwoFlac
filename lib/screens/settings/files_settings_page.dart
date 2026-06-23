@@ -12,6 +12,7 @@ import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/file_access.dart';
 import 'package:neroflac/widgets/settings_group.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class FilesSettingsPage extends ConsumerStatefulWidget {
   const FilesSettingsPage({super.key});
@@ -53,7 +54,7 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
       if (mounted) setState(() => _hasAllFilesAccess = true);
     } else if (status.isPermanentlyDenied) {
       if (mounted) {
-        final shouldOpen = await showDialog<bool>(
+        final shouldOpen = await showGlassDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
             title: Text(context.l10n.setupStorageAccessRequired),
@@ -469,14 +470,11 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
     final settings = ref.read(settingsProvider);
     final isSafMode =
         settings.storageMode == 'saf' && settings.downloadTreeUri.isNotEmpty;
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (ctx) => SafeArea(
+builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -547,14 +545,11 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
 
   void _showIOSDirectoryOptions(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (ctx) => SafeArea(
+builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -712,15 +707,12 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
     final save =
         onSave ?? ref.read(settingsProvider.notifier).setFilenameFormat;
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
       backgroundColor: colorScheme.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (context) => _FilenameFormatEditorSheet(
+builder: (context) => _FilenameFormatEditorSheet(
         initialText: current,
         onSave: save,
         title: title,
@@ -734,7 +726,7 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
     WidgetRef ref,
     String current,
   ) {
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       builder: (context) => SafeArea(
@@ -803,15 +795,12 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
     String current,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      constraints: BoxConstraints(
+constraints: BoxConstraints(
         maxHeight: MediaQuery.of(context).size.height * 0.7,
       ),
       builder: (context) => SafeArea(
@@ -1023,8 +1012,7 @@ class _FilenameFormatEditorSheetState
         alpha: 0.5,
       ),
       side: BorderSide.none,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      labelStyle: TextStyle(
+labelStyle: TextStyle(
         color: colorScheme.onSurface,
         fontWeight: FontWeight.w500,
       ),
@@ -1139,10 +1127,7 @@ class _FilenameFormatEditorSheetState
                         onPressed: () => Navigator.pop(context),
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
+),
                         child: Text(context.l10n.dialogCancel),
                       ),
                     ),
@@ -1156,10 +1141,7 @@ class _FilenameFormatEditorSheetState
                         },
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
+),
                         child: Text(context.l10n.dialogSave),
                       ),
                     ),

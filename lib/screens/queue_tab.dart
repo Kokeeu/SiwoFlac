@@ -45,6 +45,7 @@ import 'package:neroflac/utils/path_match_keys.dart';
 import 'package:neroflac/utils/string_utils.dart';
 import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 part 'queue_tab_helpers.dart';
 part 'queue_tab_widgets.dart';
@@ -994,7 +995,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
       return;
     }
 
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(ctx.l10n.dialogDownloadAllTitle),
@@ -1080,7 +1081,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
 
   Future<void> _deleteSelectedPlaylists(BuildContext context) async {
     final count = _selectedPlaylistIds.length;
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(ctx.l10n.collectionDeletePlaylist),
@@ -1236,10 +1237,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
                         ? colorScheme.onPrimary
                         : colorScheme.onSurfaceVariant,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
+),
                 ),
               ),
 
@@ -1265,10 +1263,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
                         ? colorScheme.onError
                         : colorScheme.onSurfaceVariant,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
+),
                 ),
               ),
             ],
@@ -1302,7 +1297,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
 
   Future<void> _deleteSelected(List<UnifiedLibraryItem> allItems) async {
     final count = _selectedIds.length;
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.dialogDeleteSelectedTitle),
@@ -1656,15 +1651,12 @@ class _QueueTabState extends ConsumerState<QueueTab> {
     String? tempMetadata = _filterMetadata;
     String tempSortMode = _sortMode;
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       isScrollControlled: true,
       backgroundColor: colorScheme.surfaceContainerLow,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (context) => StatefulBuilder(
+builder: (context) => StatefulBuilder(
         builder: (context, setSheetState) {
           return SafeArea(
             child: LayoutBuilder(
@@ -2345,7 +2337,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
     final controller = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
-    final playlistName = await showDialog<String>(
+    final playlistName = await showGlassDialog<String>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
@@ -3178,7 +3170,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
     BuildContext context,
     DownloadItem item,
   ) async {
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.cancelDownloadTitle),
@@ -4498,7 +4490,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
     WidgetRef ref,
     ColorScheme colorScheme,
   ) async {
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.queueClearAll),
@@ -4967,7 +4959,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
       return;
     }
 
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.queueFlacAction),
@@ -5289,13 +5281,10 @@ class _QueueTabState extends ConsumerState<QueueTab> {
     _hideSelectionOverlay();
     _hidePlaylistSelectionOverlay();
 
-    await showModalBottomSheet<void>(
+    await showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (sheetContext) => BatchConvertSheet(
+builder: (sheetContext) => BatchConvertSheet(
         formats: formats,
         title: sheetTitle,
         confirmLabel: sheetConfirmLabel,
@@ -5369,7 +5358,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
     }
 
     final isLossless = isLosslessConversionTarget(targetFormat);
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.selectionBatchConvertConfirmTitle),
@@ -5722,7 +5711,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
     _hideSelectionOverlay();
     _hidePlaylistSelectionOverlay();
 
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(ctx.l10n.replayGainBatchConfirmTitle),
@@ -5998,10 +5987,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
                         ? colorScheme.onError
                         : colorScheme.onSurfaceVariant,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
+),
                 ),
               ),
             ],
@@ -6027,7 +6013,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
       direction: DismissDirection.endToStart,
       confirmDismiss: isActive
           ? (_) async {
-              return await showDialog<bool>(
+              return await showGlassDialog<bool>(
                     context: context,
                     builder: (ctx) => AlertDialog(
                       title: Text(context.l10n.cancelDownloadTitle),

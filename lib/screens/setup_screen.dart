@@ -12,6 +12,7 @@ import 'package:neroflac/l10n/supported_locales.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/file_access.dart';
 import 'package:neroflac/utils/logger.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 final _log = AppLogger('SetupScreen');
 
@@ -163,7 +164,7 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
   }
 
   Future<bool?> _showAndroid11StorageDialog() {
-    return showDialog<bool>(
+    return showGlassDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.setupStorageAccessRequired),
@@ -212,7 +213,7 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
   }
 
   Future<void> _showPermissionDeniedDialog(String permissionType) async {
-    await showDialog<void>(
+    await showGlassDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.setupPermissionRequired(permissionType)),
@@ -274,7 +275,7 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
         if (_selectedTreeUri == null || _selectedTreeUri!.isEmpty) {
           final defaultDir = await _getDefaultDirectory();
           if (mounted) {
-            final useDefault = await showDialog<bool>(
+            final useDefault = await showGlassDialog<bool>(
               context: context,
               builder: (context) => AlertDialog(
                 title: Text(context.l10n.setupUseDefaultFolder),
@@ -309,14 +310,11 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
 
   Future<void> _showIOSDirectoryOptions() async {
     final colorScheme = Theme.of(context).colorScheme;
-    await showModalBottomSheet<void>(
+    await showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (ctx) => SafeArea(
+builder: (ctx) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -688,7 +686,6 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
                   'assets/images/logo-transparent.png',
                   width: logoSize,
                   height: logoSize,
-                  color: colorScheme.primary,
                   fit: BoxFit.contain,
                 ),
                 SizedBox(height: titleGap),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:neroflac/models/theme_settings.dart';
 import 'package:neroflac/providers/theme_provider.dart';
 import 'package:neroflac/theme/app_theme.dart';
 
@@ -52,14 +53,14 @@ class DynamicColorWrapper extends ConsumerWidget {
   ColorScheme _applyAmoledColors(ColorScheme scheme) {
     return scheme.copyWith(
       surface: Colors.black,
-      onSurface: Colors.white,
+      onSurface: const Color(kColorBoneWhite),
       surfaceContainerLowest: Colors.black,
       surfaceContainerLow: const Color(0xFF0A0A0A),
       surfaceContainer: const Color(0xFF121212),
       surfaceContainerHigh: const Color(0xFF1A1A1A),
       surfaceContainerHighest: const Color(0xFF222222),
-      inverseSurface: Colors.white,
-      onInverseSurface: Colors.black,
+      inverseSurface: const Color(kColorBoneWhite),
+      onInverseSurface: const Color(kColorVoid),
     );
   }
 }

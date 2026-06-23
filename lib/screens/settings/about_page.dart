@@ -304,7 +304,6 @@ class _AppHeaderCard extends StatelessWidget {
                 ),
                 child: Image.asset(
                   'assets/images/logo-transparent.png',
-                  color: colorScheme.onPrimary,
                   fit: BoxFit.contain,
                   errorBuilder: (_, _, _) => ClipRRect(
                     borderRadius: BorderRadius.circular(24),
@@ -321,11 +320,16 @@ class _AppHeaderCard extends StatelessWidget {
               Text(
                 AppInfo.appName,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
+                style: TextStyle(
+                  fontFamily: 'Playfair Display',
+                  fontSize: 40,
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.italic,
+                  letterSpacing: -1.2,
+                  color: colorScheme.onSurface,
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 8),
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
@@ -333,13 +337,16 @@ class _AppHeaderCard extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: colorScheme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   'v${AppInfo.displayVersion}',
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  style: TextStyle(
+                    fontFamily: 'JetBrains Mono',
+                    fontSize: 12,
                     color: colorScheme.onSecondaryContainer,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 0.5,
                   ),
                 ),
               ),

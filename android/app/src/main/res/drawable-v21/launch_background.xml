@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  NeroFlac Liquid Glass splash (v21+).
+  Same gradient as the v- drawable; v21+ devices get the same visual.
+-->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="?android:colorBackground" />
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="270"
+                android:startColor="#090909"
+                android:centerColor="#1A0A2E"
+                android:endColor="#3D1B5E" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="640"
+                android:centerX="0.3"
+                android:centerY="0.25"
+                android:startColor="#33AF50FF"
+                android:endColor="#00000000" />
+        </shape>
+    </item>
 </layer-list>

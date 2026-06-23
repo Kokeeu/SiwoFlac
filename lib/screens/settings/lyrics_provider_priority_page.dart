@@ -4,6 +4,7 @@ import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/widgets/priority_settings_scaffold.dart';
 import 'package:neroflac/widgets/settings_group.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class LyricsProviderPriorityPage extends ConsumerStatefulWidget {
   const LyricsProviderPriorityPage({super.key});
@@ -161,7 +162,7 @@ class _LyricsProviderPriorityPageState
   }
 
   Future<bool> _confirmDiscard(BuildContext context) async {
-    final result = await showDialog<bool>(
+    final result = await showGlassDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.dialogDiscardChanges),

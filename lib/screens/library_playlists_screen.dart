@@ -11,6 +11,7 @@ import 'package:neroflac/services/cover_cache_manager.dart';
 import 'package:neroflac/widgets/bottom_sheet_option_tile.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class LibraryPlaylistsScreen extends ConsumerWidget {
   const LibraryPlaylistsScreen({super.key});
@@ -152,14 +153,11 @@ class LibraryPlaylistsScreen extends ConsumerWidget {
   ) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (sheetContext) => SafeArea(
+builder: (sheetContext) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -379,7 +377,7 @@ class LibraryPlaylistsScreen extends ConsumerWidget {
     final controller = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
-    final playlistName = await showDialog<String>(
+    final playlistName = await showGlassDialog<String>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
@@ -447,7 +445,7 @@ class LibraryPlaylistsScreen extends ConsumerWidget {
     final controller = TextEditingController(text: currentName);
     final formKey = GlobalKey<FormState>();
 
-    final nextName = await showDialog<String>(
+    final nextName = await showGlassDialog<String>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
@@ -510,7 +508,7 @@ class LibraryPlaylistsScreen extends ConsumerWidget {
     String playlistId,
     String playlistName,
   ) async {
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(

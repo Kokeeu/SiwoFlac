@@ -24,6 +24,9 @@ import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/screens/track_metadata_screen.dart';
 import 'package:neroflac/services/downloaded_embedded_cover_resolver.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
+import 'package:neroflac/widgets/glass/glass_appbar.dart';
+import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class DownloadedAlbumScreen extends ConsumerStatefulWidget {
   final String albumName;
@@ -219,7 +222,7 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
 
   Future<void> _deleteSelected(List<DownloadHistoryItem> currentTracks) async {
     final count = _selectedIds.length;
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.downloadedAlbumDeleteSelected),
@@ -376,14 +379,14 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
 
     if (tracks.isEmpty && tracksValue.isLoading) {
       return Scaffold(
-        appBar: AppBar(title: Text(widget.albumName)),
+        appBar: GlassAppBar(child: AppBar(title: Text(widget.albumName))),
         body: const Center(child: CircularProgressIndicator()),
       );
     }
 
     if (tracks.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text(widget.albumName)),
+        appBar: GlassAppBar(child: AppBar(title: Text(widget.albumName))),
         body: Center(child: Text(context.l10n.noTracksFoundForAlbum)),
       );
     }
@@ -468,7 +471,8 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
     final embeddedCoverPath = _resolveAlbumEmbeddedCoverPath(tracks);
     final commonQuality = _getCommonQuality(tracks);
 
-    return SliverAppBar(
+    return GlassSliverAppBar(
+      child: SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
       stretch: true,
@@ -668,6 +672,7 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
         ),
         onPressed: () => Navigator.pop(context),
       ),
+      ),
     );
   }
 
@@ -832,10 +837,7 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
             : Colors.transparent,
         margin: const EdgeInsets.symmetric(vertical: 2),
         child: ListTile(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          onTap: _isSelectionMode
+onTap: _isSelectionMode
               ? () => _toggleSelection(track.id)
               : () => _navigateToMetadataScreen(
                   track,
@@ -976,13 +978,10 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
       _selectedIds.length,
     );
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (sheetContext) => BatchConvertSheet(
+builder: (sheetContext) => BatchConvertSheet(
         formats: formats,
         title: sheetTitle,
         confirmLabel: sheetConfirmLabel,
@@ -1033,7 +1032,7 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
     }
 
     final isLossless = isLosslessConversionTarget(targetFormat);
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.selectionBatchConvertConfirmTitle),
@@ -1259,9 +1258,9 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
               targetFormat,
             ),
           ),
-        ),
-      );
-    }
+      ),
+    );
+  }
   }
 
   Future<void> _runBatchReplayGain(List<DownloadHistoryItem> tracks) async {
@@ -1275,7 +1274,7 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
 
     if (selected.isEmpty) return;
 
-    final confirmed = await showDialog<bool>(
+    final confirmed = await showGlassDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(ctx.l10n.replayGainBatchConfirmTitle),
@@ -1499,10 +1498,7 @@ class _DownloadedAlbumScreenState extends ConsumerState<DownloadedAlbumScreen> {
                         ? colorScheme.onError
                         : colorScheme.onSurfaceVariant,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
+),
                 ),
               ),
             ],

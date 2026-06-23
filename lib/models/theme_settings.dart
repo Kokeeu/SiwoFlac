@@ -5,8 +5,26 @@ const String kUseDynamicColorKey = 'use_dynamic_color';
 const String kSeedColorKey = 'seed_color';
 const String kUseAmoledKey = 'use_amoled';
 
-/// Default NeroFlac brand color (deep violet/black accent)
-const int kDefaultSeedColor = 0xFF7C3AED;
+// === Dope Security color tokens (subset) ===
+// Vivid violet (#AF50FF) on near-black canvas (#090909).
+const int kColorVoid = 0xFF090909;
+const int kColorBoneWhite = 0xFFF7F9FA;
+const int kColorAsh = 0xFFF0F0F0;
+const int kColorSlate = 0xFF6B6B6B;
+const int kColorGraphite = 0xFF454545;
+const int kColorSmoke = 0xFF828384;
+const int kColorIron = 0xFF333333;
+const int kColorCinder = 0xFF423738;
+const int kColorIris = 0xFFAF50FF;
+const int kColorPlum = 0xFF7F56D9;
+const int kColorAubergine = 0xFF271635;
+const int kColorStormGray = 0xFF475467;
+const int kColorLavenderWash = 0xFFE1BDFF;
+const int kColorOrchidRadial = 0xFF6C4BD6;
+const int kColorAmethystBand = 0xFF4823B4;
+
+/// Default NeroFlac brand color — Dope Security's Iris (vivid violet).
+const int kDefaultSeedColor = kColorIris;
 
 class ThemeSettings {
   final ThemeMode themeMode;
@@ -15,7 +33,7 @@ class ThemeSettings {
   final bool useAmoled;
 
   const ThemeSettings({
-    this.themeMode = ThemeMode.system,
+    this.themeMode = ThemeMode.dark,
     this.useDynamicColor = true,
     this.seedColorValue = kDefaultSeedColor,
     this.useAmoled = false,
@@ -38,11 +56,11 @@ class ThemeSettings {
   }
 
   Map<String, dynamic> toJson() => {
-        kThemeModeKey: themeMode.name,
-        kUseDynamicColorKey: useDynamicColor,
-        kSeedColorKey: seedColorValue,
-        kUseAmoledKey: useAmoled,
-      };
+    kThemeModeKey: themeMode.name,
+    kUseDynamicColorKey: useDynamicColor,
+    kSeedColorKey: seedColorValue,
+    kUseAmoledKey: useAmoled,
+  };
 
   factory ThemeSettings.fromJson(Map<String, dynamic> json) {
     return ThemeSettings(
@@ -65,13 +83,16 @@ class ThemeSettings {
 
   @override
   int get hashCode =>
-      themeMode.hashCode ^ useDynamicColor.hashCode ^ seedColorValue.hashCode ^ useAmoled.hashCode;
+      themeMode.hashCode ^
+      useDynamicColor.hashCode ^
+      seedColorValue.hashCode ^
+      useAmoled.hashCode;
 }
 
 ThemeMode themeModeFromString(String? value) {
-  if (value == null) return ThemeMode.system;
+  if (value == null) return ThemeMode.dark;
   return ThemeMode.values.firstWhere(
     (e) => e.name == value,
-    orElse: () => ThemeMode.system,
+    orElse: () => ThemeMode.dark,
   );
 }

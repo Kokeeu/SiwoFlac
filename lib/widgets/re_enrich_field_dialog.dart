@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 /// Field group keys matching the Go backend `update_fields` values.
 class ReEnrichFields {
@@ -33,7 +34,7 @@ Future<ReEnrichFieldSelection?> showReEnrichFieldDialog(
   BuildContext context, {
   required int selectedCount,
 }) {
-  return showModalBottomSheet<ReEnrichFieldSelection>(
+  return showGlassModalBottomSheet<ReEnrichFieldSelection>(
     context: context,
     useRootNavigator: true,
     showDragHandle: true,

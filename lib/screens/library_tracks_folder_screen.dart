@@ -19,6 +19,8 @@ import 'package:neroflac/screens/track_metadata_screen.dart';
 import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/playlist_picker_sheet.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
+import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class LibraryTracksFolderScreen extends ConsumerStatefulWidget {
   final LibraryTracksFolderMode mode;
@@ -554,10 +556,7 @@ class _LibraryTracksFolderScreenState
                         ? colorScheme.onError
                         : colorScheme.onSurfaceVariant,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
+),
                 ),
               ),
             ],
@@ -616,7 +615,8 @@ class _LibraryTracksFolderScreenState
         customCoverPath != null && customCoverPath.isNotEmpty;
     final hasCoverUrl = coverUrl != null;
 
-    return SliverAppBar(
+    return GlassSliverAppBar(
+      child: SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
       stretch: true,
@@ -836,6 +836,7 @@ class _LibraryTracksFolderScreenState
             ? _exitSelectionMode
             : () => Navigator.pop(context),
       ),
+      ),
     );
   }
 
@@ -852,14 +853,13 @@ class _LibraryTracksFolderScreenState
         backgroundColor: Colors.white,
         foregroundColor: Colors.black87,
         minimumSize: const Size(0, 48),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      ),
+),
     );
   }
 
   void _confirmDownloadAll(List<Track> tracks) {
     if (tracks.isEmpty) return;
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       builder: (dialogContext) {
         final colorScheme = Theme.of(dialogContext).colorScheme;
@@ -991,22 +991,19 @@ class _LibraryTracksFolderScreenState
                   )
                 : context.l10n.snackbarAddedTracksToQueue(tracksToQueue.length),
           ),
-        ),
-      );
-    }
+      ),
+    );
+  }
   }
 
   void _showCoverOptionsSheet(BuildContext context, bool hasCustomCover) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surfaceContainerHigh,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (sheetContext) => SafeArea(
+builder: (sheetContext) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -1163,10 +1160,7 @@ class _CollectionTrackTile extends ConsumerWidget {
             : Colors.transparent,
         margin: const EdgeInsets.symmetric(vertical: 2),
         child: ListTile(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          leading: Row(
+leading: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               if (isSelectionMode) ...[
@@ -1473,8 +1467,7 @@ class _SelectionActionButton extends StatelessWidget {
             ? colorScheme.onPrimaryContainer
             : colorScheme.onSurfaceVariant,
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      ),
+),
     );
   }
 }

@@ -14,6 +14,7 @@ import 'package:neroflac/services/cover_cache_manager.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class CacheManagementPage extends ConsumerStatefulWidget {
   const CacheManagementPage({super.key});
@@ -221,7 +222,7 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
   }
 
   Future<bool> _confirmClear(String target) async {
-    final confirm = await showDialog<bool>(
+    final confirm = await showGlassDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.cacheClearConfirmTitle),
@@ -242,7 +243,7 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
   }
 
   Future<bool> _confirmClearAll() async {
-    final confirm = await showDialog<bool>(
+    final confirm = await showGlassDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.cacheClearAllConfirmTitle),

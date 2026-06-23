@@ -5,6 +5,7 @@ import 'package:neroflac/services/update_checker.dart';
 import 'package:neroflac/services/apk_downloader.dart';
 import 'package:neroflac/services/notification_service.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 class UpdateDialog extends StatefulWidget {
   final UpdateInfo updateInfo;
@@ -399,7 +400,7 @@ Future<void> showUpdateDialog(
   required UpdateInfo updateInfo,
   required VoidCallback onDisableUpdates,
 }) async {
-  return showDialog(
+  return showGlassDialog(
     context: context,
     builder: (context) => UpdateDialog(
       updateInfo: updateInfo,
