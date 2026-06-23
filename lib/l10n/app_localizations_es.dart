@@ -4268,6 +4268,98 @@ class AppLocalizationsEs extends AppLocalizations {
   String shareSheetLinkCopied(Object service) {
     return '$service link copied';
   }
+
+  @override
+  String get importPlaylistTitle => 'Importar lista';
+
+  @override
+  String get importPlaylistUrlLabel => 'URL de YouTube Music';
+
+  @override
+  String get importPlaylistUrlHint =>
+      'https://music.youtube.com/playlist?list=…';
+
+  @override
+  String get importPlaylistProviderLabel => 'Proveedor de búsqueda';
+
+  @override
+  String get importPlaylistFindMatches => 'Buscar coincidencias';
+
+  @override
+  String get importPlaylistRescan => 'Volver a buscar';
+
+  @override
+  String get importPlaylistDownload => 'Descargar';
+
+  @override
+  String get importPlaylistPaste => 'Pegar';
+
+  @override
+  String get importPlaylistTooltip => 'Importar lista de YouTube Music';
+
+  @override
+  String get importPlaylistFetching => 'Obteniendo lista…';
+
+  @override
+  String importPlaylistSearching(int done, int total) {
+    return 'Buscando coincidencias… $done / $total';
+  }
+
+  @override
+  String importPlaylistResultsSummary(int matched, int total) {
+    return '$matched / $total coincidentes';
+  }
+
+  @override
+  String importPlaylistResultsBreakdown(int exact, int approx, int none) {
+    return '$exact exactas · $approx aproximadas · $none sin coincidencia';
+  }
+
+  @override
+  String get importPlaylistNoResults =>
+      'No se encontraron canciones. La URL puede ser privada, estar bloqueada por región, o estar vacía.';
+
+  @override
+  String get importPlaylistNoExtensionTitle =>
+      'Se requiere la extensión de YouTube Music';
+
+  @override
+  String get importPlaylistNoExtensionBody =>
+      'Para importar una lista de YouTube Music, instala la extensión \"YouTube Music\" desde la pestaña Tienda. La extensión maneja URLs de listas de forma fiable; el respaldo integrado no es fiable.';
+
+  @override
+  String get importPlaylistInstallExtension => 'Abrir Tienda';
+
+  @override
+  String get importPlaylistClose => 'Cerrar';
+
+  @override
+  String get importPlaylistErrorEmpty => 'Primero pega una URL de lista.';
+
+  @override
+  String get importPlaylistErrorNotPlaylist =>
+      'Esa URL no es una lista de YouTube Music.';
+
+  @override
+  String get importPlaylistErrorNoProvider =>
+      'Primero elige un proveedor de búsqueda.';
+
+  @override
+  String get importPlaylistErrorNoSearchExtensions =>
+      'No hay ninguna extensión con búsqueda personalizada habilitada. Instala una (Spotify Web, etc.) desde la Tienda.';
+
+  @override
+  String importPlaylistQueued(int count) {
+    return '$count pistas en cola para descargar';
+  }
+
+  @override
+  String get importPlaylistNoneQueued => 'No hay coincidencias para descargar';
+
+  @override
+  String importPlaylistTracksLabel(int count) {
+    return 'pistas';
+  }
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).

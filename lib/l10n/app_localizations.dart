@@ -7116,6 +7116,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{service} link copied'**
   String shareSheetLinkCopied(Object service);
+
+  /// Title of the YouTube Music playlist import screen
+  ///
+  /// In en, this message translates to:
+  /// **'Import playlist'**
+  String get importPlaylistTitle;
+
+  /// Label for the playlist URL text field
+  ///
+  /// In en, this message translates to:
+  /// **'YouTube Music URL'**
+  String get importPlaylistUrlLabel;
+
+  /// Hint placeholder for the URL text field
+  ///
+  /// In en, this message translates to:
+  /// **'https://music.youtube.com/playlist?list=…'**
+  String get importPlaylistUrlHint;
+
+  /// Label for the search provider dropdown
+  ///
+  /// In en, this message translates to:
+  /// **'Search provider'**
+  String get importPlaylistProviderLabel;
+
+  /// Button that starts extracting and searching the playlist
+  ///
+  /// In en, this message translates to:
+  /// **'Find matches'**
+  String get importPlaylistFindMatches;
+
+  /// Button to re-run the search after results are shown
+  ///
+  /// In en, this message translates to:
+  /// **'Re-search'**
+  String get importPlaylistRescan;
+
+  /// Button in the app bar to download all matched songs
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get importPlaylistDownload;
+
+  /// Tooltip for the paste button
+  ///
+  /// In en, this message translates to:
+  /// **'Paste'**
+  String get importPlaylistPaste;
+
+  /// Tooltip for the playlist import button in the search bar
+  ///
+  /// In en, this message translates to:
+  /// **'Import YouTube Music playlist'**
+  String get importPlaylistTooltip;
+
+  /// Status shown while extracting songs from the playlist URL
+  ///
+  /// In en, this message translates to:
+  /// **'Fetching playlist…'**
+  String get importPlaylistFetching;
+
+  /// Status shown while searching each song
+  ///
+  /// In en, this message translates to:
+  /// **'Searching matches… {done} / {total}'**
+  String importPlaylistSearching(int done, int total);
+
+  /// Summary line for results
+  ///
+  /// In en, this message translates to:
+  /// **'{matched} / {total} matched'**
+  String importPlaylistResultsSummary(int matched, int total);
+
+  /// Detailed breakdown of match quality
+  ///
+  /// In en, this message translates to:
+  /// **'{exact} exact · {approx} approximate · {none} not found'**
+  String importPlaylistResultsBreakdown(int exact, int approx, int none);
+
+  /// Shown when the extractor returns an empty list
+  ///
+  /// In en, this message translates to:
+  /// **'No songs found in this playlist. The URL may be private, region-locked, or empty.'**
+  String get importPlaylistNoResults;
+
+  /// Title of the dialog shown when no YouTube extension is installed
+  ///
+  /// In en, this message translates to:
+  /// **'YouTube Music extension required'**
+  String get importPlaylistNoExtensionTitle;
+
+  /// Body of the dialog shown when no YouTube extension is installed
+  ///
+  /// In en, this message translates to:
+  /// **'To import a YouTube Music playlist, install the \"YouTube Music\" extension from the Store tab. The extension handles playlist URLs reliably; the built-in fallback is unreliable.'**
+  String get importPlaylistNoExtensionBody;
+
+  /// Button on the missing-extension dialog to go to the Store
+  ///
+  /// In en, this message translates to:
+  /// **'Open Store'**
+  String get importPlaylistInstallExtension;
+
+  /// Button on the missing-extension dialog to dismiss it
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get importPlaylistClose;
+
+  /// Validation error when the URL field is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Paste a playlist URL first.'**
+  String get importPlaylistErrorEmpty;
+
+  /// Validation error when the URL doesn't match a YT Music playlist
+  ///
+  /// In en, this message translates to:
+  /// **'That URL is not a YouTube Music playlist.'**
+  String get importPlaylistErrorNotPlaylist;
+
+  /// Validation error when no search provider is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a search provider first.'**
+  String get importPlaylistErrorNoProvider;
+
+  /// Shown when no extension with custom search is enabled
+  ///
+  /// In en, this message translates to:
+  /// **'No extension with custom search is enabled. Install one (Spotify Web, etc.) from the Store.'**
+  String get importPlaylistErrorNoSearchExtensions;
+
+  /// Snackbar after queuing downloads
+  ///
+  /// In en, this message translates to:
+  /// **'Queued {count} tracks for download'**
+  String importPlaylistQueued(int count);
+
+  /// Snackbar when no matched songs are available to download
+  ///
+  /// In en, this message translates to:
+  /// **'No matched songs to download'**
+  String get importPlaylistNoneQueued;
+
+  /// Subtitle in the quality picker for the playlist import
+  ///
+  /// In en, this message translates to:
+  /// **'tracks'**
+  String importPlaylistTracksLabel(int count);
 }
 
 class _AppLocalizationsDelegate

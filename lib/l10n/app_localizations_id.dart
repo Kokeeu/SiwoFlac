@@ -4281,4 +4281,95 @@ class AppLocalizationsId extends AppLocalizations {
   String shareSheetLinkCopied(Object service) {
     return '$service link copied';
   }
+
+  @override
+  String get importPlaylistTitle => 'Import playlist';
+
+  @override
+  String get importPlaylistUrlLabel => 'YouTube Music URL';
+
+  @override
+  String get importPlaylistUrlHint =>
+      'https://music.youtube.com/playlist?list=…';
+
+  @override
+  String get importPlaylistProviderLabel => 'Search provider';
+
+  @override
+  String get importPlaylistFindMatches => 'Find matches';
+
+  @override
+  String get importPlaylistRescan => 'Re-search';
+
+  @override
+  String get importPlaylistDownload => 'Download';
+
+  @override
+  String get importPlaylistPaste => 'Paste';
+
+  @override
+  String get importPlaylistTooltip => 'Import YouTube Music playlist';
+
+  @override
+  String get importPlaylistFetching => 'Fetching playlist…';
+
+  @override
+  String importPlaylistSearching(int done, int total) {
+    return 'Searching matches… $done / $total';
+  }
+
+  @override
+  String importPlaylistResultsSummary(int matched, int total) {
+    return '$matched / $total matched';
+  }
+
+  @override
+  String importPlaylistResultsBreakdown(int exact, int approx, int none) {
+    return '$exact exact · $approx approximate · $none not found';
+  }
+
+  @override
+  String get importPlaylistNoResults =>
+      'No songs found in this playlist. The URL may be private, region-locked, or empty.';
+
+  @override
+  String get importPlaylistNoExtensionTitle =>
+      'YouTube Music extension required';
+
+  @override
+  String get importPlaylistNoExtensionBody =>
+      'To import a YouTube Music playlist, install the \"YouTube Music\" extension from the Store tab. The extension handles playlist URLs reliably; the built-in fallback is unreliable.';
+
+  @override
+  String get importPlaylistInstallExtension => 'Open Store';
+
+  @override
+  String get importPlaylistClose => 'Close';
+
+  @override
+  String get importPlaylistErrorEmpty => 'Paste a playlist URL first.';
+
+  @override
+  String get importPlaylistErrorNotPlaylist =>
+      'That URL is not a YouTube Music playlist.';
+
+  @override
+  String get importPlaylistErrorNoProvider => 'Pick a search provider first.';
+
+  @override
+  String get importPlaylistErrorNoSearchExtensions =>
+      'No extension with custom search is enabled. Install one (Spotify Web, etc.) from the Store.';
+
+  @override
+  String importPlaylistQueued(int count) {
+    return 'Queued $count tracks for download';
+  }
+
+  @override
+  String get importPlaylistNoneQueued => 'No matched songs to download';
+
+  @override
+  String importPlaylistTracksLabel(int count) {
+    return 'tracks';
+  }
 }

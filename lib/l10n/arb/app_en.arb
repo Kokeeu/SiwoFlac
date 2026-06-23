@@ -5595,5 +5595,142 @@
     "placeholders": {
       "service": {}
     }
+  },
+  "importPlaylistTitle": "Import playlist",
+  "@importPlaylistTitle": {
+    "description": "Title of the YouTube Music playlist import screen"
+  },
+  "importPlaylistUrlLabel": "YouTube Music URL",
+  "@importPlaylistUrlLabel": {
+    "description": "Label for the playlist URL text field"
+  },
+  "importPlaylistUrlHint": "https://music.youtube.com/playlist?list=…",
+  "@importPlaylistUrlHint": {
+    "description": "Hint placeholder for the URL text field"
+  },
+  "importPlaylistProviderLabel": "Search provider",
+  "@importPlaylistProviderLabel": {
+    "description": "Label for the search provider dropdown"
+  },
+  "importPlaylistFindMatches": "Find matches",
+  "@importPlaylistFindMatches": {
+    "description": "Button that starts extracting and searching the playlist"
+  },
+  "importPlaylistRescan": "Re-search",
+  "@importPlaylistRescan": {
+    "description": "Button to re-run the search after results are shown"
+  },
+  "importPlaylistDownload": "Download",
+  "@importPlaylistDownload": {
+    "description": "Button in the app bar to download all matched songs"
+  },
+  "importPlaylistPaste": "Paste",
+  "@importPlaylistPaste": {
+    "description": "Tooltip for the paste button"
+  },
+  "importPlaylistTooltip": "Import YouTube Music playlist",
+  "@importPlaylistTooltip": {
+    "description": "Tooltip for the playlist import button in the search bar"
+  },
+  "importPlaylistFetching": "Fetching playlist…",
+  "@importPlaylistFetching": {
+    "description": "Status shown while extracting songs from the playlist URL"
+  },
+  "importPlaylistSearching": "Searching matches… {done} / {total}",
+  "@importPlaylistSearching": {
+    "description": "Status shown while searching each song",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "importPlaylistResultsSummary": "{matched} / {total} matched",
+  "@importPlaylistResultsSummary": {
+    "description": "Summary line for results",
+    "placeholders": {
+      "matched": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "importPlaylistResultsBreakdown": "{exact} exact · {approx} approximate · {none} not found",
+  "@importPlaylistResultsBreakdown": {
+    "description": "Detailed breakdown of match quality",
+    "placeholders": {
+      "exact": {
+        "type": "int"
+      },
+      "approx": {
+        "type": "int"
+      },
+      "none": {
+        "type": "int"
+      }
+    }
+  },
+  "importPlaylistNoResults": "No songs found in this playlist. The URL may be private, region-locked, or empty.",
+  "@importPlaylistNoResults": {
+    "description": "Shown when the extractor returns an empty list"
+  },
+  "importPlaylistNoExtensionTitle": "YouTube Music extension required",
+  "@importPlaylistNoExtensionTitle": {
+    "description": "Title of the dialog shown when no YouTube extension is installed"
+  },
+  "importPlaylistNoExtensionBody": "To import a YouTube Music playlist, install the \"YouTube Music\" extension from the Store tab. The extension handles playlist URLs reliably; the built-in fallback is unreliable.",
+  "@importPlaylistNoExtensionBody": {
+    "description": "Body of the dialog shown when no YouTube extension is installed"
+  },
+  "importPlaylistInstallExtension": "Open Store",
+  "@importPlaylistInstallExtension": {
+    "description": "Button on the missing-extension dialog to go to the Store"
+  },
+  "importPlaylistClose": "Close",
+  "@importPlaylistClose": {
+    "description": "Button on the missing-extension dialog to dismiss it"
+  },
+  "importPlaylistErrorEmpty": "Paste a playlist URL first.",
+  "@importPlaylistErrorEmpty": {
+    "description": "Validation error when the URL field is empty"
+  },
+  "importPlaylistErrorNotPlaylist": "That URL is not a YouTube Music playlist.",
+  "@importPlaylistErrorNotPlaylist": {
+    "description": "Validation error when the URL doesn't match a YT Music playlist"
+  },
+  "importPlaylistErrorNoProvider": "Pick a search provider first.",
+  "@importPlaylistErrorNoProvider": {
+    "description": "Validation error when no search provider is selected"
+  },
+  "importPlaylistErrorNoSearchExtensions": "No extension with custom search is enabled. Install one (Spotify Web, etc.) from the Store.",
+  "@importPlaylistErrorNoSearchExtensions": {
+    "description": "Shown when no extension with custom search is enabled"
+  },
+  "importPlaylistQueued": "Queued {count} tracks for download",
+  "@importPlaylistQueued": {
+    "description": "Snackbar after queuing downloads",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "importPlaylistNoneQueued": "No matched songs to download",
+  "@importPlaylistNoneQueued": {
+    "description": "Snackbar when no matched songs are available to download"
+  },
+  "importPlaylistTracksLabel": "tracks",
+  "@importPlaylistTracksLabel": {
+    "description": "Subtitle in the quality picker for the playlist import",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

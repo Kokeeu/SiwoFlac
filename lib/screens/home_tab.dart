@@ -17,6 +17,7 @@ import 'package:neroflac/providers/local_library_provider.dart';
 import 'package:neroflac/screens/track_metadata_screen.dart';
 import 'package:neroflac/screens/album_screen.dart';
 import 'package:neroflac/screens/artist_screen.dart';
+import 'package:neroflac/screens/import_playlist_screen.dart';
 import 'package:neroflac/services/csv_import_service.dart';
 import 'package:neroflac/services/downloaded_embedded_cover_resolver.dart';
 import 'package:neroflac/services/platform_bridge.dart';
@@ -33,6 +34,9 @@ import 'package:neroflac/utils/clickable_metadata.dart';
 import 'package:neroflac/widgets/audio_quality_badges.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
 import 'package:neroflac/widgets/settings_group.dart';
+import 'package:neroflac/widgets/glass/glass_appbar.dart';
+import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
+import 'package:neroflac/widgets/glass/glass_sheet.dart';
 
 part 'home_tab_helpers.dart';
 part 'home_tab_widgets.dart';
@@ -895,7 +899,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
       if (progressDialogInitialized || !mounted) return;
       progressDialogInitialized = true;
       progressDialogVisible = true;
-      showDialog<void>(
+      showGlassDialog<void>(
         context: this.context,
         useRootNavigator: false,
         barrierDismissible: false,
@@ -967,7 +971,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
         // ignore: use_build_context_synchronously
         final l10n = context.l10n;
 
-        final options = await showDialog<_CsvImportOptions>(
+        final options = await showGlassDialog<_CsvImportOptions>(
           context: this.context,
           useRootNavigator: false,
           builder: (dialogCtx) {
@@ -1292,7 +1296,8 @@ class _HomeTabState extends ConsumerState<HomeTab>
           child: CustomScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             slivers: [
-              SliverAppBar(
+              GlassSliverAppBar(
+                child: SliverAppBar(
                 expandedHeight: 120 + topPadding,
                 collapsedHeight: kToolbarHeight,
                 floating: false,
@@ -1323,6 +1328,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
                     );
                   },
                 ),
+              ),
               ),
 
               SliverToBoxAdapter(
@@ -1608,7 +1614,6 @@ class _HomeTabState extends ConsumerState<HomeTab>
             ),
             child: Image.asset(
               'assets/images/logo-transparent.png',
-              color: colorScheme.onPrimary,
               fit: BoxFit.contain,
               errorBuilder: (_, _, _) => ClipRRect(
                 borderRadius: BorderRadius.circular(24),
@@ -2018,13 +2023,10 @@ class _HomeTabState extends ConsumerState<HomeTab>
   void _showTrackBottomSheet(ExploreItem item) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       backgroundColor: colorScheme.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
       builder: (context) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -2576,8 +2578,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
       return Card(
         elevation: 0,
         color: colorScheme.errorContainer,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Padding(
+child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
@@ -2615,8 +2616,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
       return Card(
         elevation: 0,
         color: colorScheme.errorContainer.withValues(alpha: 0.5),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Padding(
+child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
@@ -2650,8 +2650,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
     return Card(
       elevation: 0,
       color: colorScheme.errorContainer.withValues(alpha: 0.5),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Padding(
+child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
@@ -2735,14 +2734,11 @@ class _HomeTabState extends ConsumerState<HomeTab>
 
   void _showSortOptions(ColorScheme colorScheme) {
     var tempSort = _searchSortOption;
-    showModalBottomSheet<void>(
+    showGlassModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       isScrollControlled: true,
       backgroundColor: colorScheme.surfaceContainerLow,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setSheetState) {
           return SafeArea(
@@ -3604,6 +3600,16 @@ class _HomeTabState extends ConsumerState<HomeTab>
                     ? null
                     : () => _importCsv(context, ref),
                 tooltip: context.l10n.homeImportCsvTooltip,
+              ),
+              IconButton(
+                icon: const Icon(Icons.playlist_add_rounded),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const ImportPlaylistScreen(),
+                    fullscreenDialog: true,
+                  ),
+                ),
+                tooltip: context.l10n.importPlaylistTooltip,
               ),
               IconButton(
                 icon: const Icon(Icons.paste),

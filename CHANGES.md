@@ -267,3 +267,116 @@ NeroFlac/
 - **Tiempo estimado**: ~1.5 horas de sesión interactiva
 - **Modo final**: build (con permisos de edición)
 - **Decisión clave del usuario**: Force-push a Kokeeu/NeroFlac sobreescribiendo el commit inicial; identidad visual violeta; URL de extensiones = spotiflacapp/SpotiFLAC-Extension.
+
+---
+
+## 11. Feature: Importar listas de YouTube Music (sesión 2026-06-23)
+
+### 11.1 Resumen
+
+Añadido importador de playlists de YouTube Music con búsqueda por lote. El usuario pega una URL de YouTube Music, el extractor obtiene los nombres de las canciones, y se buscan en paralelo en un proveedor de búsqueda habilitado (Spotify Web, etc.) para descarga en lote.
+
+### 11.2 Flujo
+
+1. Usuario toca el icono `playlist_add_rounded` en la search bar del home tab
+2. Pega URL de YouTube Music (o usa el botón Pegar)
+3. Selecciona el proveedor de búsqueda
+4. Toca "Buscar coincidencias"
+5. Extractor intenta primero la extensión de YouTube Music vía `PlatformBridge.handleURLWithExtension`
+6. Si no hay extensión o falla, fallback con `youtube_explode_dart` (parsing de la playlist page)
+7. Búsqueda concurrente (3 workers en paralelo) usando `PlatformBridge.customSearchWithExtension`
+8. Score Jaccard (title 0.6 + artist 0.4) para clasificar cada resultado: exact / approximate / none
+9. Lista de resultados con iconos ✅/⚠️/❌
+10. Toca "Descargar" → abre `DownloadServicePicker` para elegir calidad + servicio
+11. Se encolan todas las canciones coincidentes con `addToQueue(qualityOverride, playlistName)`
+
+### 11.3 Archivos nuevos
+
+| Archivo | Descripción |
+|---|---|
+| `lib/services/youtube_playlist_extractor.dart` | Extractor con dos estrategias: extension → youtube_explode_dart fallback |
+| `lib/services/batch_search_service.dart` | Búsqueda concurrente con scoring Jaccard |
+| `lib/screens/import_playlist_screen.dart` | UI completa: 4 fases (idle/extracting/searching/ready), diálogos de error, picker de calidad |
+
+### 11.4 Archivos modificados
+
+| Archivo | Cambio |
+|---|---|
+| `pubspec.yaml` | Añadido `youtube_explode_dart: ^3.1.0` |
+| `lib/screens/home_tab.dart` | Botón `playlist_add_rounded` en suffixIcon de la search bar; tooltip l10n |
+| `lib/l10n/arb/app_en.arb` | 25 claves nuevas (`importPlaylist*`) |
+| `lib/l10n/arb/app_es.arb` | 25 claves nuevas en español |
+| `lib/l10n/app_localizations*.dart` | Regenerados (18 idiomas) |
+
+### 11.5 Decisiones
+
+- **Detección de extensión YouTube Music**: leniente (busca "youtube"/"ytmusic" en id, name, displayName o urlHandler.patterns)
+- **Diálogo de extensión faltante**: dismisible (`barrierDismissible: true` + `PopScope`)
+- **Bug fix en dialogs**: usa `dialogContext` del builder en vez del contexto externo para `Navigator.pop()` (antes los botones no respondían porque pop estaba cerrando el import screen, no el dialog)
+- **Score Jaccard** sobre tokens en vez de Levenshtein (más rápido y robusto a prefijos/sufijos)
+- **Fallback youtube_explode_dart** es poco fiable (YouTube bloquea IPs de datacenter); la extensión de YouTube Music es el método primario
+
+### 11.6 UX añadidos
+
+- Diálogo de validación en español para: URL vacía, URL no válida, sin proveedor, sin extensiones con búsqueda
+- Diálogo "Se requiere la extensión de YouTube Music" con botón "Abrir Tienda" si no hay extensión instalada
+- Mensaje "no se encontraron canciones" si el extractor devuelve 0 (URL privada/bloqueada/vacía)
+- Snackbar final con conteo: "N pistas en cola para descargar" o "No hay coincidencias para descargar"
+- "Re-search" como label del botón cuando ya hay resultados
+
+---
+
+## 12. Backup a Google Drive (DEFERRED — 2026-06-23)
+
+Investigado pero NO implementado. Documentado para retomar en una sesión futura.
+
+### 12.1 Lo que se investigó
+
+- `pubspec.yaml` NO tiene `google_sign_in`, `googleapis`, ni `googleapis_auth`
+- En el pub cache local SÍ están disponibles: `googleapis-14.0.0` (58 MB, incluye `drive/v3.dart`) y `googleapis_auth-2.0.0`
+- El `app_state_database` y `library_database` ya almacenan `filePath` por canción, así que sabemos qué archivos respaldar
+- El modo de almacenamiento `'saf'` ya usa `Intent.ACTION_OPEN_DOCUMENT_TREE` (visto en `MainActivity.kt:2278`), que ya SOPORTA Google Drive porque es un `DocumentsProvider` registrado en Android
+- El usuario ya tiene la extensión "YouTube Music" instalada (visible con badge "Instalada" en Repositorio)
+
+### 12.2 Opciones evaluadas
+
+- **Opción A — Usar el modo SAF actual (0 código nuevo)**: El usuario ya puede elegir una carpeta de Google Drive como destino en Ajustes → Archivos → SAF. Las canciones se descargan DIRECTO a Drive sin OAuth, sin SDK adicional, sin dependencias nuevas. Funciona en iOS vía Files → iCloud Drive.
+- **Opción B — Subir archivos locales a Drive vía API**: Requiere `google_sign_in: ^6.x` + `extension_google_sign_in_as_googleapis_auth: ^2.x` + credenciales OAuth de Google Cloud Project. ~3-5 días de trabajo, +1 MB de deps, mantenimiento de tokens.
+- **Opción C — Híbrido (SAF + worker de respaldo automático)**: Igual de complejo que B pero con un worker periódico que suba archivos nuevos.
+
+### 12.3 Recomendación
+
+Empezar con A (ya funciona, no requiere código). Solo implementar B/C si el usuario reporta que quiere respaldo automático de archivos ya descargados localmente.
+
+### 12.4 Para retomar más adelante
+
+1. Confirmar con el usuario qué opción quiere (A/B/C)
+2. Si B/C: crear Google Cloud Project, configurar OAuth consent screen, obtener Client ID
+3. Añadir dependencias al `pubspec.yaml`
+4. Implementar `lib/services/google_drive_backup_service.dart`
+5. Nueva pantalla en `lib/screens/settings/google_drive_backup_page.dart`
+6. Nuevas claves l10n en los 18 idiomas
+7. Testing con cuentas reales de Google Drive (cuota 15 GB gratis)
+8. Documentar en CHANGES.md al terminar
+
+---
+
+## 13. Sesión de release (2026-06-23)
+
+Configuración de firma de release para generar APKs firmados publicables en GitHub Releases.
+
+### 13.1 Método elegido: Local (Método A)
+
+- Keystore generado en `C:/Users/jason/keystores/neroflac.jks`
+- Alias: `neroflac`, password: `4ND3R50N` (almacenado en 1Password)
+- Datos del certificado: Kokeeu kafufu / Mobile / Kokeeu / Madrid / Madrid / ES
+- `android/key.properties` creado (NO commiteado, en `.gitignore`)
+- `android/app/build.gradle.kts` modificado para usar el keystore
+- `pubspec.yaml` bumped a `4.7.0+136`
+
+### 13.2 Publicación
+
+- `gh` CLI instalado vía winget
+- Release `v4.7.0` publicada en GitHub con los APKs `app-arm64-v8a-release.apk`, `app-armeabi-v7a-release.apk`, `app-x86_64-release.apk`
+- `apps.json` actualizado con la URL del release
+
