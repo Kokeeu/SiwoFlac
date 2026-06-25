@@ -2,6 +2,11 @@
 .DS_Store
 Thumbs.db
 
+# Android debug heap dumps
+*.hprof
+android/*.hprof
+android/**/*.hprof
+
 # IDE
 .idea/
 .vscode/
