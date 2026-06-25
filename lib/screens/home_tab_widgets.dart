@@ -112,6 +112,22 @@ class _SearchProviderDropdown extends ConsumerWidget {
               )
             else
               Icon(displayIcon, size: 20),
+            const SizedBox(width: 6),
+            if (currentExt != null)
+              Flexible(
+                child: Text(
+                  currentExt.displayName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: currentProvider == currentExt.id
+                        ? FontWeight.w600
+                        : FontWeight.w400,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
+              ),
             const SizedBox(width: 2),
             Icon(
               Icons.arrow_drop_down,
@@ -162,6 +178,8 @@ class _SearchProviderDropdown extends ConsumerWidget {
                   Expanded(
                     child: Text(
                       ext.displayName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontWeight: currentProvider == ext.id
                             ? FontWeight.w600

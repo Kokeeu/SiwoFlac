@@ -869,7 +869,10 @@ class _QueueTabState extends ConsumerState<QueueTab> {
         return Positioned(
           left: 0,
           right: 0,
-          bottom: 0,
+          // Float above the bottom nav (80px) so the selection bar's
+          // action buttons stay visible while the user can still see
+          // and tap the bottom nav.
+          bottom: 80,
           child: _AnimatedOverlayBottomBar(
             child: Material(
               color: Colors.transparent,
@@ -4456,7 +4459,11 @@ builder: (context) => StatefulBuilder(
                 (filteredGroupedAlbums.isNotEmpty ||
                     filteredGroupedLocalAlbums.isNotEmpty)))
           SliverToBoxAdapter(
-            child: SizedBox(height: _isSelectionMode ? 100 : 16),
+            // Reserve enough vertical space for the floating selection
+            // bar so the last track isn't hidden behind it. Bar height is
+            // ~280px (handle + close row + 4 actions wrap + delete);
+            // bottom nav already pads via its own slot above the scroll.
+            child: SizedBox(height: _isSelectionMode ? 320 : 16),
           ),
         SliverToBoxAdapter(child: SizedBox(height: bottomInset)),
       ],
