@@ -269,18 +269,15 @@ class _ImportPlaylistScreenState
       appBar: NeroAppBar(
         child: AppBar(
           title: Text(l10n.importPlaylistTitle),
-          actions: [
-            if (_phase == _Phase.ready)
-              TextButton(
-                onPressed:
-                    _results.any((m) => m.isMatched) ? _downloadAll : null,
-                child: Text(l10n.importPlaylistDownload),
-              ),
-          ],
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+        padding: EdgeInsets.fromLTRB(
+          20,
+          12,
+          20,
+          24 + MediaQuery.paddingOf(context).bottom,
+        ),
         children: [
           _buildUrlField(theme, l10n),
           const SizedBox(height: 16),
@@ -303,6 +300,37 @@ class _ImportPlaylistScreenState
             ),
           if (_phase == _Phase.ready) ..._buildResults(theme, l10n),
         ],
+      ),
+      bottomNavigationBar: (_phase == _Phase.ready &&
+              _results.any((m) => m.isMatched))
+          ? _buildDownloadBar(theme, l10n)
+          : null,
+    );
+  }
+
+  Widget _buildDownloadBar(ThemeData theme, AppLocalizations l10n) {
+    final matchedCount = _results.where((m) => m.isMatched).length;
+    return Material(
+      color: Colors.transparent,
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+          child: SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: _downloadAll,
+              icon: const Icon(Icons.download_rounded),
+              label: Text(
+                '${l10n.importPlaylistDownload} · $matchedCount '
+                '${l10n.importPlaylistTracksLabel(matchedCount)}',
+              ),
+              style: FilledButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 18),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

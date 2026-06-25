@@ -30,7 +30,9 @@ class NeroAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => Size.fromHeight(expandedHeight);
+  Size get preferredSize => Size.fromHeight(
+        flexibleSpace != null ? expandedHeight : collapsedHeight,
+      );
 
   @override
   Widget build(BuildContext context) {
