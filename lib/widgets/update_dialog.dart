@@ -6,7 +6,6 @@ import 'package:neroflac/services/update_checker.dart';
 import 'package:neroflac/services/apk_downloader.dart';
 import 'package:neroflac/services/notification_service.dart';
 import 'package:neroflac/l10n/l10n.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class UpdateDialog extends StatefulWidget {
   final UpdateInfo updateInfo;

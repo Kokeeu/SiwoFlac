@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/theme/nero_theme_extension.dart';
 import 'package:neroflac/widgets/liquid_glass_surface.dart';
 
@@ -58,7 +59,7 @@ class ErrorStateView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(nero.radiusMd),
                   ),
                 ),
-                child: const Text('Retry'),
+                child: Text(context.l10n.retry),
               ),
             ],
           ],

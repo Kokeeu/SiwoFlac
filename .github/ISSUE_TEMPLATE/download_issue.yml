@@ -16,7 +16,7 @@ body:
       options:
         - label: I have tried downloading with a different service (Tidal/Qobuz/Amazon)
           required: true
-        - label: I am using the latest version of NeroFlac (Stable Version)
+        - label: I am using the latest version of SiwöFlac (Stable Version)
           required: true
 
   - type: dropdown
@@ -90,8 +90,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: App Version
-      description: Which version of NeroFlac are you using?
+label: App Version
+    description: Which version of SiwöFlac are you using?
       placeholder: "e.g., v2.2.0"
     validations:
       required: true

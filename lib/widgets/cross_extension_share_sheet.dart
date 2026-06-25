@@ -8,7 +8,6 @@ import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/services/cross_extension_share_service.dart';
 import 'package:neroflac/services/share_intent_service.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class CrossExtensionShareSheet extends ConsumerStatefulWidget {
   final String name;

@@ -550,7 +550,7 @@ void main() {
   });
 
   group('AppRemoteConfig', () {
-    test('parses announcement and donate payloads from API JSON', () {
+    test('parses announcement payloads from API JSON', () {
       final config = AppRemoteConfig.fromJson({
         'announcement': {
           'id': 'hello-2026',
@@ -558,37 +558,12 @@ void main() {
           'title': 'Server message',
           'message': 'A clear message for users',
           'cta_enabled': true,
-          'cta_label': 'Donate',
-          'cta_url': 'https://example.test/donate',
+          'cta_label': 'Learn More',
+          'cta_url': 'https://example.test/announcement',
           'starts_at': '2026-05-01T00:00:00Z',
           'ends_at': '2026-06-01T00:00:00Z',
           'min_version': '4.5.0',
           'priority': 'high',
-        },
-        'donate': {
-          'enabled': true,
-          'title': 'Support NeroFlac',
-          'message': 'Help cover infrastructure.',
-          'methods': [
-            {
-              'id': 'kofi',
-              'title': 'Ko-fi',
-              'subtitle': 'ko-fi.com/example',
-              'url': 'https://ko-fi.com/example',
-              'icon': 'kofi',
-              'color': '#FF5E5B',
-            },
-            {
-              'id': 'wallet',
-              'title': 'USDT',
-              'subtitle': 'TRC20',
-              'wallet_address': 'T123',
-              'icon': 'wallet',
-              'color': '0xFF26A17B',
-            },
-          ],
-          'supporters': ['Alice', 'Bob'],
-          'notices': ['No paywalls'],
         },
       });
 
@@ -601,12 +576,6 @@ void main() {
         ),
         isTrue,
       );
-      expect(config.donate.title, 'Support NeroFlac');
-      expect(config.donate.methods, hasLength(2));
-      expect(config.donate.methods.first.color, 0xFFFF5E5B);
-      expect(config.donate.methods.last.isWallet, isTrue);
-      expect(config.donate.supporters, ['Alice', 'Bob']);
-      expect(config.donate.notices, ['No paywalls']);
     });
 
     test('requires enabled announcement CTA with label and url', () {

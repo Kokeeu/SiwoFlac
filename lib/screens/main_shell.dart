@@ -26,9 +26,7 @@ import 'package:neroflac/services/update_checker.dart';
 import 'package:neroflac/widgets/app_announcement_dialog.dart';
 import 'package:neroflac/widgets/update_dialog.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/batch_progress_dialog.dart';
 import 'package:neroflac/widgets/liquid_glass_surface.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 final _log = AppLogger('MainShell');
 

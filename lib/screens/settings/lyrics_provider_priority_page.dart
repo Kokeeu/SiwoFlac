@@ -5,7 +5,6 @@ import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/widgets/priority_settings_scaffold.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class LyricsProviderPriorityPage extends ConsumerStatefulWidget {
   const LyricsProviderPriorityPage({super.key});

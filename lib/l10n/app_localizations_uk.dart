@@ -2924,12 +2924,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get safMigrationSuccess => 'Папку завантажень оновлено до режиму SAF';
 
   @override
-  String get settingsDonate => 'Support Development';
-
-  @override
-  String get settingsDonateSubtitle => 'Buy the developer a coffee';
-
-  @override
   String get tooltipLoveAll => 'Уподобати всіх';
 
   @override
@@ -4418,4 +4412,11 @@ class AppLocalizationsUk extends AppLocalizations {
   String importPlaylistTracksLabel(int count) {
     return 'tracks';
   }
+
+  @override
+  String get unableToOpenLink =>
+      'Не вдалося відкрити посилання. Спробуйте ще раз.';
+
+  @override
+  String get retry => 'Повторити';
 }

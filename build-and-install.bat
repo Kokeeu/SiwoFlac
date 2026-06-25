@@ -1,8 +1,8 @@
 @echo off
-REM Build + install del APK debug de NeroFlac en el emulador conectado.
+REM Build + install del APK debug de SiwöFlac en el emulador conectado.
 setlocal
 
-set "PROJECT_DIR=C:\dev\neroflac\local"
+set "PROJECT_DIR=C:\dev\siwoflac\local"
 set "FLUTTER=C:\Users\jason\fvm\versions\3.44.3\bin\flutter.bat"
 set "ADB=C:\Users\jason\AppData\Local\Android\Sdk\platform-tools\adb.exe"
 set "APK=%PROJECT_DIR%\build\app\outputs\flutter-apk\app-arm64-v8a-debug.apk"

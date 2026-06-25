@@ -37,7 +37,6 @@ import 'package:neroflac/widgets/audio_quality_badges.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
 import 'package:neroflac/widgets/nero/nero_appbar.dart';
 import 'package:neroflac/widgets/nero/nero_button.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 import 'package:neroflac/widgets/liquid_glass_surface.dart';
 
 part 'home_tab_helpers.dart';
@@ -1303,8 +1302,6 @@ class _HomeTabState extends ConsumerState<HomeTab>
                 child: SliverAppBar(
                 expandedHeight: 140 + topPadding,
                 collapsedHeight: kToolbarHeight,
-                floating: false,
-                pinned: true,
                 backgroundColor: Colors.transparent,
                 surfaceTintColor: Colors.transparent,
                 foregroundColor: nero.carbonInk,
@@ -1370,7 +1367,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
                                     fontWeight: FontWeight.w500,
                                     height: 1.0,
                                     letterSpacing: -0.5,
-                                    color: nero.carbon,
+                                    color: nero.carbonInk,
                                   ),
                                 ),
                               ),
@@ -2266,7 +2263,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
                     width: 4,
                     height: 16,
                     decoration: BoxDecoration(
-                      color: nero.royalAmethyst,
+                      color: nero.prismTeal,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -2278,7 +2275,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                       height: 1.0,
-                      color: nero.carbon,
+                      color: nero.carbonInk,
                     ),
                   ),
                 ],
@@ -2296,7 +2293,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
                   child: Text(
                     context.l10n.dialogClearAll,
                     style: TextStyle(
-                      color: nero.royalAmethyst,
+                      color: nero.prismTeal,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
@@ -2310,7 +2307,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
               decoration: BoxDecoration(
                 color: nero.paper,
-                borderRadius: BorderRadius.circular(nero.radiusCards),
+                borderRadius: BorderRadius.circular(nero.radiusMd),
                 border: Border.all(color: nero.mist, width: 1),
               ),
               child: Column(
@@ -2319,13 +2316,13 @@ class _HomeTabState extends ConsumerState<HomeTab>
                     width: 64,
                     height: 64,
                     decoration: BoxDecoration(
-                      color: nero.mistViolet,
+                      color: nero.mist,
                       borderRadius: BorderRadius.circular(32),
                     ),
                     child: Icon(
                       hasHiddenDownloads ? Icons.visibility_off : Icons.history,
                       size: 28,
-                      color: nero.royalAmethyst,
+                      color: nero.prismTeal,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -2336,7 +2333,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
                       fontFamily: 'Inter',
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: nero.plumVelvet,
+                      color: nero.carbonInk,
                     ),
                   ),
                   if (hasHiddenDownloads) ...[
@@ -2767,15 +2764,15 @@ child: Padding(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  nero.lavenderGlow.withValues(alpha: 0.4),
-                  nero.mistViolet,
+                  nero.prismTeal.withValues(alpha: 0.4),
+                  nero.mist,
                 ],
               ),
             ),
             child: Icon(
               Icons.manage_search,
               size: 48,
-              color: nero.royalAmethyst,
+              color: nero.prismTeal,
             ),
           ),
           const SizedBox(height: 20),
@@ -2787,7 +2784,7 @@ child: Padding(
               fontSize: 22,
               fontWeight: FontWeight.w500,
               height: 1.0,
-              color: nero.carbon,
+              color: nero.carbonInk,
             ),
           ),
           const SizedBox(height: 10),
@@ -3653,7 +3650,7 @@ child: Padding(
         fontFamily: 'Inter',
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: nero.carbon,
+        color: nero.carbonInk,
       ),
       decoration: InputDecoration(
         hintText: _getSearchHint(),
@@ -3661,7 +3658,7 @@ child: Padding(
           fontFamily: 'Inter',
           fontSize: 14,
           fontWeight: FontWeight.w400,
-          color: nero.ash,
+          color: nero.fog,
         ),
         filled: true,
         fillColor: nero.paper,
@@ -3675,7 +3672,7 @@ child: Padding(
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(nero.radiusSearch),
-          borderSide: BorderSide(color: nero.royalAmethyst, width: 2),
+          borderSide: BorderSide(color: nero.prismTeal, width: 2),
         ),
         prefixIcon: _SearchProviderDropdown(
           onProviderChanged: () {
@@ -3824,7 +3821,7 @@ class _GlassFilterChip extends StatelessWidget {
           children: [
             if (icon != null) ...[
               IconTheme(
-                data: IconThemeData(color: nero.carbon, size: 18),
+                data: IconThemeData(color: nero.carbonInk, size: 18),
                 child: icon!,
               ),
               const SizedBox(width: 6),
@@ -3832,7 +3829,7 @@ class _GlassFilterChip extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                color: nero.carbon,
+                color: nero.carbonInk,
                 fontWeight: FontWeight.w500,
                 fontSize: 13,
               ),

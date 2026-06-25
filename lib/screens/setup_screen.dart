@@ -13,7 +13,6 @@ import 'package:neroflac/l10n/supported_locales.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/file_access.dart';
 import 'package:neroflac/utils/logger.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 final _log = AppLogger('SetupScreen');
 
@@ -815,7 +814,7 @@ builder: (ctx) => SafeArea(
                   final isSelected = _selectedLocale == code;
 
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Material(
                       color: isSelected
                           ? colorScheme.primaryContainer

@@ -7,7 +7,6 @@ import 'package:neroflac/providers/store_provider.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
 import 'package:neroflac/widgets/nero/nero_appbar.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class ExtensionDetailsScreen extends ConsumerStatefulWidget {
   final StoreExtension extension;
@@ -89,8 +88,6 @@ class _ExtensionDetailsScreenState
     return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: 200,
-      pinned: true,
-      stretch: true,
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       flexibleSpace: FlexibleSpaceBar(

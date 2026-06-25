@@ -6,7 +6,6 @@ import 'package:neroflac/providers/download_queue_provider.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class AppSettingsPage extends ConsumerWidget {
   const AppSettingsPage({super.key});
@@ -25,8 +24,6 @@ class AppSettingsPage extends ConsumerWidget {
             SliverAppBar(
               expandedHeight: 120 + topPadding,
               collapsedHeight: kToolbarHeight,
-              floating: false,
-              pinned: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(

@@ -10,10 +10,10 @@ class AudioQualityBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final nero = NeroTheme.of(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: nero.mistViolet,
-        borderRadius: BorderRadius.circular(nero.radiusPill),
+        color: nero.prismTeal.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
         label,
@@ -21,7 +21,7 @@ class AudioQualityBadge extends StatelessWidget {
           fontFamily: 'Inter',
           fontSize: 10,
           fontWeight: FontWeight.w500,
-          color: nero.royalAmethyst,
+          color: nero.prismTeal,
           height: 1.3,
         ),
       ),
@@ -36,17 +36,17 @@ class DolbyAtmosBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final nero = NeroTheme.of(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: nero.mistViolet,
-        borderRadius: BorderRadius.circular(nero.radiusPill),
+        color: nero.prismTeal.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomPaint(
             size: const Size(14, 10),
-            painter: DolbyLogoPainter(color: nero.royalAmethyst),
+            painter: DolbyLogoPainter(color: nero.prismTeal),
           ),
           const SizedBox(width: 3),
           Text(
@@ -55,7 +55,7 @@ class DolbyAtmosBadge extends StatelessWidget {
               fontFamily: 'Inter',
               fontSize: 10,
               fontWeight: FontWeight.w500,
-              color: nero.royalAmethyst,
+              color: nero.prismTeal,
               height: 1.3,
             ),
           ),

@@ -1,7 +1,6 @@
 import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 /// Field group keys matching the Go backend `update_fields` values.
 class ReEnrichFields {

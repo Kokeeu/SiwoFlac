@@ -11,7 +11,6 @@ import 'package:neroflac/services/youtube_playlist_extractor.dart';
 import 'package:neroflac/utils/logger.dart';
 import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/nero/nero_appbar.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 final _log = AppLogger('ImportPlaylistScreen');
 

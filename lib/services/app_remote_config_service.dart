@@ -10,13 +10,11 @@ final _log = AppLogger('AppRemoteConfig');
 
 class AppRemoteConfig {
   final RemoteAnnouncement? announcement;
-  final DonateConfig donate;
 
-  const AppRemoteConfig({this.announcement, required this.donate});
+  const AppRemoteConfig({this.announcement});
 
   factory AppRemoteConfig.fromJson(Map<String, dynamic> json) {
     final announcementJson = json['announcement'];
-    final donateJson = json['donate'];
 
     return AppRemoteConfig(
       announcement: announcementJson is Map
@@ -24,9 +22,6 @@ class AppRemoteConfig {
               Map<String, dynamic>.from(announcementJson),
             )
           : null,
-      donate: donateJson is Map
-          ? DonateConfig.fromJson(Map<String, dynamic>.from(donateJson))
-          : DonateConfig.fallback(),
     );
   }
 }
@@ -130,132 +125,6 @@ class RemoteAnnouncement {
 
     return true;
   }
-}
-
-class DonateConfig {
-  final bool enabled;
-  final String title;
-  final String message;
-  final List<DonateMethod> methods;
-  final List<String> supporters;
-  final List<String> notices;
-
-  const DonateConfig({
-    required this.enabled,
-    required this.title,
-    required this.message,
-    required this.methods,
-    required this.supporters,
-    required this.notices,
-  });
-
-  factory DonateConfig.fromJson(Map<String, dynamic> json) {
-    final methods = (json['methods'] as List<dynamic>? ?? const [])
-        .whereType<Map<Object?, Object?>>()
-        .map((value) => DonateMethod.fromJson(Map<String, dynamic>.from(value)))
-        .where((method) => method.isValid)
-        .toList(growable: false);
-
-    return DonateConfig(
-      enabled: json['enabled'] as bool? ?? true,
-      title: _readString(json['title']).isEmpty
-          ? 'Support Development'
-          : _readString(json['title']),
-      message: _readString(json['message']).isEmpty
-          ? 'Optional support helps cover tools, testing devices, and hosting.'
-          : _readString(json['message']),
-      methods: methods.isEmpty ? DonateConfig.fallback().methods : methods,
-      supporters: _readStringList(
-        json['supporters'] ?? json['recent_supporters'],
-      ),
-      notices: _readStringList(json['notices']).isEmpty
-          ? DonateConfig.fallback().notices
-          : _readStringList(json['notices']),
-    );
-  }
-
-  factory DonateConfig.fallback() {
-    return const DonateConfig(
-      enabled: true,
-      title: 'Support Development',
-      message: 'Optional support helps cover dev tools and testing devices.',
-      methods: [
-        DonateMethod(
-          id: 'kofi',
-          title: 'Ko-fi',
-          subtitle: 'ko-fi.com/zarzet',
-          url: AppInfo.kofiUrl,
-          icon: 'kofi',
-          color: 0xFFFF5E5B,
-        ),
-        DonateMethod(
-          id: 'github-sponsors',
-          title: 'GitHub Sponsors',
-          subtitle: 'github.com/sponsors/zarzet',
-          url: AppInfo.githubSponsorsUrl,
-          icon: 'github',
-          color: 0xFF2D333B,
-        ),
-        DonateMethod(
-          id: 'usdt-trc20',
-          title: 'USDT (TRC20)',
-          subtitle: 'TL7iAqjq9M8BwVMi9AtHvuAGHtdwEvsDta',
-          walletAddress: 'TL7iAqjq9M8BwVMi9AtHvuAGHtdwEvsDta',
-          icon: 'crypto',
-          color: 0xFF26A17B,
-        ),
-      ],
-      supporters: [],
-      notices: [
-        'Not selling early access, premium features, or paywalls',
-        'Funds go to dev tools and testing devices',
-        'Your support helps keep this project active',
-        'Supporter list can be updated from the app API',
-      ],
-    );
-  }
-}
-
-class DonateMethod {
-  final String id;
-  final String title;
-  final String subtitle;
-  final String? url;
-  final String? walletAddress;
-  final String icon;
-  final int color;
-
-  const DonateMethod({
-    required this.id,
-    required this.title,
-    required this.subtitle,
-    this.url,
-    this.walletAddress,
-    this.icon = 'heart',
-    this.color = 0xFF6750A4,
-  });
-
-  factory DonateMethod.fromJson(Map<String, dynamic> json) {
-    return DonateMethod(
-      id: _readString(json['id']),
-      title: _readString(json['title'] ?? json['label']),
-      subtitle: _readString(json['subtitle']),
-      url: _readNullableString(json['url']),
-      walletAddress: _readNullableString(
-        json['wallet_address'] ?? json['walletAddress'],
-      ),
-      icon: _readString(json['icon']).isEmpty
-          ? 'heart'
-          : _readString(json['icon']),
-      color: _readColor(json['color']) ?? 0xFF6750A4,
-    );
-  }
-
-  bool get isWallet => walletAddress != null && walletAddress!.isNotEmpty;
-
-  bool get isLink => url != null && url!.isNotEmpty;
-
-  bool get isValid => id.isNotEmpty && title.isNotEmpty && (isLink || isWallet);
 }
 
 class AppRemoteConfigService {
@@ -407,33 +276,6 @@ bool _readBool(Object? value) {
 DateTime? _readDate(Object? value) {
   final text = _readString(value);
   return text.isEmpty ? null : DateTime.tryParse(text);
-}
-
-List<String> _readStringList(Object? value) {
-  if (value is! List) return const [];
-  return value
-      .whereType<String>()
-      .map((text) => text.trim())
-      .where((text) => text.isNotEmpty)
-      .toList(growable: false);
-}
-
-int? _readColor(Object? value) {
-  if (value is int) {
-    return value;
-  }
-  if (value is! String) {
-    return null;
-  }
-
-  final normalized = value.trim().replaceFirst('#', '').replaceFirst('0x', '');
-  if (normalized.length == 6) {
-    return int.tryParse('FF$normalized', radix: 16);
-  }
-  if (normalized.length == 8) {
-    return int.tryParse(normalized, radix: 16);
-  }
-  return null;
 }
 
 int _compareVersions(String left, String right) {

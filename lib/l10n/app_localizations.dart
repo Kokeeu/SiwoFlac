@@ -4981,18 +4981,6 @@ abstract class AppLocalizations {
   /// **'Download folder updated to SAF mode'**
   String get safMigrationSuccess;
 
-  /// Settings menu item - donate page
-  ///
-  /// In en, this message translates to:
-  /// **'Support Development'**
-  String get settingsDonate;
-
-  /// Subtitle for donate menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Buy the developer a coffee'**
-  String get settingsDonateSubtitle;
-
   /// Tooltip for the Love All button on album/playlist screens
   ///
   /// In en, this message translates to:
@@ -7266,6 +7254,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'tracks'**
   String importPlaylistTracksLabel(int count);
+
+  /// Snackbar message when an external link fails to launch
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to open link. Please try again.'**
+  String get unableToOpenLink;
+
+  /// Generic retry button label
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
 }
 
 class _AppLocalizationsDelegate

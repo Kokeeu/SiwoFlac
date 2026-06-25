@@ -10,7 +10,6 @@ import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class ExtensionDetailPage extends ConsumerStatefulWidget {
   final String extensionId;
@@ -95,8 +94,6 @@ class _ExtensionDetailPageState extends ConsumerState<ExtensionDetailPage> {
             SliverAppBar(
               expandedHeight: 120 + topPadding,
               collapsedHeight: kToolbarHeight,
-              floating: false,
-              pinned: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
@@ -588,7 +585,7 @@ class _OauthLoginLinkPreview extends StatelessWidget {
         text,
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
           color: colorScheme.primary,
-          fontFamily: 'monospace',
+          fontFamily: 'JetBrains Mono',
           fontSize: 11,
         ),
       ),
@@ -1308,7 +1305,7 @@ class _PostProcessingHookItem extends StatelessWidget {
                           return Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 6,
-                              vertical: 2,
+                              vertical: 4,
                             ),
                             decoration: BoxDecoration(
                               color: colorScheme.surfaceContainerHighest,
@@ -1528,7 +1525,7 @@ class _QualityOptionItem extends StatelessWidget {
                       quality.id,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: colorScheme.primary,
-                        fontFamily: 'monospace',
+                        fontFamily: 'JetBrains Mono',
                       ),
                     ),
                   ],

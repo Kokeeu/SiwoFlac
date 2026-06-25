@@ -22,7 +22,6 @@ import 'package:neroflac/widgets/animation_utils.dart';
 import 'package:neroflac/widgets/nero/nero_appbar.dart';
 import 'package:neroflac/widgets/audio_quality_badges.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class PlaylistScreen extends ConsumerStatefulWidget {
   final String playlistName;
@@ -272,8 +271,6 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
     return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: expandedHeight,
-      pinned: true,
-      stretch: true,
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       title: AnimatedOpacity(
@@ -914,7 +911,7 @@ class _PlaylistTrackItem extends ConsumerWidget {
       child: Card(
         elevation: 0,
         color: Colors.transparent,
-        margin: const EdgeInsets.symmetric(vertical: 2),
+        margin: const EdgeInsets.symmetric(vertical: 4),
         child: ListTile(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -965,7 +962,7 @@ class _PlaylistTrackItem extends ConsumerWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 6,
-                    vertical: 2,
+                    vertical: 4,
                   ),
                   decoration: BoxDecoration(
                     color: colorScheme.primaryContainer,

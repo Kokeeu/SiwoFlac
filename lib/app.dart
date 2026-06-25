@@ -7,7 +7,6 @@ import 'package:neroflac/screens/main_shell.dart';
 import 'package:neroflac/screens/setup_screen.dart';
 import 'package:neroflac/screens/tutorial_screen.dart';
 import 'package:neroflac/providers/settings_provider.dart';
-import 'package:neroflac/theme/dynamic_color_wrapper.dart';
 import 'package:neroflac/theme/app_theme.dart';
 import 'package:neroflac/theme/nero_theme_extension.dart';
 import 'package:neroflac/l10n/app_localizations.dart';

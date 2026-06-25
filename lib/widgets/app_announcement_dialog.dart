@@ -2,7 +2,7 @@ import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:neroflac/services/app_remote_config_service.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
+import 'package:neroflac/l10n/l10n.dart';
 
 class AppAnnouncementDialog extends StatelessWidget {
   final RemoteAnnouncement announcement;
@@ -51,7 +51,7 @@ class AppAnnouncementDialog extends StatelessWidget {
   void _showCtaOpenFailed(BuildContext context) {
     if (!context.mounted) return;
     ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-      const SnackBar(content: Text('Unable to open link. Please try again.')),
+      SnackBar(content: Text(context.l10n.unableToOpenLink)),
     );
   }
 

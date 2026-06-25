@@ -2880,12 +2880,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get safMigrationSuccess => 'Download folder updated to SAF mode';
 
   @override
-  String get settingsDonate => 'Support Development';
-
-  @override
-  String get settingsDonateSubtitle => 'Buy the developer a coffee';
-
-  @override
   String get tooltipLoveAll => 'Love All';
 
   @override
@@ -4360,6 +4354,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String importPlaylistTracksLabel(int count) {
     return 'pistas';
   }
+
+  @override
+  String get unableToOpenLink =>
+      'No se pudo abrir el enlace. Inténtalo de nuevo.';
+
+  @override
+  String get retry => 'Reintentar';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -7235,12 +7236,6 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
   String get safMigrationSuccess => 'Download folder updated to SAF mode';
 
   @override
-  String get settingsDonate => 'Apoya el desarrollo';
-
-  @override
-  String get settingsDonateSubtitle => 'Compra un café al desarrollador';
-
-  @override
   String get tooltipLoveAll => 'Love All';
 
   @override
@@ -8634,4 +8629,11 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
   String shareSheetLinkCopied(Object service) {
     return '$service link copied';
   }
+
+  @override
+  String get unableToOpenLink =>
+      'No se pudo abrir el enlace. Inténtalo de nuevo.';
+
+  @override
+  String get retry => 'Reintentar';
 }

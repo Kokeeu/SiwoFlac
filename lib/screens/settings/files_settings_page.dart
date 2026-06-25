@@ -13,7 +13,6 @@ import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/file_access.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class FilesSettingsPage extends ConsumerStatefulWidget {
   const FilesSettingsPage({super.key});
@@ -100,8 +99,6 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
             SliverAppBar(
               expandedHeight: 120 + topPadding,
               collapsedHeight: kToolbarHeight,
-              floating: false,
-              pinned: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
@@ -704,7 +701,6 @@ builder: (ctx) => SafeArea(
     String? title,
     String? description,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
     final save =
         onSave ?? ref.read(settingsProvider.notifier).setFilenameFormat;
 
@@ -908,7 +904,7 @@ class _FolderOption extends StatelessWidget {
           Text(
             example,
             style: TextStyle(
-              fontFamily: 'monospace',
+              fontFamily: 'JetBrains Mono',
               fontSize: 11,
               color: colorScheme.primary,
             ),

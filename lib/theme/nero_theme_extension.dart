@@ -116,27 +116,45 @@ class NeroTheme extends ThemeExtension<NeroTheme> {
   /// Subtle border on glass surfaces
   final Color glassBorderSubtle;
 
-  // === Deprecated tokens (Wiza era) — kept as stubs so screens compile.
-  //     Phase 3 subagents will replace these with proper Prisma tokens.
-  //     Ignore the analyzer warnings — these exist only for backward compat.
-  Color get canvas => paper; // deprecated alias
-  Color get charcoal => graphite; // deprecated alias
-  Color get carbon => carbonInk; // deprecated alias
-  Color get ash => fog; // deprecated alias
-  Color get smoke => mist; // deprecated alias
-  Color get gradientHeroWash => deepTeal; // deprecated alias (was gradient)
-  Color get deepIris => carbonInk; // deprecated alias
-  Color get royalAmethyst => prismTeal; // deprecated alias
-  Color get plumVelvet => deepTeal; // deprecated alias
-  Color get mistViolet => mist; // deprecated alias
-  Color get lavenderGlow => prismTeal; // deprecated alias
-  Color get twilightBeam => prismTeal; // deprecated alias
-  double get radiusCards => radiusMd; // deprecated alias
-  double get radiusPill => radiusMd; // deprecated alias (was 1440)
-  double get radiusLarge => radius2xl; // deprecated alias
+  // === Deprecated tokens (Wiza era) — kept as stubs so external code
+  //     referencing them still compiles. Prefer the canonical Prisma
+  //     tokens above; new code must not introduce call sites.
+  @Deprecated('Use paper')
+  Color get canvas => paper;
+  @Deprecated('Use graphite')
+  Color get charcoal => graphite;
+  @Deprecated('Use carbonInk')
+  Color get carbon => carbonInk;
+  @Deprecated('Use fog')
+  Color get ash => fog;
+  @Deprecated('Use mist')
+  Color get smoke => mist;
+  @Deprecated('Use deepTeal (no gradient)')
+  Color get gradientHeroWash => deepTeal;
+  @Deprecated('Use carbonInk')
+  Color get deepIris => carbonInk;
+  @Deprecated('Use prismTeal')
+  Color get royalAmethyst => prismTeal;
+  @Deprecated('Use deepTeal')
+  Color get plumVelvet => deepTeal;
+  @Deprecated('Use mist')
+  Color get mistViolet => mist;
+  @Deprecated('Use prismTeal')
+  Color get lavenderGlow => prismTeal;
+  @Deprecated('Use prismTeal')
+  Color get twilightBeam => prismTeal;
+  @Deprecated('Use radiusMd')
+  double get radiusCards => radiusMd;
+  @Deprecated('Use StadiumBorder or radiusMd')
+  double get radiusPill => radiusMd;
+  @Deprecated('Use radius2xl')
+  double get radiusLarge => radius2xl;
   // Deprecated shadow aliases
+  @Deprecated('Use shadowSubtle')
   List<BoxShadow> get shadowSm => shadowSubtle;
+  @Deprecated('Use shadowSubtle')
   List<BoxShadow> get shadowLg => shadowSubtle;
+  @Deprecated('Use shadowSubtle')
   List<BoxShadow> get shadowLgAccent => shadowSubtle;
 
   /// Returns the Prisma palette tokens (light only — no dark mode).

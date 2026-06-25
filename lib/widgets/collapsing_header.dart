@@ -24,8 +24,6 @@ class CollapsingHeader extends StatelessWidget {
       slivers: [
         SliverAppBar(
           expandedHeight: 140,
-          floating: false,
-          pinned: true,
           backgroundColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
           leading: showBackButton

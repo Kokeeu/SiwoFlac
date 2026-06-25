@@ -32,8 +32,6 @@ class SettingsTab extends ConsumerWidget {
         SliverAppBar(
           expandedHeight: 120 + topPadding,
           collapsedHeight: kToolbarHeight,
-          floating: false,
-          pinned: true,
           backgroundColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
           automaticallyImplyLeading: false,

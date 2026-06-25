@@ -27,7 +27,6 @@ import 'package:neroflac/widgets/nero/nero_appbar.dart';
 import 'package:neroflac/utils/clickable_metadata.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
 import 'package:neroflac/widgets/cross_extension_share_sheet.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class _ArtistCache {
   static final Map<String, _CacheEntry> _cache = {};
@@ -1152,8 +1151,6 @@ builder: (context) => SafeArea(
     return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: hasDiscography ? 420 : 380,
-      pinned: true,
-      stretch: true,
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       title: AnimatedOpacity(
@@ -1443,7 +1440,7 @@ builder: (context) => SafeArea(
                 children: List.generate(pageCount, (index) {
                   final isActive = _popularCurrentPage == index;
                   return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 3),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
                     width: isActive ? 8 : 6,
                     height: isActive ? 8 : 6,
                     decoration: BoxDecoration(
@@ -1588,7 +1585,7 @@ builder: (context) => SafeArea(
                               Container(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 6,
-                                  vertical: 2,
+                                  vertical: 4,
                                 ),
                                 decoration: BoxDecoration(
                                   color: colorScheme.primaryContainer,
@@ -1902,7 +1899,7 @@ builder: (context) => SafeArea(
                         child: Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 6,
-                            vertical: 2,
+                            vertical: 4,
                           ),
                           decoration: BoxDecoration(
                             color: Colors.black.withValues(alpha: 0.7),

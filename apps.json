@@ -1,17 +1,17 @@
 {
-  "name": "NeroFlac Source",
+  "name": "SiwöFlac Source",
   "identifier": "com.kokeeu.neroflac.source",
   "subtitle": "FLAC Downloader for iOS",
   "apps": [
     {
-      "name": "NeroFlac",
+      "name": "SiwöFlac",
       "bundleIdentifier": "com.kokeeu.neroflac",
       "developerName": "Kokeeu",
       "version": "4.7.0",
       "versionDate": "2026-06-23",
-      "downloadURL": "https://github.com/Kokeeu/NeroFlac/releases/download/v4.7.0/app-arm64-v8a-release.apk",
-      "localizedDescription": "NeroFlac is a fork of SpotiFLAC Mobile. Written in Flutter. Download tracks in true FLAC from extension-provided sources.\n\nv4.7.0: Import YouTube Music playlists with batch search across enabled extensions.",
-      "iconURL": "https://raw.githubusercontent.com/Kokeeu/NeroFlac/main/assets/images/logo.png",
+      "downloadURL": "https://github.com/Kokeeu/Siw%C3%B6Flac/releases/download/v4.7.0/SiwoFlac-v4.7.0-arm64.apk",
+      "localizedDescription": "SiwöFlac is a fork of SpotiFLAC Mobile. Written in Flutter. Download tracks in true FLAC from extension-provided sources.\n\nv4.7.0: Import YouTube Music playlists with batch search across enabled extensions.",
+      "iconURL": "https://raw.githubusercontent.com/Kokeeu/Siw%C3%B6Flac/main/assets/icon/icon.png",
       "size": 79548376
     }
   ]

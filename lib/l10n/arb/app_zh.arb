@@ -3653,14 +3653,6 @@
   "@safMigrationSuccess": {
     "description": "Snackbar after successfully migrating to SAF"
   },
-  "settingsDonate": "Support Development",
-  "@settingsDonate": {
-    "description": "Settings menu item - donate page"
-  },
-  "settingsDonateSubtitle": "Buy the developer a coffee",
-  "@settingsDonateSubtitle": {
-    "description": "Subtitle for donate menu item"
-  },
   "tooltipLoveAll": "Love All",
   "@tooltipLoveAll": {
     "description": "Tooltip for the Love All button on album/playlist screens"
@@ -4560,5 +4552,13 @@
   "downloadFallbackExtensionsSubtitle": "Choose which extensions can be used as fallback",
   "@downloadFallbackExtensionsSubtitle": {
     "description": "Subtitle for fallback extensions item"
+  },
+  "unableToOpenLink": "无法打开链接。请重试。",
+  "@unableToOpenLink": {
+    "description": "Snackbar message when an external link fails to launch"
+  },
+  "retry": "重试",
+  "@retry": {
+    "description": "Generic retry button label"
   }
 }

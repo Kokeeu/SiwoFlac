@@ -8,7 +8,6 @@ import 'package:neroflac/providers/library_collections_provider.dart';
 import 'package:neroflac/services/cover_cache_manager.dart';
 import 'package:neroflac/widgets/playlist_picker_sheet.dart';
 import 'package:neroflac/utils/clickable_metadata.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class TrackCollectionQuickActions extends ConsumerWidget {
   final Track track;

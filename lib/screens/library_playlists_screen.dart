@@ -12,7 +12,6 @@ import 'package:neroflac/services/cover_cache_manager.dart';
 import 'package:neroflac/widgets/bottom_sheet_option_tile.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class LibraryPlaylistsScreen extends ConsumerWidget {
   const LibraryPlaylistsScreen({super.key});
@@ -32,8 +31,6 @@ class LibraryPlaylistsScreen extends ConsumerWidget {
           SliverAppBar(
             expandedHeight: 120 + topPadding,
             collapsedHeight: kToolbarHeight,
-            floating: false,
-            pinned: true,
             backgroundColor: Colors.transparent,
             surfaceTintColor: Colors.transparent,
             leading: IconButton(
@@ -112,7 +109,7 @@ class LibraryPlaylistsScreen extends ConsumerWidget {
                 return ListTile(
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 16,
-                    vertical: 2,
+                    vertical: 4,
                   ),
                   leading: _buildPlaylistThumbnail(context, playlist),
                   title: Text(playlist.name),

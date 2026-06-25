@@ -361,7 +361,7 @@ class _TrackItemWithStatus extends ConsumerWidget {
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 6,
-                                vertical: 2,
+                                vertical: 4,
                               ),
                               decoration: BoxDecoration(
                                 color: colorScheme.primaryContainer,
@@ -1603,7 +1603,7 @@ class _QuickPicksPageViewState extends State<_QuickPicksPageView> {
                   duration: const Duration(milliseconds: 200),
                   width: isActive ? 8 : 6,
                   height: isActive ? 8 : 6,
-                  margin: const EdgeInsets.symmetric(horizontal: 3),
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isActive

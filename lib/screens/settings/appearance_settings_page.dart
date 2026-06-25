@@ -2,12 +2,12 @@ import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/theme/nero_theme_extension.dart';
 import 'package:neroflac/l10n/supported_locales.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/providers/theme_provider.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class AppearanceSettingsPage extends ConsumerWidget {
   const AppearanceSettingsPage({super.key});
@@ -16,7 +16,6 @@ class AppearanceSettingsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeSettings = ref.watch(themeProvider);
     final settings = ref.watch(settingsProvider);
-    final colorScheme = Theme.of(context).colorScheme;
     final topPadding = normalizedHeaderTopPadding(context);
 
     return PopScope(
@@ -27,8 +26,6 @@ class AppearanceSettingsPage extends ConsumerWidget {
             SliverAppBar(
               expandedHeight: 120 + topPadding,
               collapsedHeight: kToolbarHeight,
-              floating: false,
-              pinned: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
@@ -291,13 +288,14 @@ class _SeedSwatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final nero = NeroTheme.of(context);
     return Container(
       width: 28,
       height: 28,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFFE6E2E3), width: 1),
+        border: Border.all(color: nero.mist, width: 1),
       ),
     );
   }
@@ -333,124 +331,6 @@ class _AppBarTitle extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class _ThemeModeSelector extends StatelessWidget {
-  final ThemeMode currentMode;
-  final ValueChanged<ThemeMode> onChanged;
-  const _ThemeModeSelector({
-    required this.currentMode,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Row(
-        children: [
-          _ThemeModeChip(
-            icon: Icons.brightness_auto,
-            label: context.l10n.appearanceThemeSystem,
-            isSelected: currentMode == ThemeMode.system,
-            onTap: () => onChanged(ThemeMode.system),
-          ),
-          const SizedBox(width: 8),
-          _ThemeModeChip(
-            icon: Icons.light_mode,
-            label: context.l10n.appearanceThemeLight,
-            isSelected: currentMode == ThemeMode.light,
-            onTap: () => onChanged(ThemeMode.light),
-          ),
-          const SizedBox(width: 8),
-          _ThemeModeChip(
-            icon: Icons.dark_mode,
-            label: context.l10n.appearanceThemeDark,
-            isSelected: currentMode == ThemeMode.dark,
-            onTap: () => onChanged(ThemeMode.dark),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ThemeModeChip extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-  const _ThemeModeChip({
-    required this.icon,
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    final unselectedColor = isDark
-        ? Color.alphaBlend(
-            Colors.white.withValues(alpha: 0.05),
-            colorScheme.surface,
-          )
-        : Color.alphaBlend(
-            Colors.black.withValues(alpha: 0.05),
-            colorScheme.surfaceContainerHighest,
-          );
-
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: isSelected ? colorScheme.primaryContainer : unselectedColor,
-          borderRadius: BorderRadius.circular(12),
-          border: !isDark && !isSelected
-              ? Border.all(
-                  color: colorScheme.outlineVariant.withValues(alpha: 0.5),
-                  width: 1,
-                )
-              : null,
-        ),
-        child: Material(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(12),
-          child: InkWell(
-            onTap: onTap,
-            borderRadius: BorderRadius.circular(12),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              child: Column(
-                children: [
-                  Icon(
-                    icon,
-                    color: isSelected
-                        ? colorScheme.onPrimaryContainer
-                        : colorScheme.onSurfaceVariant,
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: isSelected
-                          ? FontWeight.w600
-                          : FontWeight.normal,
-                      color: isSelected
-                          ? colorScheme.onPrimaryContainer
-                          : colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

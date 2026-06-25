@@ -1,4 +1,4 @@
-# NeroFlac v4.7.0
+# SiwöFlac v4.7.0
 
 ## 🎵 Importar listas de YouTube Music
 
@@ -32,22 +32,16 @@ Pega una URL de YouTube Music y descarga todas las canciones en lote usando cual
 ## 🔧 Otros cambios
 
 - Bump de versión a `4.7.0+136`
-- APKs firmados con certificado de release (`4ND3R50N`)
+- APKs firmados con certificado de release
+- Rediseño Prisma + Liquid Glass (gradient teal + glass chrome surfaces)
 
 ## 📦 Instalación
 
 Descarga el APK que coincida con tu dispositivo:
 
-- **`app-arm64-v8a-release.apk`** (76 MB) — la mayoría de dispositivos modernos
-- **`app-armeabi-v7a-release.apk`** (96 MB) — dispositivos 32-bit antiguos
-- **`app-release.apk`** (175 MB) — universal, todas las arquitecturas
-
-### Verificación de firma
-
-```
-SHA-256: 885c638c5be7af2479f25cccd18a641bc0e0f7477ae84400c30134183aca8031
-```
+- **`SiwöFlac-4.7.0-arm64.apk`** — la mayoría de dispositivos modernos
+- **`SiwöFlac-4.7.0-universal.apk`** — universal, todas las arquitecturas
 
 ---
 
-**NeroFlac** — Download music in true lossless FLAC from extension-provided sources.
+**SiwöFlac** — Download music in true lossless FLAC from extension-provided sources.

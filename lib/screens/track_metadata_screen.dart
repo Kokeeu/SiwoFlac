@@ -30,7 +30,6 @@ import 'package:neroflac/utils/nav_bar_inset.dart';
 import 'package:neroflac/widgets/audio_analysis_widget.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 part 'track_metadata_edit_sheet.dart';
 
@@ -1096,8 +1095,6 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
           slivers: [
             SliverAppBar(
               expandedHeight: expandedHeight,
-              pinned: true,
-              stretch: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               title: AnimatedOpacity(
@@ -1998,7 +1995,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
                       child: Text(
                         displayFilePath,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontFamily: 'monospace',
+                          fontFamily: 'JetBrains Mono',
                           color: colorScheme.onSurfaceVariant,
                         ),
                         maxLines: 3,

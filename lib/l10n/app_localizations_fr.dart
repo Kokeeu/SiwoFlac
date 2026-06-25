@@ -2957,12 +2957,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le dossier de téléchargement a été mis à jour en mode SAF';
 
   @override
-  String get settingsDonate => 'Soutien au développement';
-
-  @override
-  String get settingsDonateSubtitle => 'Offrez un café au développeur';
-
-  @override
   String get tooltipLoveAll => 'Tout aimer';
 
   @override
@@ -4479,4 +4473,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String importPlaylistTracksLabel(int count) {
     return 'tracks';
   }
+
+  @override
+  String get unableToOpenLink =>
+      'Impossible d\'ouvrir le lien. Veuillez réessayer.';
+
+  @override
+  String get retry => 'Réessayer';
 }

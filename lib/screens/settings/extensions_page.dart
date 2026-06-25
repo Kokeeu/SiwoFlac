@@ -15,7 +15,6 @@ import 'package:neroflac/screens/settings/metadata_provider_priority_page.dart';
 import 'package:neroflac/screens/settings/provider_priority_page.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class ExtensionsPage extends ConsumerStatefulWidget {
   const ExtensionsPage({super.key});
@@ -74,8 +73,6 @@ class _ExtensionsPageState extends ConsumerState<ExtensionsPage> {
             SliverAppBar(
               expandedHeight: 120 + topPadding,
               collapsedHeight: kToolbarHeight,
-              floating: false,
-              pinned: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(

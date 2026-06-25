@@ -46,7 +46,6 @@ import 'package:neroflac/utils/path_match_keys.dart';
 import 'package:neroflac/utils/string_utils.dart';
 import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 import 'package:neroflac/widgets/liquid_glass_surface.dart';
 import 'package:neroflac/theme/nero_theme_extension.dart';
 
@@ -2772,8 +2771,6 @@ builder: (context) => StatefulBuilder(
                 SliverAppBar(
                   expandedHeight: 120 + topPadding,
                   collapsedHeight: kToolbarHeight,
-                  floating: false,
-                  pinned: true,
                   backgroundColor: Colors.transparent,
                   surfaceTintColor: Colors.transparent,
                   automaticallyImplyLeading: false,
@@ -6725,7 +6722,7 @@ builder: (sheetContext) => BatchConvertSheet(
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 6,
-                              vertical: 2,
+                              vertical: 4,
                             ),
                             decoration: BoxDecoration(
                               color: sourceColor,
@@ -6760,7 +6757,7 @@ builder: (sheetContext) => BatchConvertSheet(
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 6,
-                                vertical: 2,
+                                vertical: 4,
                               ),
                               decoration: BoxDecoration(
                                 color: item.quality!.startsWith('24')
@@ -6889,7 +6886,7 @@ builder: (sheetContext) => BatchConvertSheet(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 4,
-                        vertical: 2,
+                        vertical: 4,
                       ),
                       decoration: BoxDecoration(
                         color: isDownloaded
@@ -6913,7 +6910,7 @@ builder: (sheetContext) => BatchConvertSheet(
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 4,
-                          vertical: 2,
+                          vertical: 4,
                         ),
                         decoration: BoxDecoration(
                           color: item.quality!.startsWith('24')

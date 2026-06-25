@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/l10n/l10n.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class DownloadServicePicker extends ConsumerStatefulWidget {
   final String? trackName;

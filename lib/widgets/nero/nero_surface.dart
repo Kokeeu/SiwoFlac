@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:neroflac/theme/nero_theme_extension.dart';
 import 'package:neroflac/widgets/liquid_glass_surface.dart';
 
 enum NeroSurfaceElevation { none, sm, lg, accent }
@@ -49,13 +48,12 @@ class NeroSurface extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nero = NeroTheme.of(context);
     return LiquidGlassSurface(
       variant: GlassVariant.card,
       borderRadius: borderRadius,
       padding: padding,
       tint: tint,
-      child: child,
+      child: child ?? const SizedBox.shrink(),
     );
   }
 }

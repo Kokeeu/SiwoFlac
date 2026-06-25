@@ -1,6 +1,6 @@
 <div align="center">
 
-# NeroFlac
+# SiwöFlac
 
 **Mobile music utility built with Flutter and Go.**  
 High-quality audio management for your personal library.  
@@ -14,7 +14,7 @@ Open source, no ads, no subscription.
 
 ## Sobre este fork
 
-NeroFlac es un fork no oficial de **SpotiFLAC Mobile** (mantenido originalmente por [@zarzet](https://github.com/zarzet)). Todo el crédito por el diseño, la arquitectura y la implementación original va al equipo de SpotiFLAC. Este fork solo cambia:
+SiwöFlac es un fork no oficial de **SpotiFLAC Mobile** (mantenido originalmente por [@zarzet](https://github.com/zarzet)). Todo el crédito por el diseño, la arquitectura y la implementación original va al equipo de SpotiFLAC. Este fork solo cambia:
 
 - Identidad de la app (nombre, package, label, ícono, color seed)
 - Repositorio por defecto de extensiones
@@ -24,22 +24,22 @@ NeroFlac es un fork no oficial de **SpotiFLAC Mobile** (mantenido originalmente 
 
 ## Diferencias con upstream
 
-| | SpotiFLAC Mobile | NeroFlac |
+| | SpotiFLAC Mobile | SiwöFlac |
 |---|---|---|
-| App name | SpotiFLAC Mobile | NeroFlac |
+| App name | SpotiFLAC Mobile | SiwöFlac |
 | Package | `com.zarz.spotiflac` | `com.kokeeu.neroflac` |
 | Author | zarzet | Kokeeu |
 | Default extension repo | api.zarz.moe | `spotiflacapp/SpotiFLAC-Extension` |
-| Seed color | Spotify green (`#1DB954`) | Violet (`#7C3AED`) |
+| Seed color | Spotify green (`#1DB954`) | Prism Teal (`#14B8A6`) |
 | Flutter version | 3.41.5 | 3.44.3 |
 
 ## Instalación
 
 ### Android
-1. Descarga el APK desde la página de [Releases](https://github.com/Kokeeu/NeroFlac/releases)
+1. Descarga el APK desde la página de [Releases](https://github.com/Kokeeu/Siw%C3%B6Flac/releases)
 2. Habilita "Instalar apps de orígenes desconocidos" en Ajustes
 3. Instala el APK
-4. Abre NeroFlac y concede permisos de almacenamiento cuando se soliciten
+4. Abre SiwöFlac y concede permisos de almacenamiento cuando se soliciten
 
 ### Compilar desde el código fuente
 
@@ -47,8 +47,8 @@ Requisitos: **Flutter 3.44.3** (FVM recomendado), **Go 1.25+**, **Android SDK 36
 
 ```bash
 # Clonar
-git clone https://github.com/Kokeeu/NeroFlac.git
-cd NeroFlac
+git clone https://github.com/Kokeeu/SiwöFlac.git
+cd SiwöFlac
 
 # Setup Flutter via FVM
 fvm install && fvm use
@@ -100,6 +100,6 @@ Este repositorio y su contenido se proporcionan estrictamente con fines educativ
 
 <div align="center">
 
-**[Original repo](https://github.com/zarzet/SpotiFLAC-Mobile)** · **[Releases](https://github.com/Kokeeu/NeroFlac/releases)** · **[Reportar bug](../../issues)**
+**[Original repo](https://github.com/zarzet/SpotiFLAC-Mobile)** · **[Releases](https://github.com/Kokeeu/Siw%C3%B6Flac/releases)** · **[Reportar bug](../../issues)**
 
 </div>

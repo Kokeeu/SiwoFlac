@@ -7,7 +7,6 @@ import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/artist_utils.dart';
 import 'package:neroflac/screens/settings/metadata_provider_priority_page.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class MetadataSettingsPage extends ConsumerWidget {
   const MetadataSettingsPage({super.key});
@@ -26,8 +25,6 @@ class MetadataSettingsPage extends ConsumerWidget {
             SliverAppBar(
               expandedHeight: 120 + topPadding,
               collapsedHeight: kToolbarHeight,
-              floating: false,
-              pinned: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(

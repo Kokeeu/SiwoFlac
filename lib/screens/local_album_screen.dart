@@ -26,7 +26,6 @@ import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/providers/local_library_provider.dart';
 import 'package:neroflac/providers/playback_provider.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class LocalAlbumScreen extends ConsumerStatefulWidget {
   final String albumName;
@@ -323,8 +322,6 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
     return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: expandedHeight,
-      pinned: true,
-      stretch: true,
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       title: AnimatedOpacity(
@@ -675,7 +672,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
         color: isSelected
             ? colorScheme.primaryContainer.withValues(alpha: 0.3)
             : Colors.transparent,
-        margin: const EdgeInsets.symmetric(vertical: 2),
+        margin: const EdgeInsets.symmetric(vertical: 4),
         child: ListTile(
 onTap: _isSelectionMode
               ? () => _toggleSelection(track.id)

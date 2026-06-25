@@ -387,8 +387,6 @@ class _AlbumScreenState extends ConsumerState<AlbumScreen> {
     return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: expandedHeight,
-      pinned: true,
-      stretch: true,
       backgroundColor: pageBackgroundColor,
       surfaceTintColor: Colors.transparent,
       title: AnimatedOpacity(
@@ -1043,7 +1041,7 @@ class _AlbumTrackItem extends ConsumerWidget {
       child: Card(
         elevation: 0,
         color: Colors.transparent,
-        margin: const EdgeInsets.symmetric(vertical: 2),
+        margin: const EdgeInsets.symmetric(vertical: 4),
         child: ListTile(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -1089,7 +1087,7 @@ class _AlbumTrackItem extends ConsumerWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 6,
-                    vertical: 2,
+                    vertical: 4,
                   ),
                   decoration: BoxDecoration(
                     color: colorScheme.primaryContainer,

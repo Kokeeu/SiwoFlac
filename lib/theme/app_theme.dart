@@ -11,7 +11,6 @@ class AppTheme {
 
   static const String _displayFontFamily = 'Mona Sans';
   static const String _bodyFontFamily = 'Inter';
-  static const String _monoFontFamily = 'JetBrains Mono';
 
   /// The single theme used across the app. Light only.
   static ThemeData light() {

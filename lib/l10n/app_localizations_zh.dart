@@ -2880,12 +2880,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get safMigrationSuccess => 'Download folder updated to SAF mode';
 
   @override
-  String get settingsDonate => 'Support Development';
-
-  @override
-  String get settingsDonateSubtitle => 'Buy the developer a coffee';
-
-  @override
   String get tooltipLoveAll => 'Love All';
 
   @override
@@ -4359,6 +4353,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String importPlaylistTracksLabel(int count) {
     return 'tracks';
   }
+
+  @override
+  String get unableToOpenLink => '无法打开链接。请重试。';
+
+  @override
+  String get retry => '重试';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -7182,12 +7182,6 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get safMigrationSuccess => 'Download folder updated to SAF mode';
 
   @override
-  String get settingsDonate => 'Support Development';
-
-  @override
-  String get settingsDonateSubtitle => 'Buy the developer a coffee';
-
-  @override
   String get tooltipLoveAll => 'Love All';
 
   @override
@@ -8576,6 +8570,12 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String shareSheetLinkCopied(Object service) {
     return '$service link copied';
   }
+
+  @override
+  String get unableToOpenLink => '无法打开链接。请重试。';
+
+  @override
+  String get retry => '重试';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -11413,12 +11413,6 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get safMigrationSuccess => 'Download folder updated to SAF mode';
 
   @override
-  String get settingsDonate => 'Support Development';
-
-  @override
-  String get settingsDonateSubtitle => 'Buy the developer a coffee';
-
-  @override
   String get tooltipLoveAll => 'Love All';
 
   @override
@@ -12807,4 +12801,10 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String shareSheetLinkCopied(Object service) {
     return '$service link copied';
   }
+
+  @override
+  String get unableToOpenLink => '無法開啟連結。請重試。';
+
+  @override
+  String get retry => '重試';
 }

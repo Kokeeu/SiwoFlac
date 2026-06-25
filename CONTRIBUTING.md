@@ -1,8 +1,10 @@
-# Contributing to SpotiFLAC
+# Contributing to SiwöFlac
 
-First off, thank you for considering contributing to SpotiFLAC! 🎉
+First off, thank you for considering contributing to SiwöFlac! 🎉
 
 This document provides guidelines and steps for contributing. Following these guidelines helps maintain code quality and ensures a smooth collaboration process.
+
+> SiwöFlac is a fork of [SpotiFLAC Mobile](https://github.com/zarzet/SpotiFLAC-Mobile). Most upstream contributions go to the SpotiFLAC project first.
 
 ## Table of Contents
 
@@ -26,7 +28,7 @@ This project and everyone participating in it is governed by our [Code of Conduc
 
 ### Reporting Bugs
 
-Before creating bug reports, please check the [existing issues](https://github.com/zarzet/SpotiFLAC-Mobile/issues) to avoid duplicates.
+Before creating bug reports, please check the [existing issues](https://github.com/Kokeeu/Siw%C3%B6Flac/issues) to avoid duplicates.
 
 When creating a bug report, please use the bug report template and include:
 
@@ -49,10 +51,10 @@ Feature requests are welcome! Please use the feature request template and:
 
 ### Code Contributions
 
-1. **Fork the repository** and create your branch from `dev`
+1. **Fork the repository** and create your branch from `main`
 2. **Make your changes** following our coding guidelines
 3. **Test your changes** thoroughly
-4. **Submit a pull request** to the `dev` branch
+4. **Submit a pull request** to the `main` branch
 
 ### Translations
 
@@ -68,7 +70,7 @@ Translation files are located in `lib/l10n/arb/`.
 
 ### Prerequisites
 
-- **Flutter SDK** 3.10.0 or higher
+- **Flutter SDK** 3.10.0 or higher (3.44.3 recommended via FVM)
 - **Dart SDK** 3.10.0 or higher
 - **Android Studio** or **VS Code** with Flutter extensions
 - **Git**
@@ -77,16 +79,16 @@ Translation files are located in `lib/l10n/arb/`.
 
 1. **Clone your fork**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/SpotiFLAC-Mobile.git
-   cd SpotiFLAC-Mobile
+   git clone https://github.com/YOUR_USERNAME/SiwöFlac.git
+   cd SiwöFlac
    ```
 
 2. **Add upstream remote**
    ```bash
-   git remote add upstream https://github.com/zarzet/SpotiFLAC-Mobile.git
+   git remote add upstream https://github.com/Kokeeu/SiwöFlac.git
    ```
 
-3. **Use FVM (Flutter Version: 3.41.5)**
+3. **Use FVM (Flutter Version: 3.44.3)**
    ```bash
    fvm use
    ```
@@ -238,7 +240,7 @@ chore(deps): update flutter_riverpod to 3.1.0
 1. **Update your fork**
    ```bash
    git fetch upstream
-   git rebase upstream/dev
+   git rebase upstream/main
    ```
 
 2. **Create a feature branch**
@@ -254,7 +256,7 @@ chore(deps): update flutter_riverpod to 3.1.0
    ```
 
 5. **Create a Pull Request**
-   - Target the `dev` branch
+   - Target the `main` branch
    - Fill in the PR template
    - Link related issues
 
@@ -276,7 +278,7 @@ chore(deps): update flutter_riverpod to 3.1.0
 
 If you have questions, feel free to:
 
-- Open a [Discussion](https://github.com/zarzet/SpotiFLAC-Mobile/discussions)
-- Check existing [Issues](https://github.com/zarzet/SpotiFLAC-Mobile/issues)
+- Open a [Discussion](https://github.com/Kokeeu/SiwöFlac/discussions)
+- Check existing [Issues](https://github.com/Kokeeu/SiwöFlac/issues)
 
 Thank you for contributing! 💚

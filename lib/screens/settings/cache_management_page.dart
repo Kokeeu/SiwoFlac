@@ -15,7 +15,6 @@ import 'package:neroflac/services/cover_cache_manager.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class CacheManagementPage extends ConsumerStatefulWidget {
   const CacheManagementPage({super.key});
@@ -385,8 +384,6 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
           SliverAppBar(
             expandedHeight: 120 + topPadding,
             collapsedHeight: kToolbarHeight,
-            floating: false,
-            pinned: true,
             backgroundColor: Colors.transparent,
             surfaceTintColor: Colors.transparent,
             leading: IconButton(

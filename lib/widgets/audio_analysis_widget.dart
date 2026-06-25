@@ -14,6 +14,7 @@ import 'package:neroflac/widgets/settings_group.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/services/platform_bridge.dart';
+import 'package:neroflac/theme/nero_theme_extension.dart';
 
 class AudioAnalysisData {
   static const cacheVersion = 4;
@@ -1612,7 +1613,8 @@ class _SpectrogramView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    const labelColor = Color(0xFFB5B5B5);
+    final nero = NeroTheme.of(context);
+    final labelColor = nero.steel;
 
     return Card(
       color: Colors.black,
@@ -1651,7 +1653,7 @@ class _SpectrogramView extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(40, 0, 10, 8),
             child: Row(
               children: [
-                const Text(
+                Text(
                   'Quiet',
                   style: TextStyle(color: labelColor, fontSize: 10),
                 ),
@@ -1666,7 +1668,7 @@ class _SpectrogramView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                const Text(
+                Text(
                   'Loud',
                   style: TextStyle(color: labelColor, fontSize: 10),
                 ),

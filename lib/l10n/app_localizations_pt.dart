@@ -2880,12 +2880,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get safMigrationSuccess => 'Download folder updated to SAF mode';
 
   @override
-  String get settingsDonate => 'Support Development';
-
-  @override
-  String get settingsDonateSubtitle => 'Buy the developer a coffee';
-
-  @override
   String get tooltipLoveAll => 'Love All';
 
   @override
@@ -4359,6 +4353,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String importPlaylistTracksLabel(int count) {
     return 'tracks';
   }
+
+  @override
+  String get unableToOpenLink =>
+      'Não foi possível abrir o link. Tente novamente.';
+
+  @override
+  String get retry => 'Tentar novamente';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -7213,12 +7214,6 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
   String get safMigrationSuccess => 'Download folder updated to SAF mode';
 
   @override
-  String get settingsDonate => 'Support Development';
-
-  @override
-  String get settingsDonateSubtitle => 'Buy the developer a coffee';
-
-  @override
   String get tooltipLoveAll => 'Love All';
 
   @override
@@ -8607,4 +8602,11 @@ class AppLocalizationsPtPt extends AppLocalizationsPt {
   String shareSheetLinkCopied(Object service) {
     return '$service link copied';
   }
+
+  @override
+  String get unableToOpenLink =>
+      'Não foi possível abrir o link. Tente novamente.';
+
+  @override
+  String get retry => 'Tentar novamente';
 }

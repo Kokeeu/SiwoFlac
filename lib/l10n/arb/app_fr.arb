@@ -3653,14 +3653,6 @@
   "@safMigrationSuccess": {
     "description": "Snackbar after successfully migrating to SAF"
   },
-  "settingsDonate": "Soutien au développement",
-  "@settingsDonate": {
-    "description": "Settings menu item - donate"
-  },
-  "settingsDonateSubtitle": "Offrez un café au développeur",
-  "@settingsDonateSubtitle": {
-    "description": "Subtitle for donate menu item"
-  },
   "tooltipLoveAll": "Tout aimer",
   "@tooltipLoveAll": {
     "description": "Tooltip for the Love All button on album/playlist screens"
@@ -5533,5 +5525,13 @@
     "placeholders": {
       "service": {}
     }
+  },
+  "unableToOpenLink": "Impossible d'ouvrir le lien. Veuillez réessayer.",
+  "@unableToOpenLink": {
+    "description": "Snackbar message when an external link fails to launch"
+  },
+  "retry": "Réessayer",
+  "@retry": {
+    "description": "Generic retry button label"
   }
 }

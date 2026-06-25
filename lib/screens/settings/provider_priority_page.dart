@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class ProviderPriorityPage extends ConsumerStatefulWidget {
   const ProviderPriorityPage({super.key});
@@ -63,8 +62,6 @@ class _ProviderPriorityPageState extends ConsumerState<ProviderPriorityPage> {
             SliverAppBar(
               expandedHeight: 120 + topPadding,
               collapsedHeight: kToolbarHeight,
-              floating: false,
-              pinned: true,
               backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(

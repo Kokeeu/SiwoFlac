@@ -2935,12 +2935,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get safMigrationSuccess => 'Download folder updated to SAF mode';
 
   @override
-  String get settingsDonate => 'Support Development';
-
-  @override
-  String get settingsDonateSubtitle => 'Buy the developer a coffee';
-
-  @override
   String get tooltipLoveAll => 'Love All';
 
   @override
@@ -4421,4 +4415,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String importPlaylistTracksLabel(int count) {
     return 'tracks';
   }
+
+  @override
+  String get unableToOpenLink =>
+      'Не удалось открыть ссылку. Попробуйте ещё раз.';
+
+  @override
+  String get retry => 'Повторить';
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:neroflac/theme/nero_theme_extension.dart';
 import 'package:neroflac/widgets/liquid_glass_surface.dart';
 
 /// Stub: original Wiza glass appbar. Now wraps content in
@@ -37,7 +36,6 @@ class NeroAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     if (child is SliverAppBar) return child;
-    final nero = NeroTheme.of(context);
     return LiquidGlassSurface(
       variant: GlassVariant.chrome,
       height: expandedHeight,

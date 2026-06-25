@@ -1,7 +1,6 @@
 import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:neroflac/l10n/l10n.dart';
-import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class _BatchProgress {
   final int current;
