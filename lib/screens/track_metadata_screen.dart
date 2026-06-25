@@ -18,6 +18,7 @@ import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/services/ffmpeg_service.dart';
 import 'package:neroflac/services/replaygain_service.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/utils/audio_conversion_utils.dart';
 import 'package:neroflac/utils/logger.dart';
 import 'package:neroflac/utils/lyrics_metadata_helper.dart';
@@ -29,7 +30,7 @@ import 'package:neroflac/utils/nav_bar_inset.dart';
 import 'package:neroflac/widgets/audio_analysis_widget.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 part 'track_metadata_edit_sheet.dart';
 
@@ -1097,7 +1098,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
               expandedHeight: expandedHeight,
               pinned: true,
               stretch: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               title: AnimatedOpacity(
                 duration: const Duration(milliseconds: 200),
@@ -3280,9 +3281,9 @@ side: BorderSide(color: colorScheme.error.withValues(alpha: 0.5)),
     WidgetRef ref,
     ColorScheme colorScheme,
   ) {
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: screenContext,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 isScrollControlled: true,
       builder: (sheetContext) {
@@ -3734,9 +3735,9 @@ isScrollControlled: true,
     String selectedBitrate = defaultBitrateForFormat(selectedFormat);
     bool isLosslessTarget = isLosslessConversionTarget(selectedFormat);
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
 builder: (sheetContext) {
         return StatefulBuilder(
           builder: (context, setSheetState) {
@@ -4020,9 +4021,9 @@ builder: (sheetContext) {
 
       if (!mounted) return;
 
-      showGlassModalBottomSheet<void>(
+      showNeroSheet<void>(
         context: this.context,
-        useRootNavigator: true,
+        
         isScrollControlled: true,
 builder: (sheetContext) {
           final colorScheme = Theme.of(sheetContext).colorScheme;
@@ -4177,7 +4178,7 @@ builder: (sheetContext) {
     required String date,
     required List<CueSplitTrackInfo> tracks,
   }) {
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
@@ -4426,7 +4427,7 @@ builder: (sheetContext) {
     required String bitrate,
   }) {
     final isLossless = isLosslessConversionTarget(targetFormat);
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
@@ -4798,9 +4799,9 @@ builder: (sheetContext) {
 
     if (!context.mounted) return;
 
-    final saved = await showGlassModalBottomSheet<bool>(
+    final saved = await showNeroSheet<bool>(
       context: context,
-      useRootNavigator: true,
+      
       isScrollControlled: true,
       backgroundColor: colorScheme.surface,
 builder: (sheetContext) => _EditMetadataSheet(
@@ -4853,9 +4854,9 @@ builder: (sheetContext) => _EditMetadataSheet(
     WidgetRef ref,
     ColorScheme colorScheme,
   ) {
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: screenContext,
-      useRootNavigator: true,
+      
       builder: (dialogContext) => AlertDialog(
         title: Text(dialogContext.l10n.trackDeleteConfirmTitle),
         content: Text(dialogContext.l10n.trackDeleteConfirmMessage),

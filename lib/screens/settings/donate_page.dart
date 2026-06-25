@@ -66,7 +66,7 @@ class _DonatePageState extends State<DonatePage> {
             collapsedHeight: kToolbarHeight,
             floating: false,
             pinned: true,
-            backgroundColor: colorScheme.surface,
+            backgroundColor: Colors.transparent,
             surfaceTintColor: Colors.transparent,
             leading: IconButton(
               tooltip: MaterialLocalizations.of(context).backButtonTooltip,

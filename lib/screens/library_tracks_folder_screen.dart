@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/models/track.dart';
 import 'package:neroflac/providers/download_queue_provider.dart';
 import 'package:neroflac/providers/extension_provider.dart';
@@ -19,8 +20,8 @@ import 'package:neroflac/screens/track_metadata_screen.dart';
 import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/playlist_picker_sheet.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_appbar.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class LibraryTracksFolderScreen extends ConsumerStatefulWidget {
   final LibraryTracksFolderMode mode;
@@ -615,12 +616,12 @@ class _LibraryTracksFolderScreenState
         customCoverPath != null && customCoverPath.isNotEmpty;
     final hasCoverUrl = coverUrl != null;
 
-    return GlassSliverAppBar(
+    return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
       stretch: true,
-      backgroundColor: colorScheme.surface,
+      backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       title: AnimatedOpacity(
         duration: const Duration(milliseconds: 200),
@@ -859,7 +860,7 @@ class _LibraryTracksFolderScreenState
 
   void _confirmDownloadAll(List<Track> tracks) {
     if (tracks.isEmpty) return;
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       builder: (dialogContext) {
         final colorScheme = Theme.of(dialogContext).colorScheme;
@@ -999,9 +1000,9 @@ class _LibraryTracksFolderScreenState
   void _showCoverOptionsSheet(BuildContext context, bool hasCustomCover) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (sheetContext) => SafeArea(
         child: Column(

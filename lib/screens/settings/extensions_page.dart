@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +15,7 @@ import 'package:neroflac/screens/settings/metadata_provider_priority_page.dart';
 import 'package:neroflac/screens/settings/provider_priority_page.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class ExtensionsPage extends ConsumerStatefulWidget {
   const ExtensionsPage({super.key});
@@ -75,7 +76,7 @@ class _ExtensionsPageState extends ConsumerState<ExtensionsPage> {
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -806,9 +807,9 @@ class _SearchProviderSelector extends ConsumerWidget {
   ) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (ctx) => SafeArea(
         child: SingleChildScrollView(
@@ -946,9 +947,9 @@ class _HomeFeedProviderSelector extends ConsumerWidget {
   ) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (ctx) => SafeArea(
         child: SingleChildScrollView(

@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/screens/settings/download_fallback_extensions_page.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class DownloadSettingsPage extends ConsumerStatefulWidget {
   const DownloadSettingsPage({super.key});
@@ -63,7 +64,7 @@ class _DownloadSettingsPageState extends ConsumerState<DownloadSettingsPage> {
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -402,9 +403,9 @@ class _DownloadSettingsPageState extends ConsumerState<DownloadSettingsPage> {
     String current,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (context) => SafeArea(
         child: Column(
@@ -498,9 +499,9 @@ builder: (context) => SafeArea(
     String current,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (context) => SafeArea(
         child: Column(
@@ -767,9 +768,9 @@ builder: (context) => SafeArea(
     };
     final colorScheme = Theme.of(context).colorScheme;
     final normalizedCurrent = current.trim().toUpperCase();
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
       isScrollControlled: true,
 builder: (context) => SafeArea(

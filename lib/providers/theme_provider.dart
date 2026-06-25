@@ -7,6 +7,25 @@ final themeProvider = NotifierProvider<ThemeNotifier, ThemeSettings>(() {
   return ThemeNotifier();
 });
 
+/// Stale preference keys cleaned up after the Prisma redesign. The redesign
+/// dropped dark mode and dynamic color, so any leftover values are removed
+/// on the first launch after the upgrade.
+const _legacyKeys = <String>[
+  'theme_mode', // ThemeMode.light is now the only option
+];
+
+/// Wiza-era seed colors that should migrate to the new Prisma default
+/// (Prism Teal) so legacy installs don't keep a purple `Brand color`.
+const _wizaSeedColors = <int>{
+  0xFF7C3AED, // original Wiza default (violeta)
+  0xFF805AD5,
+  0xFF553C9A,
+  0xFF3E0079, // royalAmethyst
+  0xFFB99AFF, // lavenderGlow
+  0xFFCF8AFF, // twilightBeam
+  0xFF1DB954, // pre-Wiza Spotify green
+};
+
 class ThemeNotifier extends Notifier<ThemeSettings> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -19,17 +38,20 @@ class ThemeNotifier extends Notifier<ThemeSettings> {
   Future<void> _loadFromStorage() async {
     try {
       final prefs = await _prefs;
-      final modeString = prefs.getString(kThemeModeKey);
-      final useDynamic = prefs.getBool(kUseDynamicColorKey);
-      final seedColor = prefs.getInt(kSeedColorKey);
-      final useAmoled = prefs.getBool(kUseAmoledKey);
 
-      state = ThemeSettings(
-        themeMode: themeModeFromString(modeString),
-        useDynamicColor: useDynamic ?? true,
-        seedColorValue: seedColor ?? kDefaultSeedColor,
-        useAmoled: useAmoled ?? false,
-      );
+      // Clean stale preferences from the pre-Prisma rebrand.
+      for (final k in _legacyKeys) {
+        if (prefs.containsKey(k)) {
+          await prefs.remove(k);
+        }
+      }
+
+      final stored = prefs.getInt(kSeedColorKey);
+      final seedColor = (stored != null && _wizaSeedColors.contains(stored))
+          ? kDefaultSeedColor
+          : (stored ?? kDefaultSeedColor);
+
+      state = ThemeSettings(seedColorValue: seedColor);
     } catch (e) {
       debugPrint('Error loading theme settings: $e');
     }
@@ -38,23 +60,10 @@ class ThemeNotifier extends Notifier<ThemeSettings> {
   Future<void> _saveToStorage() async {
     try {
       final prefs = await _prefs;
-      await prefs.setString(kThemeModeKey, state.themeMode.name);
-      await prefs.setBool(kUseDynamicColorKey, state.useDynamicColor);
       await prefs.setInt(kSeedColorKey, state.seedColorValue);
-      await prefs.setBool(kUseAmoledKey, state.useAmoled);
     } catch (e) {
       debugPrint('Error saving theme settings: $e');
     }
-  }
-
-  Future<void> setThemeMode(ThemeMode mode) async {
-    state = state.copyWith(themeMode: mode);
-    await _saveToStorage();
-  }
-
-  Future<void> setUseDynamicColor(bool value) async {
-    state = state.copyWith(useDynamicColor: value);
-    await _saveToStorage();
   }
 
   Future<void> setSeedColor(Color color) async {
@@ -64,11 +73,6 @@ class ThemeNotifier extends Notifier<ThemeSettings> {
 
   Future<void> setSeedColorValue(int colorValue) async {
     state = state.copyWith(seedColorValue: colorValue);
-    await _saveToStorage();
-  }
-
-  Future<void> setUseAmoled(bool value) async {
-    state = state.copyWith(useAmoled: value);
     await _saveToStorage();
   }
 }

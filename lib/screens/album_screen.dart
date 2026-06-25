@@ -18,7 +18,7 @@ import 'package:neroflac/utils/nav_bar_inset.dart';
 import 'package:neroflac/widgets/track_collection_quick_actions.dart';
 import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
+import 'package:neroflac/widgets/nero/nero_appbar.dart';
 import 'package:neroflac/providers/library_collections_provider.dart';
 import 'package:neroflac/widgets/playlist_picker_sheet.dart';
 import 'package:neroflac/utils/clickable_metadata.dart';
@@ -384,7 +384,7 @@ class _AlbumScreenState extends ConsumerState<AlbumScreen> {
             : null);
     final releaseDate = tracks.isNotEmpty ? tracks.first.releaseDate : null;
 
-    return GlassSliverAppBar(
+    return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
@@ -1083,7 +1083,6 @@ class _AlbumTrackItem extends ConsumerWidget {
               ...buildQualityBadges(
                 audioQuality: track.audioQuality,
                 audioModes: track.audioModes,
-                colorScheme: colorScheme,
               ),
               if (isInLocalLibrary || isInHistory) ...[
                 const SizedBox(width: 6),

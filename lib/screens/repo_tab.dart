@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/providers/store_provider.dart';
+import 'package:neroflac/theme/nero_theme_extension.dart';
 import 'package:neroflac/widgets/settings_group.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
 import 'package:neroflac/screens/store/extension_details_screen.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class RepoTab extends ConsumerStatefulWidget {
   const RepoTab({super.key});
@@ -77,6 +79,7 @@ class _RepoTabState extends ConsumerState<RepoTab> {
       );
     }
     final colorScheme = Theme.of(context).colorScheme;
+    final nero = NeroTheme.of(context);
     final topPadding = normalizedHeaderTopPadding(context);
     final bottomInset = context.navBarBottomInset;
 
@@ -91,7 +94,7 @@ class _RepoTabState extends ConsumerState<RepoTab> {
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               automaticallyImplyLeading: false,
               actions: [
@@ -117,9 +120,11 @@ class _RepoTabState extends ConsumerState<RepoTab> {
                     title: Text(
                       context.l10n.storeTitle,
                       style: TextStyle(
-                        fontSize: 20 + (14 * expandRatio),
-                        fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface,
+                        fontFamily: 'Plus Jakarta Sans',
+                        fontSize: 24 + (16 * expandRatio),
+                        fontWeight: FontWeight.w500,
+                        height: 1.0,
+                        color: nero.carbon,
                       ),
                     ),
                   );
@@ -142,11 +147,13 @@ class _RepoTabState extends ConsumerState<RepoTab> {
                         controller: _searchController,
                         decoration: InputDecoration(
                           hintText: context.l10n.storeSearch,
-                          prefixIcon: const Icon(Icons.search),
+                          hintStyle: TextStyle(color: nero.ash),
+                          prefixIcon: Icon(Icons.search, color: nero.slate),
                           suffixIcon: value.text.isNotEmpty
                               ? IconButton(
                                   tooltip: context.l10n.dialogClear,
                                   icon: const Icon(Icons.clear),
+                                  color: nero.slate,
                                   onPressed: () {
                                     _searchController.clear();
                                     ref
@@ -156,30 +163,31 @@ class _RepoTabState extends ConsumerState<RepoTab> {
                                 )
                               : null,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(28),
-                            borderSide: BorderSide(
-                              color: colorScheme.outlineVariant,
-                            ),
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(color: nero.mist),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(28),
-                            borderSide: BorderSide(
-                              color: colorScheme.outlineVariant,
-                            ),
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(color: nero.mist),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(28),
+                            borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide(
-                              color: colorScheme.primary,
+                              color: nero.royalAmethyst,
                               width: 2,
                             ),
                           ),
                           filled: true,
-                          fillColor: settingsGroupColor(context),
+                          fillColor: nero.paper,
                           contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 16,
+                            horizontal: 14,
+                            vertical: 10,
                           ),
+                        ),
+                        style: TextStyle(
+                          color: nero.carbon,
+                          fontFamily: 'Inter',
+                          fontSize: 14,
                         ),
                         onChanged: (value) {
                           ref
@@ -287,8 +295,11 @@ class _RepoTabState extends ConsumerState<RepoTab> {
                       context.l10n.storeExtensionsCount(
                         filteredExtensions.length,
                       ),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        color: nero.slate,
                       ),
                     ),
                   ),
@@ -422,7 +433,7 @@ class _RepoTabState extends ConsumerState<RepoTab> {
 
   void _showChangeRepoDialog(String currentUrl) {
     final changeUrlController = TextEditingController(text: currentUrl);
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.storeRepoDialogTitle),
@@ -655,17 +666,37 @@ class _CategoryChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final nero = NeroTheme.of(context);
     return FilterChip(
       label: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [Icon(icon, size: 16), const SizedBox(width: 6), Text(label)],
+        children: [
+          Icon(icon, size: 16, color: Theme.of(context).brightness == Brightness.dark
+              ? nero.lavenderGlow
+              : nero.deepIris),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: TextStyle(
+              fontFamily: 'Inter',
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+              color: nero.carbon,
+            ),
+          ),
+        ],
       ),
       selected: isSelected,
       onSelected: (_) => onTap(),
       showCheckmark: false,
-      backgroundColor: settingsGroupColor(context),
-      side: BorderSide(color: colorScheme.outlineVariant.withValues(alpha: 0.6)),
+      backgroundColor: nero.paper,
+      selectedColor: Theme.of(context).brightness == Brightness.dark
+          ? nero.lavenderGlow
+          : nero.mistViolet,
+      side: BorderSide(color: nero.mist, width: 1),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(1440),
+      ),
     );
   }
 }
@@ -707,6 +738,7 @@ class _ExtensionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final nero = NeroTheme.of(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -722,9 +754,10 @@ class _ExtensionItem extends StatelessWidget {
                   height: 44,
                   decoration: BoxDecoration(
                     color: extension.isInstalled
-                        ? colorScheme.primaryContainer
-                        : colorScheme.surfaceContainerHighest,
+                        ? nero.mistViolet
+                        : nero.paper,
                     borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: nero.mist, width: 1),
                   ),
                   clipBehavior: Clip.antiAlias,
                   child:
@@ -737,8 +770,8 @@ class _ExtensionItem extends StatelessWidget {
                           errorBuilder: (context, error, stackTrace) => Icon(
                             _getCategoryIcon(extension.category),
                             color: extension.isInstalled
-                                ? colorScheme.onPrimaryContainer
-                                : colorScheme.onSurfaceVariant,
+                                ? nero.royalAmethyst
+                                : nero.slate,
                           ),
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
@@ -753,6 +786,7 @@ class _ExtensionItem extends StatelessWidget {
                                       ? loadingProgress.cumulativeBytesLoaded /
                                             loadingProgress.expectedTotalBytes!
                                       : null,
+                                  color: nero.royalAmethyst,
                                 ),
                               ),
                             );
@@ -761,8 +795,8 @@ class _ExtensionItem extends StatelessWidget {
                       : Icon(
                           _getCategoryIcon(extension.category),
                           color: extension.isInstalled
-                              ? colorScheme.onPrimaryContainer
-                              : colorScheme.onSurfaceVariant,
+                              ? nero.royalAmethyst
+                              : nero.slate,
                         ),
                 ),
                 const SizedBox(width: 16),
@@ -775,25 +809,31 @@ class _ExtensionItem extends StatelessWidget {
                           Expanded(
                             child: Text(
                               extension.displayName,
-                              style: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: nero.carbon,
+                              ),
                             ),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
+                              horizontal: 8,
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: colorScheme.surfaceContainerHighest,
-                              borderRadius: BorderRadius.circular(6),
+                              color: nero.paper,
+                              borderRadius: BorderRadius.circular(1440),
                             ),
                             child: Text(
                               'v${extension.version}',
-                              style: Theme.of(context).textTheme.labelSmall
-                                  ?.copyWith(
-                                    color: colorScheme.onSurfaceVariant,
-                                  ),
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: nero.slate,
+                              ),
                             ),
                           ),
                         ],
@@ -835,8 +875,13 @@ class _ExtensionItem extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           extension.description,
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(color: colorScheme.onSurfaceVariant),
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                            color: nero.slate,
+                            height: 1.4,
+                          ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),

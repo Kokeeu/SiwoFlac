@@ -6,10 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/providers/download_queue_provider.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/providers/store_provider.dart';
 import 'package:neroflac/providers/track_provider.dart';
+import 'package:neroflac/theme/nero_theme_extension.dart';
 import 'package:neroflac/screens/home_tab.dart';
 import 'package:neroflac/screens/repo_tab.dart';
 import 'package:neroflac/screens/queue_tab.dart';
@@ -19,13 +21,14 @@ import 'package:neroflac/services/shell_navigation_service.dart';
 import 'package:neroflac/services/share_intent_service.dart';
 import 'package:neroflac/services/notification_service.dart';
 import 'package:neroflac/services/app_remote_config_service.dart';
+import 'package:neroflac/utils/logger.dart';
 import 'package:neroflac/services/update_checker.dart';
 import 'package:neroflac/widgets/app_announcement_dialog.dart';
 import 'package:neroflac/widgets/update_dialog.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/utils/logger.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
-import 'package:neroflac/widgets/glass/glass.dart';
+import 'package:neroflac/widgets/batch_progress_dialog.dart';
+import 'package:neroflac/widgets/liquid_glass_surface.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 final _log = AppLogger('MainShell');
 
@@ -200,7 +203,7 @@ class _MainShellState extends ConsumerState<MainShell>
 
     final colorScheme = Theme.of(context).colorScheme;
 
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
@@ -443,6 +446,7 @@ class _MainShellState extends ConsumerState<MainShell>
 
   @override
   Widget build(BuildContext context) {
+    final nero = NeroTheme.of(context);
     final queueState = ref.watch(
       downloadQueueProvider.select((s) => s.queuedCount),
     );
@@ -549,8 +553,13 @@ class _MainShellState extends ConsumerState<MainShell>
         await _handleBackPress();
         return true;
       },
-      child: Scaffold(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: nero.gradientPageBg,
+        ),
+        child: Scaffold(
         extendBody: true,
+        extendBodyBehindAppBar: true,
         body: AnimatedBuilder(
           animation: _tabJumpTransitionController,
           child: PageView.builder(
@@ -573,23 +582,22 @@ class _MainShellState extends ConsumerState<MainShell>
             );
           },
         ),
-        bottomNavigationBar: GlassSurface(
-          blur: 50,
-          opacity: 0.42,
+        bottomNavigationBar: LiquidGlassSurface(
+          variant: GlassVariant.pill,
           borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(24),
+            top: Radius.circular(20),
           ),
-          showShadow: true,
+          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          height: 80,
           child: NavigationBar(
             selectedIndex: _currentIndex.clamp(0, maxIndex),
             onDestinationSelected: _onNavTap,
             animationDuration: const Duration(milliseconds: 500),
             elevation: 0,
             height: 64,
-            backgroundColor: Colors.transparent,
-            surfaceTintColor: Colors.transparent,
             destinations: destinations,
           ),
+        ),
         ),
       ),
     );

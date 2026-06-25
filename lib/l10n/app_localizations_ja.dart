@@ -9,7 +9,7 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
-  String get appName => 'SpotiFLAC Mobile';
+  String get appName => 'SiwöFlac';
 
   @override
   String get navHome => 'ホーム';
@@ -348,7 +348,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get aboutMobileDeveloper => 'モバイルバージョンの開発者';
 
   @override
-  String get aboutOriginalCreator => 'オリジナルの SpotiFLAC の作者';
+  String get aboutOriginalCreator => 'オリジナルの SiwöFlac の作者';
 
   @override
   String get aboutLogoArtist => '美しいアプリロゴを作成した才能あるアーティストです！';
@@ -528,7 +528,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get setupStorageDescription =>
-      'SpotiFLAC はダウンロードした音楽ファイルを保存するためにストレージの権限が必要です。';
+      'SiwöFlac はダウンロードした音楽ファイルを保存するためにストレージの権限が必要です。';
 
   @override
   String get setupNotificationGranted => '通知の権限が許可されました！';
@@ -1982,7 +1982,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get libraryStorageAccessMessage =>
-      'SpotiFLAC needs storage access to scan your music library. Please grant permission in settings.';
+      'SiwöFlac needs storage access to scan your music library. Please grant permission in settings.';
 
   @override
   String get libraryFolderNotExist => 'Selected folder does not exist';
@@ -2094,7 +2094,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get tutorialWelcomeTitle => 'SpotiFLAC へようこそ！';
+  String get tutorialWelcomeTitle => 'SiwöFlac へようこそ！';
 
   @override
   String get tutorialWelcomeDesc =>
@@ -2858,7 +2858,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get safMigrationMessage1 =>
-      'SpotiFLAC now uses Android Storage Access Framework (SAF) for downloads. This fixes \"permission denied\" errors on Android 10+.';
+      'SiwöFlac now uses Android Storage Access Framework (SAF) for downloads. This fixes \"permission denied\" errors on Android 10+.';
 
   @override
   String get safMigrationMessage2 =>
@@ -2938,7 +2938,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get storageModeAppFolderSubtitle =>
-      'Saves to Music/SpotiFLAC by default';
+      'Saves to Music/SiwöFlac by default';
 
   @override
   String get storageModeSaf => 'Custom Folder (SAF)';
@@ -3572,7 +3572,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String notifDownloadingUpdate(String version) {
-    return 'Downloading SpotiFLAC Mobile v$version';
+    return 'Downloading SiwöFlac v$version';
   }
 
   @override
@@ -3585,7 +3585,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String notifUpdateReadyBody(String version) {
-    return 'SpotiFLAC Mobile v$version downloaded. Tap to install.';
+    return 'SiwöFlac v$version downloaded. Tap to install.';
   }
 
   @override
@@ -4112,7 +4112,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get extensionCustomUrlHandlingShareHint =>
-      'Share links from these sites to SpotiFLAC Mobile and this extension will handle them.';
+      'Share links from these sites to SiwöFlac and this extension will handle them.';
 
   @override
   String extensionSettingsCount(int count) {

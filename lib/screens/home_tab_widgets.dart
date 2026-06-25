@@ -337,7 +337,6 @@ class _TrackItemWithStatus extends ConsumerWidget {
                           ...buildQualityBadges(
                             audioQuality: track.audioQuality,
                             audioModes: track.audioModes,
-                            colorScheme: colorScheme,
                           ),
                           if (isInLocalLibrary) ...[
                             const SizedBox(width: 6),
@@ -1119,7 +1118,7 @@ class _ExtensionAlbumScreenState extends ConsumerState<ExtensionAlbumScreen> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return Scaffold(
-        appBar: GlassAppBar(child: AppBar(title: Text(widget.albumName))),
+        appBar: NeroAppBar(child: AppBar(title: Text(widget.albumName))),
         body: const AlbumTrackListSkeleton(
           itemCount: 10,
           showCoverHeader: true,
@@ -1129,7 +1128,7 @@ class _ExtensionAlbumScreenState extends ConsumerState<ExtensionAlbumScreen> {
 
     if (_error != null) {
       return Scaffold(
-        appBar: GlassAppBar(child: AppBar(title: Text(widget.albumName))),
+        appBar: NeroAppBar(child: AppBar(title: Text(widget.albumName))),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -1278,14 +1277,14 @@ class _ExtensionPlaylistScreenState
   Widget build(BuildContext context) {
     if (_isLoading) {
       return Scaffold(
-        appBar: GlassAppBar(child: AppBar(title: Text(widget.playlistName))),
+        appBar: NeroAppBar(child: AppBar(title: Text(widget.playlistName))),
         body: const TrackListSkeleton(itemCount: 8, showCoverHeader: true),
       );
     }
 
     if (_error != null) {
       return Scaffold(
-        appBar: GlassAppBar(child: AppBar(title: Text(widget.playlistName))),
+        appBar: NeroAppBar(child: AppBar(title: Text(widget.playlistName))),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -1453,14 +1452,14 @@ class _ExtensionArtistScreenState extends ConsumerState<ExtensionArtistScreen> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return Scaffold(
-        appBar: GlassAppBar(child: AppBar(title: Text(widget.artistName))),
+        appBar: NeroAppBar(child: AppBar(title: Text(widget.artistName))),
         body: const ArtistScreenSkeleton(),
       );
     }
 
     if (_error != null) {
       return Scaffold(
-        appBar: GlassAppBar(child: AppBar(title: Text(widget.artistName))),
+        appBar: NeroAppBar(child: AppBar(title: Text(widget.artistName))),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:neroflac/theme/nero_theme_extension.dart';
 
 class AudioQualityBadge extends StatelessWidget {
   final String label;
-  final ColorScheme colorScheme;
 
-  const AudioQualityBadge({
-    super.key,
-    required this.label,
-    required this.colorScheme,
-  });
+  const AudioQualityBadge({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {
+    final nero = NeroTheme.of(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: colorScheme.primaryContainer.withValues(alpha: 0.6),
-        borderRadius: BorderRadius.circular(4),
+        color: nero.mistViolet,
+        borderRadius: BorderRadius.circular(nero.radiusPill),
       ),
       child: Text(
         label,
         style: TextStyle(
-          fontSize: 9,
-          fontWeight: FontWeight.w600,
-          color: colorScheme.onPrimaryContainer,
+          fontFamily: 'Inter',
+          fontSize: 10,
+          fontWeight: FontWeight.w500,
+          color: nero.royalAmethyst,
           height: 1.3,
         ),
       ),
@@ -32,32 +30,32 @@ class AudioQualityBadge extends StatelessWidget {
 }
 
 class DolbyAtmosBadge extends StatelessWidget {
-  final ColorScheme colorScheme;
-
-  const DolbyAtmosBadge({super.key, required this.colorScheme});
+  const DolbyAtmosBadge({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final nero = NeroTheme.of(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: colorScheme.tertiaryContainer.withValues(alpha: 0.6),
-        borderRadius: BorderRadius.circular(4),
+        color: nero.mistViolet,
+        borderRadius: BorderRadius.circular(nero.radiusPill),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           CustomPaint(
             size: const Size(14, 10),
-            painter: DolbyLogoPainter(color: colorScheme.onTertiaryContainer),
+            painter: DolbyLogoPainter(color: nero.royalAmethyst),
           ),
           const SizedBox(width: 3),
           Text(
             'Atmos',
             style: TextStyle(
-              fontSize: 9,
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onTertiaryContainer,
+              fontFamily: 'Inter',
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+              color: nero.royalAmethyst,
               height: 1.3,
             ),
           ),
@@ -117,18 +115,15 @@ class DolbyLogoPainter extends CustomPainter {
 List<Widget> buildQualityBadges({
   required String? audioQuality,
   required String? audioModes,
-  required ColorScheme colorScheme,
 }) {
   final badges = <Widget>[];
   if (audioQuality != null && audioQuality.isNotEmpty) {
     badges.add(const SizedBox(width: 6));
-    badges.add(
-      AudioQualityBadge(label: audioQuality, colorScheme: colorScheme),
-    );
+    badges.add(AudioQualityBadge(label: audioQuality));
   }
   if (audioModes != null && audioModes.contains('DOLBY_ATMOS')) {
     badges.add(const SizedBox(width: 4));
-    badges.add(DolbyAtmosBadge(colorScheme: colorScheme));
+    badges.add(const DolbyAtmosBadge());
   }
   return badges;
 }

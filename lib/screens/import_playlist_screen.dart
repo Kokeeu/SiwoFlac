@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/providers/download_queue_provider.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/providers/settings_provider.dart';
@@ -9,8 +10,8 @@ import 'package:neroflac/services/batch_search_service.dart';
 import 'package:neroflac/services/youtube_playlist_extractor.dart';
 import 'package:neroflac/utils/logger.dart';
 import 'package:neroflac/widgets/download_service_picker.dart';
-import 'package:neroflac/widgets/glass/glass_appbar.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_appbar.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 final _log = AppLogger('ImportPlaylistScreen');
 
@@ -57,7 +58,7 @@ class _ImportPlaylistScreenState
     final url = _urlController.text.trim();
 
     if (url.isEmpty) {
-      showGlassDialog<void>(
+      showNeroDialog<void>(
         context: context,
         builder: (_) => _SimpleMessageDialog(
           title: l10n.importPlaylistErrorEmpty,
@@ -66,7 +67,7 @@ class _ImportPlaylistScreenState
       return;
     }
     if (!YouTubePlaylistExtractor.isPlaylistUrl(url)) {
-      showGlassDialog<void>(
+      showNeroDialog<void>(
         context: context,
         builder: (_) => _SimpleMessageDialog(
           title: l10n.importPlaylistErrorNotPlaylist,
@@ -75,7 +76,7 @@ class _ImportPlaylistScreenState
       return;
     }
     if (_selectedProvider == null) {
-      showGlassDialog<void>(
+      showNeroDialog<void>(
         context: context,
         builder: (_) => _SimpleMessageDialog(
           title: l10n.importPlaylistErrorNoProvider,
@@ -172,7 +173,7 @@ class _ImportPlaylistScreenState
 
   Future<bool?> _showMissingExtensionDialog() {
     final l10n = context.l10n;
-    return showGlassDialog<bool>(
+    return showNeroDialog<bool>(
       context: context,
       barrierDismissible: true,
       builder: (dialogContext) => PopScope(
@@ -264,8 +265,8 @@ class _ImportPlaylistScreenState
     }
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface,
-      appBar: GlassAppBar(
+      backgroundColor: Colors.transparent,
+      appBar: NeroAppBar(
         child: AppBar(
           title: Text(l10n.importPlaylistTitle),
           actions: [

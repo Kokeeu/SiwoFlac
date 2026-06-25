@@ -25,7 +25,7 @@ class AboutPage extends StatelessWidget {
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -302,17 +302,13 @@ class _AppHeaderCard extends StatelessWidget {
                   color: colorScheme.primary,
                   shape: BoxShape.circle,
                 ),
-                child: Image.asset(
-                  'assets/images/logo-transparent.png',
-                  fit: BoxFit.contain,
-                  errorBuilder: (_, _, _) => ClipRRect(
-                    borderRadius: BorderRadius.circular(24),
-                    child: Image.asset(
-                      'assets/images/logo.png',
-                      width: logoSize,
-                      height: logoSize,
-                      fit: BoxFit.cover,
-                    ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(48),
+                  child: Image.asset(
+                    'assets/icon/icon.png',
+                    width: logoSize,
+                    height: logoSize,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

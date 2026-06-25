@@ -26,7 +26,7 @@ class CollapsingHeader extends StatelessWidget {
           expandedHeight: 140,
           floating: false,
           pinned: true,
-          backgroundColor: colorScheme.surface,
+          backgroundColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
           leading: showBackButton
               ? IconButton(

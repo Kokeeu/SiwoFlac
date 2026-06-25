@@ -8,6 +8,8 @@ import 'package:neroflac/screens/setup_screen.dart';
 import 'package:neroflac/screens/tutorial_screen.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/theme/dynamic_color_wrapper.dart';
+import 'package:neroflac/theme/app_theme.dart';
+import 'package:neroflac/theme/nero_theme_extension.dart';
 import 'package:neroflac/l10n/app_localizations.dart';
 
 final _routerProvider = Provider<GoRouter>((ref) {
@@ -76,10 +78,10 @@ Locale _resolveSupportedLocale(
   return _fallbackLocale(supportedLocales);
 }
 
-class NeroFlacApp extends ConsumerWidget {
+class SiwoFlacApp extends ConsumerWidget {
   final bool disableOverscrollEffects;
 
-  const NeroFlacApp({super.key, this.disableOverscrollEffects = false});
+  const SiwoFlacApp({super.key, this.disableOverscrollEffects = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -103,43 +105,41 @@ class NeroFlacApp extends ConsumerWidget {
       }
     }
 
-    return DynamicColorWrapper(
-      builder: (lightTheme, darkTheme, themeMode) {
-        return MaterialApp.router(
-          title: AppInfo.appName,
-          debugShowCheckedModeBanner: false,
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: themeMode,
-          scrollBehavior: scrollBehavior,
-          themeAnimationDuration: const Duration(milliseconds: 300),
-          themeAnimationCurve: Curves.easeInOut,
-          // Treat the display as one continuous surface so bottom sheets and
-          // dialogs stay centered on large/foldable devices.
-          builder: (context, child) {
-            final mediaQuery = MediaQuery.of(context);
-            return MediaQuery(
-              data: mediaQuery.copyWith(displayFeatures: const []),
-              child: child ?? const SizedBox.shrink(),
-            );
-          },
-          routerConfig: router,
-          locale: locale,
-          localeResolutionCallback: (deviceLocale, supportedLocales) {
-            return _resolveSupportedLocale(
-              locale ?? deviceLocale,
-              supportedLocales,
-            );
-          },
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: AppLocalizations.supportedLocales,
+    return MaterialApp.router(
+      title: AppInfo.appName,
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light(),
+      scrollBehavior: scrollBehavior,
+      themeAnimationDuration: const Duration(milliseconds: 300),
+      themeAnimationCurve: Curves.easeInOut,
+      builder: (context, child) {
+        final mediaQuery = MediaQuery.of(context);
+        final nero = Theme.of(context).extension<NeroTheme>();
+        return MediaQuery(
+          data: mediaQuery.copyWith(displayFeatures: const []),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: nero?.gradientPageBg,
+            ),
+            child: child ?? const SizedBox.shrink(),
+          ),
         );
       },
+      routerConfig: router,
+      locale: locale,
+      localeResolutionCallback: (deviceLocale, supportedLocales) {
+        return _resolveSupportedLocale(
+          locale ?? deviceLocale,
+          supportedLocales,
+        );
+      },
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

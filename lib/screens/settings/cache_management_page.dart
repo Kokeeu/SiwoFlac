@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -14,7 +15,7 @@ import 'package:neroflac/services/cover_cache_manager.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class CacheManagementPage extends ConsumerStatefulWidget {
   const CacheManagementPage({super.key});
@@ -222,7 +223,7 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
   }
 
   Future<bool> _confirmClear(String target) async {
-    final confirm = await showGlassDialog<bool>(
+    final confirm = await showNeroDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.cacheClearConfirmTitle),
@@ -243,7 +244,7 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
   }
 
   Future<bool> _confirmClearAll() async {
-    final confirm = await showGlassDialog<bool>(
+    final confirm = await showNeroDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.cacheClearAllConfirmTitle),
@@ -386,7 +387,7 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
             collapsedHeight: kToolbarHeight,
             floating: false,
             pinned: true,
-            backgroundColor: colorScheme.surface,
+            backgroundColor: Colors.transparent,
             surfaceTintColor: Colors.transparent,
             leading: IconButton(
               tooltip: MaterialLocalizations.of(context).backButtonTooltip,

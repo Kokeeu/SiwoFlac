@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class ExtensionDetailPage extends ConsumerStatefulWidget {
   final String extensionId;
@@ -96,7 +97,7 @@ class _ExtensionDetailPageState extends ConsumerState<ExtensionDetailPage> {
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -529,7 +530,7 @@ class _ExtensionDetailPageState extends ConsumerState<ExtensionDetailPage> {
 
   Future<void> _confirmRemove(BuildContext context) async {
     final colorScheme = Theme.of(context).colorScheme;
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.dialogRemoveExtension),
@@ -1206,7 +1207,7 @@ class _SettingItemState extends State<_SettingItem> {
     );
     final colorScheme = Theme.of(context).colorScheme;
 
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(widget.setting.label),

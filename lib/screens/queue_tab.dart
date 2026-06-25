@@ -10,6 +10,7 @@ import 'package:neroflac/services/ffmpeg_service.dart';
 import 'package:neroflac/services/replaygain_service.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
 import 'package:neroflac/utils/audio_conversion_utils.dart';
@@ -45,7 +46,9 @@ import 'package:neroflac/utils/path_match_keys.dart';
 import 'package:neroflac/utils/string_utils.dart';
 import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
+import 'package:neroflac/widgets/liquid_glass_surface.dart';
+import 'package:neroflac/theme/nero_theme_extension.dart';
 
 part 'queue_tab_helpers.dart';
 part 'queue_tab_widgets.dart';
@@ -995,7 +998,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
       return;
     }
 
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(ctx.l10n.dialogDownloadAllTitle),
@@ -1081,7 +1084,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
 
   Future<void> _deleteSelectedPlaylists(BuildContext context) async {
     final count = _selectedPlaylistIds.length;
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(ctx.l10n.collectionDeletePlaylist),
@@ -1297,7 +1300,7 @@ class _QueueTabState extends ConsumerState<QueueTab> {
 
   Future<void> _deleteSelected(List<UnifiedLibraryItem> allItems) async {
     final count = _selectedIds.length;
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.dialogDeleteSelectedTitle),
@@ -1651,9 +1654,9 @@ class _QueueTabState extends ConsumerState<QueueTab> {
     String? tempMetadata = _filterMetadata;
     String tempSortMode = _sortMode;
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       isScrollControlled: true,
       backgroundColor: colorScheme.surfaceContainerLow,
 builder: (context) => StatefulBuilder(
@@ -2337,7 +2340,7 @@ builder: (context) => StatefulBuilder(
     final controller = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
-    final playlistName = await showGlassDialog<String>(
+    final playlistName = await showNeroDialog<String>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
@@ -2768,7 +2771,7 @@ builder: (context) => StatefulBuilder(
                   collapsedHeight: kToolbarHeight,
                   floating: false,
                   pinned: true,
-                  backgroundColor: colorScheme.surface,
+                  backgroundColor: Colors.transparent,
                   surfaceTintColor: Colors.transparent,
                   automaticallyImplyLeading: false,
                   flexibleSpace: LayoutBuilder(
@@ -3170,7 +3173,7 @@ builder: (context) => StatefulBuilder(
     BuildContext context,
     DownloadItem item,
   ) async {
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.cancelDownloadTitle),
@@ -3297,7 +3300,6 @@ builder: (context) => StatefulBuilder(
                     top: 4,
                     child: AudioQualityBadge(
                       label: item.track.audioQuality!,
-                      colorScheme: colorScheme,
                     ),
                   ),
               ],
@@ -3355,7 +3357,6 @@ builder: (context) => StatefulBuilder(
                   top: 4,
                   child: AudioQualityBadge(
                     label: track.audioQuality!,
-                    colorScheme: colorScheme,
                   ),
                 ),
             ],
@@ -4037,13 +4038,11 @@ builder: (context) => StatefulBuilder(
                   if (!_isSelectionMode)
                     _buildFilterButton(context, unifiedItems),
                   if (!_isSelectionMode && filteredUnifiedItems.isNotEmpty)
-                    TextButton.icon(
-                      onPressed: () => _showCreatePlaylistDialog(context),
+                    _GlassActionChip(
+                      label: context.l10n.collectionCreatePlaylist,
+                      nero: NeroTheme.of(context),
                       icon: const Icon(Icons.add, size: 20),
-                      label: Text(context.l10n.collectionCreatePlaylist),
-                      style: TextButton.styleFrom(
-                        visualDensity: VisualDensity.compact,
-                      ),
+                      onTap: () => _showCreatePlaylistDialog(context),
                     ),
                 ],
               ),
@@ -4354,13 +4353,11 @@ builder: (context) => StatefulBuilder(
                   if (!_isSelectionMode)
                     _buildFilterButton(context, unifiedItems),
                   if (!_isSelectionMode && filteredUnifiedItems.isNotEmpty)
-                    TextButton.icon(
-                      onPressed: () => _showCreatePlaylistDialog(context),
+                    _GlassActionChip(
+                      label: context.l10n.collectionCreatePlaylist,
+                      nero: NeroTheme.of(context),
                       icon: const Icon(Icons.add, size: 20),
-                      label: Text(context.l10n.collectionCreatePlaylist),
-                      style: TextButton.styleFrom(
-                        visualDensity: VisualDensity.compact,
-                      ),
+                      onTap: () => _showCreatePlaylistDialog(context),
                     ),
                 ],
               ),
@@ -4490,7 +4487,7 @@ builder: (context) => StatefulBuilder(
     WidgetRef ref,
     ColorScheme colorScheme,
   ) async {
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.queueClearAll),
@@ -4959,7 +4956,7 @@ builder: (context) => StatefulBuilder(
       return;
     }
 
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.queueFlacAction),
@@ -5281,9 +5278,9 @@ builder: (context) => StatefulBuilder(
     _hideSelectionOverlay();
     _hidePlaylistSelectionOverlay();
 
-    await showGlassModalBottomSheet<void>(
+    await showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
 builder: (sheetContext) => BatchConvertSheet(
         formats: formats,
         title: sheetTitle,
@@ -5358,7 +5355,7 @@ builder: (sheetContext) => BatchConvertSheet(
     }
 
     final isLossless = isLosslessConversionTarget(targetFormat);
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.selectionBatchConvertConfirmTitle),
@@ -5711,7 +5708,7 @@ builder: (sheetContext) => BatchConvertSheet(
     _hideSelectionOverlay();
     _hidePlaylistSelectionOverlay();
 
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(ctx.l10n.replayGainBatchConfirmTitle),
@@ -6013,7 +6010,7 @@ builder: (sheetContext) => BatchConvertSheet(
       direction: DismissDirection.endToStart,
       confirmDismiss: isActive
           ? (_) async {
-              return await showGlassDialog<bool>(
+              return await showNeroDialog<bool>(
                     context: context,
                     builder: (ctx) => AlertDialog(
                       title: Text(context.l10n.cancelDownloadTitle),
@@ -6440,17 +6437,18 @@ builder: (sheetContext) => BatchConvertSheet(
     BuildContext context,
     List<UnifiedLibraryItem> unifiedItems,
   ) {
+    final nero = NeroTheme.of(context);
     return GestureDetector(
       onLongPress: _activeFilterCount > 0 ? _resetFilters : null,
-      child: TextButton.icon(
-        onPressed: () => _showFilterSheet(context, unifiedItems),
+      child: _GlassActionChip(
+        label: context.l10n.libraryFilterTitle,
+        nero: nero,
         icon: Badge(
           isLabelVisible: _activeFilterCount > 0,
           label: Text('$_activeFilterCount'),
           child: const Icon(Icons.filter_list, size: 18),
         ),
-        label: Text(context.l10n.libraryFilterTitle),
-        style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
+        onTap: () => _showFilterSheet(context, unifiedItems),
       ),
     );
   }
@@ -7117,6 +7115,54 @@ class _AnimatedLibrarySliverGridState extends State<_AnimatedLibrarySliverGrid>
           delegate: widget.delegate,
         );
       },
+    );
+  }
+}
+
+/// Frosted glass pill action button — used for "Filters" and
+/// "Create playlist" buttons in the Library tab section headers.
+class _GlassActionChip extends StatelessWidget {
+  final String label;
+  final NeroTheme nero;
+  final Widget? icon;
+  final VoidCallback onTap;
+
+  const _GlassActionChip({
+    required this.label,
+    required this.nero,
+    required this.onTap,
+    this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LiquidGlassSurface(
+      variant: GlassVariant.pill,
+      borderRadius: BorderRadius.circular(20),
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) ...[
+              IconTheme(
+                data: IconThemeData(color: nero.prismTeal, size: 18),
+                child: icon!,
+              ),
+              const SizedBox(width: 6),
+            ],
+            Text(
+              label,
+              style: TextStyle(
+                color: nero.prismTeal,
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

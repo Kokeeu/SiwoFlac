@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/models/track.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/providers/track_provider.dart';
@@ -22,11 +23,11 @@ import 'package:neroflac/screens/home_tab.dart'
 import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/track_collection_quick_actions.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
+import 'package:neroflac/widgets/nero/nero_appbar.dart';
 import 'package:neroflac/utils/clickable_metadata.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
 import 'package:neroflac/widgets/cross_extension_share_sheet.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class _ArtistCache {
   static final Map<String, _CacheEntry> _cache = {};
@@ -798,9 +799,9 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
     );
     final singleTracks = singles.fold<int>(0, (sum, a) => sum + a.totalTracks);
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (context) => SafeArea(
         child: Padding(
@@ -956,7 +957,7 @@ builder: (context) => SafeArea(
     }
 
     final progressDialogKey = GlobalKey<_FetchingProgressDialogState>();
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (ctx) => _FetchingProgressDialog(
@@ -1148,12 +1149,12 @@ builder: (context) => SafeArea(
       ),
     );
 
-    return GlassSliverAppBar(
+    return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: hasDiscography ? 420 : 380,
       pinned: true,
       stretch: true,
-      backgroundColor: colorScheme.surface,
+      backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       title: AnimatedOpacity(
         duration: const Duration(milliseconds: 200),

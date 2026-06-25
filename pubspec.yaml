@@ -1,5 +1,5 @@
 name: neroflac
-description: NeroFlac - Download music in true lossless FLAC from extension-provided sources on Android.
+description: SiwöFlac - Download music in true lossless FLAC from extension-provided sources on Android.
 publish_to: "none"
 version: 4.7.0+136
 
@@ -35,9 +35,6 @@ dependencies:
   # UI Components
   cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.4.1
-
-  # Material Expressive 3 / Dynamic Color
-  dynamic_color: ^1.7.0
 
   # Permissions
   permission_handler: ^12.0.3
@@ -79,15 +76,11 @@ dev_dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "icon.png"
-  image_path_android: "icon_android.png"
-  adaptive_icon_background: "#000000"
-  adaptive_icon_foreground: "icon_foreground_android.png"
-  adaptive_icon_foreground_inset: 16
-  adaptive_icon_monochrome: "icon_foreground_android.png"
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#0D9488"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  adaptive_icon_monochrome: "assets/icon/icon_monochrome.png"
   ios_content_mode: scaleAspectFill
-  remove_alpha_ios: true
-  background_color_ios: "#000000"
 
 flutter:
   uses-material-design: true
@@ -95,14 +88,24 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icon/
 
   fonts:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Variable.ttf
+    - family: Plus Jakarta Sans
+      fonts:
+        - asset: assets/fonts/PlusJakartaSans-VariableFont_wght.ttf
     - family: Playfair Display
       fonts:
         - asset: assets/fonts/PlayfairDisplay-Italic-Variable.ttf
     - family: JetBrains Mono
       fonts:
         - asset: assets/fonts/JetBrainsMono-Variable.ttf
+    - family: Mona Sans
+      fonts:
+        - asset: assets/fonts/MonaSans-VariableFont_wght.ttf
+    - family: Mona Sans Mono
+      fonts:
+        - asset: assets/fonts/MonaSansMono-Variable.ttf

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/providers/store_provider.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
-import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_appbar.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class ExtensionDetailsScreen extends ConsumerStatefulWidget {
   final StoreExtension extension;
@@ -85,12 +86,12 @@ class _ExtensionDetailsScreenState
     StoreExtension ext,
     ColorScheme colorScheme,
   ) {
-    return GlassSliverAppBar(
+    return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: 200,
       pinned: true,
       stretch: true,
-      backgroundColor: colorScheme.surface,
+      backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       flexibleSpace: FlexibleSpaceBar(
         background: Center(
@@ -565,7 +566,7 @@ class _ExtensionDetailsScreenState
   }
 
   Future<void> _uninstallExtension(StoreExtension ext) async {
-    final confirm = await showGlassDialog<bool>(
+    final confirm = await showNeroDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.dialogUninstallExtension),

@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +13,7 @@ import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/file_access.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class FilesSettingsPage extends ConsumerStatefulWidget {
   const FilesSettingsPage({super.key});
@@ -54,7 +55,7 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
       if (mounted) setState(() => _hasAllFilesAccess = true);
     } else if (status.isPermanentlyDenied) {
       if (mounted) {
-        final shouldOpen = await showGlassDialog<bool>(
+        final shouldOpen = await showNeroDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
             title: Text(context.l10n.setupStorageAccessRequired),
@@ -101,7 +102,7 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -470,9 +471,9 @@ class _FilesSettingsPageState extends ConsumerState<FilesSettingsPage> {
     final settings = ref.read(settingsProvider);
     final isSafMode =
         settings.storageMode == 'saf' && settings.downloadTreeUri.isNotEmpty;
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (ctx) => SafeArea(
         child: Column(
@@ -545,9 +546,9 @@ builder: (ctx) => SafeArea(
 
   void _showIOSDirectoryOptions(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (ctx) => SafeArea(
         child: Column(
@@ -707,11 +708,11 @@ builder: (ctx) => SafeArea(
     final save =
         onSave ?? ref.read(settingsProvider.notifier).setFilenameFormat;
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
-      backgroundColor: colorScheme.surface,
+      backgroundColor: Colors.transparent,
 builder: (context) => _FilenameFormatEditorSheet(
         initialText: current,
         onSave: save,
@@ -726,9 +727,9 @@ builder: (context) => _FilenameFormatEditorSheet(
     WidgetRef ref,
     String current,
   ) {
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       builder: (context) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -795,9 +796,9 @@ builder: (context) => _FilenameFormatEditorSheet(
     String current,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
       isScrollControlled: true,
 constraints: BoxConstraints(

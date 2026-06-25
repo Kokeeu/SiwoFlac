@@ -131,7 +131,7 @@ abstract class AppLocalizations {
   /// App name - DO NOT TRANSLATE
   ///
   /// In en, this message translates to:
-  /// **'SpotiFLAC Mobile'**
+  /// **'SiwöFlac'**
   String get appName;
 
   /// Bottom navigation - Home tab
@@ -743,7 +743,7 @@ abstract class AppLocalizations {
   /// Role description for original creator
   ///
   /// In en, this message translates to:
-  /// **'Creator of the original SpotiFLAC'**
+  /// **'Creator of the original SiwöFlac'**
   String get aboutOriginalCreator;
 
   /// Role description for logo artist
@@ -1049,7 +1049,7 @@ abstract class AppLocalizations {
   /// App tagline in setup
   ///
   /// In en, this message translates to:
-  /// **'Download Spotify tracks in FLAC'**
+  /// **'Download music in true FLAC'**
   String get setupDownloadInFlac;
 
   /// Success message for storage permission
@@ -1067,7 +1067,7 @@ abstract class AppLocalizations {
   /// Explanation for storage permission
   ///
   /// In en, this message translates to:
-  /// **'SpotiFLAC needs storage permission to save your downloaded music files.'**
+  /// **'SiwöFlac needs storage permission to save your downloaded music files.'**
   String get setupStorageDescription;
 
   /// Success message for notification permission
@@ -3605,7 +3605,7 @@ abstract class AppLocalizations {
   /// Dialog message for storage permission
   ///
   /// In en, this message translates to:
-  /// **'SpotiFLAC needs storage access to scan your music library. Please grant permission in settings.'**
+  /// **'SiwöFlac needs storage access to scan your music library. Please grant permission in settings.'**
   String get libraryStorageAccessMessage;
 
   /// Error when folder doesn't exist
@@ -3614,7 +3614,7 @@ abstract class AppLocalizations {
   /// **'Selected folder does not exist'**
   String get libraryFolderNotExist;
 
-  /// Badge for tracks downloaded via SpotiFLAC
+  /// Badge for tracks downloaded via SiwöFlac
   ///
   /// In en, this message translates to:
   /// **'Downloaded'**
@@ -3797,7 +3797,7 @@ abstract class AppLocalizations {
   /// Tutorial welcome page title
   ///
   /// In en, this message translates to:
-  /// **'Welcome to SpotiFLAC!'**
+  /// **'Welcome to SiwöFlac!'**
   String get tutorialWelcomeTitle;
 
   /// Tutorial welcome page description
@@ -4966,7 +4966,7 @@ abstract class AppLocalizations {
   /// First paragraph of SAF migration dialog
   ///
   /// In en, this message translates to:
-  /// **'SpotiFLAC now uses Android Storage Access Framework (SAF) for downloads. This fixes \"permission denied\" errors on Android 10+.'**
+  /// **'SiwöFlac now uses Android Storage Access Framework (SAF) for downloads. This fixes \"permission denied\" errors on Android 10+.'**
   String get safMigrationMessage1;
 
   /// Second paragraph of SAF migration dialog
@@ -5104,7 +5104,7 @@ abstract class AppLocalizations {
   /// Subtitle for app folder storage mode
   ///
   /// In en, this message translates to:
-  /// **'Saves to Music/SpotiFLAC by default'**
+  /// **'Saves to Music/SiwöFlac by default'**
   String get storageModeAppFolderSubtitle;
 
   /// Storage mode option - Storage Access Framework
@@ -6058,7 +6058,7 @@ abstract class AppLocalizations {
   /// Notification title while downloading an app update
   ///
   /// In en, this message translates to:
-  /// **'Downloading SpotiFLAC Mobile v{version}'**
+  /// **'Downloading SiwöFlac v{version}'**
   String notifDownloadingUpdate(String version);
 
   /// Notification body showing update download progress
@@ -6076,7 +6076,7 @@ abstract class AppLocalizations {
   /// Notification body when app update is ready to install
   ///
   /// In en, this message translates to:
-  /// **'SpotiFLAC Mobile v{version} downloaded. Tap to install.'**
+  /// **'SiwöFlac v{version} downloaded. Tap to install.'**
   String notifUpdateReadyBody(String version);
 
   /// Notification title when app update download fails
@@ -6850,7 +6850,7 @@ abstract class AppLocalizations {
   /// Extension detail hint explaining share-to-app URL handling
   ///
   /// In en, this message translates to:
-  /// **'Share links from these sites to SpotiFLAC Mobile and this extension will handle them.'**
+  /// **'Share links from these sites to SiwöFlac and this extension will handle them.'**
   String get extensionCustomUrlHandlingShareHint;
 
   /// Count of settings exposed by an extension quality option

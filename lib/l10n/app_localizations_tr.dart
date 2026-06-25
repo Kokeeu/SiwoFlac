@@ -9,7 +9,7 @@ class AppLocalizationsTr extends AppLocalizations {
   AppLocalizationsTr([String locale = 'tr']) : super(locale);
 
   @override
-  String get appName => 'SpotiFLAC Mobile';
+  String get appName => 'SiwöFlac';
 
   @override
   String get navHome => 'Ana sayfa';
@@ -355,7 +355,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get aboutMobileDeveloper => 'Mobil versiyon geliştiricisi';
 
   @override
-  String get aboutOriginalCreator => 'Orijinal SpotiFLAC\'ın kurucusu';
+  String get aboutOriginalCreator => 'Orijinal SiwöFlac\'ın kurucusu';
 
   @override
   String get aboutLogoArtist =>
@@ -538,7 +538,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get setupStorageDescription =>
-      'SpotiFLAC\'ın şarkılarınızı kaydetmek için depolama iznine ihtiyacı var.';
+      'SiwöFlac\'ın şarkılarınızı kaydetmek için depolama iznine ihtiyacı var.';
 
   @override
   String get setupNotificationGranted => 'Bildirim İzni Verildi!';
@@ -2020,7 +2020,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get libraryStorageAccessMessage =>
-      'SpotiFLAC, müzik kitaplığınızı tarayabilmek için depolama alanına erişime ihtiyaç duyar. Lütfen ayarlar bölümünden izin verin.';
+      'SiwöFlac, müzik kitaplığınızı tarayabilmek için depolama alanına erişime ihtiyaç duyar. Lütfen ayarlar bölümünden izin verin.';
 
   @override
   String get libraryFolderNotExist => 'Seçilen klasör mevcut değil';
@@ -2132,7 +2132,7 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get tutorialWelcomeTitle => 'SpotiFLAC\'e hoş geldiniz!';
+  String get tutorialWelcomeTitle => 'SiwöFlac\'e hoş geldiniz!';
 
   @override
   String get tutorialWelcomeDesc =>
@@ -2899,7 +2899,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get safMigrationMessage1 =>
-      'SpotiFLAC now uses Android Storage Access Framework (SAF) for downloads. This fixes \"permission denied\" errors on Android 10+.';
+      'SiwöFlac now uses Android Storage Access Framework (SAF) for downloads. This fixes \"permission denied\" errors on Android 10+.';
 
   @override
   String get safMigrationMessage2 =>
@@ -2981,7 +2981,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get storageModeAppFolderSubtitle =>
-      'Varsayılan olarak Müzik/SpotiFLAC klasörüne kaydeder';
+      'Varsayılan olarak Müzik/SiwöFlac klasörüne kaydeder';
 
   @override
   String get storageModeSaf => 'Özel Klasör (SAF)';
@@ -3616,7 +3616,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String notifDownloadingUpdate(String version) {
-    return 'Downloading SpotiFLAC Mobile v$version';
+    return 'Downloading SiwöFlac v$version';
   }
 
   @override
@@ -3629,7 +3629,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String notifUpdateReadyBody(String version) {
-    return 'SpotiFLAC Mobile v$version downloaded. Tap to install.';
+    return 'SiwöFlac v$version downloaded. Tap to install.';
   }
 
   @override
@@ -4156,7 +4156,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get extensionCustomUrlHandlingShareHint =>
-      'Share links from these sites to SpotiFLAC Mobile and this extension will handle them.';
+      'Share links from these sites to SiwöFlac and this extension will handle them.';
 
   @override
   String extensionSettingsCount(int count) {

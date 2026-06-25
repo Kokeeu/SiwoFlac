@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +11,7 @@ import 'package:neroflac/providers/local_library_provider.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class LibrarySettingsPage extends ConsumerStatefulWidget {
   const LibrarySettingsPage({super.key});
@@ -81,7 +82,7 @@ class _LibrarySettingsPageState extends ConsumerState<LibrarySettingsPage> {
       return true;
     } else if (status.isPermanentlyDenied) {
       if (mounted) {
-        final shouldOpen = await showGlassDialog<bool>(
+        final shouldOpen = await showNeroDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
             title: Text(context.l10n.libraryStorageAccessRequired),
@@ -179,7 +180,7 @@ class _LibrarySettingsPageState extends ConsumerState<LibrarySettingsPage> {
   }
 
   Future<void> _clearLibrary() async {
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.libraryClearConfirmTitle),
@@ -241,9 +242,9 @@ class _LibrarySettingsPageState extends ConsumerState<LibrarySettingsPage> {
 
   void _showAutoScanPicker(BuildContext context, String current) {
     final colorScheme = Theme.of(context).colorScheme;
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (context) => SafeArea(
         child: Column(
@@ -338,7 +339,7 @@ builder: (context) => SafeArea(
             collapsedHeight: kToolbarHeight,
             floating: false,
             pinned: true,
-            backgroundColor: colorScheme.surface,
+            backgroundColor: Colors.transparent,
             surfaceTintColor: Colors.transparent,
             leading: IconButton(
               tooltip: MaterialLocalizations.of(context).backButtonTooltip,

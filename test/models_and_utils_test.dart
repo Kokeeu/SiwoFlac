@@ -268,23 +268,19 @@ void main() {
   group('ThemeSettings', () {
     test('serializes, deserializes, copies, and compares values', () {
       const settings = ThemeSettings(
-        themeMode: ThemeMode.dark,
-        useDynamicColor: false,
         seedColorValue: 0xff123456,
-        useAmoled: true,
       );
 
       final decoded = ThemeSettings.fromJson(settings.toJson());
-      final copied = decoded.copyWith(themeMode: ThemeMode.light);
+      final copied = decoded.copyWith(seedColorValue: 0xffabcdef);
 
       expect(decoded, settings);
       expect(decoded.hashCode, settings.hashCode);
       expect(decoded.seedColor, const Color(0xff123456));
-      expect(copied.themeMode, ThemeMode.light);
-      expect(copied.useAmoled, isTrue);
+      expect(copied.seedColor, const Color(0xffabcdef));
       expect(
-        ThemeSettings.fromJson({'theme_mode': 'invalid'}).themeMode,
-        ThemeMode.system,
+        ThemeSettings.fromJson({}).seedColorValue,
+        kDefaultSeedColor,
       );
     });
   });
@@ -571,7 +567,7 @@ void main() {
         },
         'donate': {
           'enabled': true,
-          'title': 'Support SpotiFLAC Mobile',
+          'title': 'Support NeroFlac',
           'message': 'Help cover infrastructure.',
           'methods': [
             {
@@ -605,7 +601,7 @@ void main() {
         ),
         isTrue,
       );
-      expect(config.donate.title, 'Support SpotiFLAC Mobile');
+      expect(config.donate.title, 'Support NeroFlac');
       expect(config.donate.methods, hasLength(2));
       expect(config.donate.methods.first.color, 0xFFFF5E5B);
       expect(config.donate.methods.last.isWallet, isTrue);

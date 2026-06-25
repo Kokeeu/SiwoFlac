@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/models/settings.dart';
 import 'package:neroflac/models/track.dart';
 import 'package:neroflac/providers/track_provider.dart';
@@ -14,6 +15,7 @@ import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/providers/recent_access_provider.dart';
 import 'package:neroflac/providers/explore_provider.dart';
 import 'package:neroflac/providers/local_library_provider.dart';
+import 'package:neroflac/theme/nero_theme_extension.dart';
 import 'package:neroflac/screens/track_metadata_screen.dart';
 import 'package:neroflac/screens/album_screen.dart';
 import 'package:neroflac/screens/artist_screen.dart';
@@ -33,10 +35,10 @@ import 'package:neroflac/widgets/animation_utils.dart';
 import 'package:neroflac/utils/clickable_metadata.dart';
 import 'package:neroflac/widgets/audio_quality_badges.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
-import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_appbar.dart';
-import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_appbar.dart';
+import 'package:neroflac/widgets/nero/nero_button.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
+import 'package:neroflac/widgets/liquid_glass_surface.dart';
 
 part 'home_tab_helpers.dart';
 part 'home_tab_widgets.dart';
@@ -899,9 +901,9 @@ class _HomeTabState extends ConsumerState<HomeTab>
       if (progressDialogInitialized || !mounted) return;
       progressDialogInitialized = true;
       progressDialogVisible = true;
-      showGlassDialog<void>(
+      showNeroDialog<void>(
         context: this.context,
-        useRootNavigator: false,
+        
         barrierDismissible: false,
         builder: (dialogCtx) => StatefulBuilder(
           builder: (dialogCtx, setState) {
@@ -971,9 +973,9 @@ class _HomeTabState extends ConsumerState<HomeTab>
         // ignore: use_build_context_synchronously
         final l10n = context.l10n;
 
-        final options = await showGlassDialog<_CsvImportOptions>(
+        final options = await showNeroDialog<_CsvImportOptions>(
           context: this.context,
-          useRootNavigator: false,
+          
           builder: (dialogCtx) {
             var skipDownloaded = true;
             return StatefulBuilder(
@@ -1187,6 +1189,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
     );
 
     final colorScheme = Theme.of(context).colorScheme;
+    final nero = NeroTheme.of(context);
     final searchText = _urlController.text.trim();
     final hasSearchInput = searchText.isNotEmpty;
     final isSearchFocused = _searchFocusNode.hasFocus;
@@ -1296,35 +1299,85 @@ class _HomeTabState extends ConsumerState<HomeTab>
           child: CustomScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             slivers: [
-              GlassSliverAppBar(
+              NeroSliverAppBar(
                 child: SliverAppBar(
-                expandedHeight: 120 + topPadding,
+                expandedHeight: 140 + topPadding,
                 collapsedHeight: kToolbarHeight,
                 floating: false,
                 pinned: true,
-                backgroundColor: colorScheme.surface,
+                backgroundColor: Colors.transparent,
                 surfaceTintColor: Colors.transparent,
+                foregroundColor: nero.carbonInk,
+                iconTheme: IconThemeData(color: nero.carbonInk),
                 automaticallyImplyLeading: false,
                 flexibleSpace: LayoutBuilder(
                   builder: (context, constraints) {
-                    final maxHeight = 120 + topPadding;
+                    final maxHeight = 140 + topPadding;
                     final minHeight = kToolbarHeight + topPadding;
                     final expandRatio =
                         ((constraints.maxHeight - minHeight) /
                                 (maxHeight - minHeight))
                             .clamp(0.0, 1.0);
 
-                    return FlexibleSpaceBar(
-                      expandedTitleScale: 1.0,
-                      titlePadding: const EdgeInsets.only(left: 24, bottom: 16),
-                      title: Text(
-                        context.l10n.homeTitle,
-                        style: TextStyle(
-                          fontSize: 20 + (14 * expandRatio),
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
+                    return Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Positioned.fill(
+                          child: Opacity(
+                            opacity: (1.0 - expandRatio).clamp(0.0, 1.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: nero.gradientPageBg,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        // Decorative brand mark at the title baseline — fades
+                        // out as the hero collapses. Renders inline with the
+                        // "Home" title via Row so they share a baseline.
+                        FlexibleSpaceBar(
+                          expandedTitleScale: 1.0,
+                          titlePadding: const EdgeInsets.only(
+                            left: 24,
+                            right: 24,
+                            bottom: 16,
+                          ),
+                          title: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Opacity(
+                                opacity: (expandRatio * 1.2).clamp(0.0, 1.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Image.asset(
+                                    'assets/icon/icon.png',
+                                    width: 56,
+                                    height: 56,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Flexible(
+                                child: Text(
+                                  context.l10n.homeTitle,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    fontSize: 22 + (18 * expandRatio),
+                                    fontWeight: FontWeight.w500,
+                                    height: 1.0,
+                                    letterSpacing: -0.5,
+                                    color: nero.carbon,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     );
                   },
                 ),
@@ -1571,10 +1624,11 @@ class _HomeTabState extends ConsumerState<HomeTab>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.extension_outlined,
-                  size: 56,
-                  color: colorScheme.onSurfaceVariant,
+                Image.asset(
+                  'assets/icon/icon.png',
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 16),
                 Text(
@@ -1612,23 +1666,19 @@ class _HomeTabState extends ConsumerState<HomeTab>
               color: colorScheme.primary,
               shape: BoxShape.circle,
             ),
-            child: Image.asset(
-              'assets/images/logo-transparent.png',
-              fit: BoxFit.contain,
-              errorBuilder: (_, _, _) => ClipRRect(
-                borderRadius: BorderRadius.circular(24),
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 96,
-                  height: 96,
-                  fit: BoxFit.cover,
-                ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(48),
+              child: Image.asset(
+                'assets/icon/icon.png',
+                width: 96,
+                height: 96,
+                fit: BoxFit.cover,
               ),
             ),
           ),
           const SizedBox(height: 16),
           Text(
-            'SpotiFLAC Mobile',
+            'SiwöFlac',
             textAlign: TextAlign.center,
             style: Theme.of(
               context,
@@ -2023,9 +2073,9 @@ class _HomeTabState extends ConsumerState<HomeTab>
   void _showTrackBottomSheet(ExploreItem item) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surface,
       builder: (context) => SafeArea(
         child: Column(
@@ -2200,20 +2250,38 @@ class _HomeTabState extends ConsumerState<HomeTab>
     final uniqueItems = view.uniqueItems;
     final downloadIds = view.downloadIds;
     final hasHiddenDownloads = view.hasHiddenDownloads;
+    final nero = NeroTheme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                context.l10n.homeRecent,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
-                ),
+              Row(
+                children: [
+                  Container(
+                    width: 4,
+                    height: 16,
+                    decoration: BoxDecoration(
+                      color: nero.royalAmethyst,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    context.l10n.homeRecent,
+                    style: TextStyle(
+                      fontFamily: 'Plus Jakarta Sans',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      height: 1.0,
+                      color: nero.carbon,
+                    ),
+                  ),
+                ],
               ),
               if (uniqueItems.isNotEmpty)
                 TextButton(
@@ -2227,49 +2295,64 @@ class _HomeTabState extends ConsumerState<HomeTab>
                   },
                   child: Text(
                     context.l10n.dialogClearAll,
-                    style: TextStyle(color: colorScheme.primary, fontSize: 12),
+                    style: TextStyle(
+                      color: nero.royalAmethyst,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           if (uniqueItems.isEmpty)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: SizedBox(
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+              decoration: BoxDecoration(
+                color: nero.paper,
+                borderRadius: BorderRadius.circular(nero.radiusCards),
+                border: Border.all(color: nero.mist, width: 1),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    width: 64,
+                    height: 64,
+                    decoration: BoxDecoration(
+                      color: nero.mistViolet,
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Icon(
                       hasHiddenDownloads ? Icons.visibility_off : Icons.history,
-                      size: 48,
-                      color: colorScheme.onSurfaceVariant.withValues(
-                        alpha: 0.5,
-                      ),
+                      size: 28,
+                      color: nero.royalAmethyst,
                     ),
-                    const SizedBox(height: 12),
-                    Text(
-                      context.l10n.recentEmpty,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    context.l10n.recentEmpty,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: nero.plumVelvet,
                     ),
-                    if (hasHiddenDownloads) ...[
-                      const SizedBox(height: 16),
-                      OutlinedButton.icon(
-                        onPressed: () {
-                          ref
-                              .read(recentAccessProvider.notifier)
-                              .clearHiddenDownloads();
-                        },
-                        icon: const Icon(Icons.visibility, size: 18),
-                        label: Text(context.l10n.recentShowAllDownloads),
-                      ),
-                    ],
+                  ),
+                  if (hasHiddenDownloads) ...[
+                    const SizedBox(height: 16),
+                    NeroButton(
+                      label: context.l10n.recentShowAllDownloads,
+                      onPressed: () {
+                        ref
+                            .read(recentAccessProvider.notifier)
+                            .clearHiddenDownloads();
+                      },
+                      variant: NeroButtonVariant.ghost,
+                      icon: Icons.visibility,
+                    ),
                   ],
-                ),
+                ],
               ),
             )
           else
@@ -2669,39 +2752,54 @@ child: Padding(
   }
 
   Widget _buildEmptySearchResultWidget(ColorScheme colorScheme) {
+    final nero = NeroTheme.of(context);
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 340),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 86,
-            height: 86,
+            width: 96,
+            height: 96,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: colorScheme.surfaceContainerHighest,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  nero.lavenderGlow.withValues(alpha: 0.4),
+                  nero.mistViolet,
+                ],
+              ),
             ),
             child: Icon(
               Icons.manage_search,
-              size: 46,
-              color: colorScheme.primary,
+              size: 48,
+              color: nero.royalAmethyst,
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           Text(
             context.l10n.errorNoTracksFound,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: colorScheme.onSurface,
-              fontWeight: FontWeight.w600,
+            style: TextStyle(
+              fontFamily: 'Plus Jakarta Sans',
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
+              height: 1.0,
+              color: nero.carbon,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Text(
             context.l10n.searchEmptyResultSubtitle,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+            style: TextStyle(
+              fontFamily: 'Inter',
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              height: 1.4,
+              color: nero.slate,
             ),
           ),
         ],
@@ -2734,9 +2832,9 @@ child: Padding(
 
   void _showSortOptions(ColorScheme colorScheme) {
     var tempSort = _searchSortOption;
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       isScrollControlled: true,
       backgroundColor: colorScheme.surfaceContainerLow,
       builder: (ctx) => StatefulBuilder(
@@ -3188,13 +3286,6 @@ child: Padding(
     required Widget Function(int index, bool showDivider) itemBuilder,
     bool showSortButton = false,
   }) {
-    final sectionColor = Theme.of(context).brightness == Brightness.dark
-        ? Color.alphaBlend(
-            Colors.white.withValues(alpha: 0.08),
-            colorScheme.surface,
-          )
-        : colorScheme.surfaceContainerHighest;
-
     return [
       SliverToBoxAdapter(
         child: Padding(
@@ -3248,16 +3339,13 @@ child: Padding(
           final isLast = index == itemCount - 1;
           return StaggeredListItem(
             index: index,
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: sectionColor,
-                borderRadius: BorderRadius.vertical(
-                  top: isFirst ? const Radius.circular(20) : Radius.zero,
-                  bottom: isLast ? const Radius.circular(20) : Radius.zero,
-                ),
+            child: LiquidGlassSurface(
+              variant: GlassVariant.card,
+              borderRadius: BorderRadius.vertical(
+                top: isFirst ? const Radius.circular(20) : Radius.zero,
+                bottom: isLast ? const Radius.circular(20) : Radius.zero,
               ),
-              clipBehavior: Clip.antiAlias,
+              margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Material(
                 color: Colors.transparent,
                 child: itemBuilder(index, !isLast),
@@ -3478,6 +3566,7 @@ child: Padding(
     String? selectedFilter,
     ColorScheme colorScheme,
   ) {
+    final nero = NeroTheme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
@@ -3486,31 +3575,33 @@ child: Padding(
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 8),
-              child: FilterChip(
-                label: Text(context.l10n.historyFilterAll),
+              child: _GlassFilterChip(
+                label: context.l10n.historyFilterAll,
                 selected: selectedFilter == 'all',
-                onSelected: (_) {
+                nero: nero,
+                onTap: () {
                   ref.read(trackProvider.notifier).setSearchFilter('all');
                   _triggerSearchWithFilter('all');
                 },
-                showCheckmark: false,
               ),
             ),
             ...filters.map((filter) {
               final isSelected = selectedFilter == filter.id;
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
-                child: FilterChip(
-                  label: Text(filter.label ?? filter.id),
+                child: _GlassFilterChip(
+                  label: filter.label ?? filter.id,
                   selected: isSelected,
-                  onSelected: (_) {
-                    ref.read(trackProvider.notifier).setSearchFilter(filter.id);
-                    _triggerSearchWithFilter(filter.id);
-                  },
-                  showCheckmark: false,
-                  avatar: filter.icon != null
+                  nero: nero,
+                  icon: filter.icon != null
                       ? Icon(_getFilterIcon(filter.icon!), size: 18)
                       : null,
+                  onTap: () {
+                    ref
+                        .read(trackProvider.notifier)
+                        .setSearchFilter(filter.id);
+                    _triggerSearchWithFilter(filter.id);
+                  },
                 ),
               );
             }),
@@ -3552,26 +3643,39 @@ child: Padding(
 
   Widget _buildSearchBar(ColorScheme colorScheme) {
     final hasText = _urlController.text.isNotEmpty;
+    final nero = NeroTheme.of(context);
 
     return TextField(
       controller: _urlController,
       focusNode: _searchFocusNode,
       autofocus: false,
+      style: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: nero.carbon,
+      ),
       decoration: InputDecoration(
         hintText: _getSearchHint(),
+        hintStyle: TextStyle(
+          fontFamily: 'Inter',
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: nero.ash,
+        ),
         filled: true,
-        fillColor: settingsGroupColor(context),
+        fillColor: nero.paper,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(28),
-          borderSide: BorderSide(color: colorScheme.outlineVariant),
+          borderRadius: BorderRadius.circular(nero.radiusSearch),
+          borderSide: BorderSide(color: nero.mist, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(28),
-          borderSide: BorderSide(color: colorScheme.outlineVariant),
+          borderRadius: BorderRadius.circular(nero.radiusSearch),
+          borderSide: BorderSide(color: nero.mist, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(28),
-          borderSide: BorderSide(color: colorScheme.primary, width: 2),
+          borderRadius: BorderRadius.circular(nero.radiusSearch),
+          borderSide: BorderSide(color: nero.royalAmethyst, width: 2),
         ),
         prefixIcon: _SearchProviderDropdown(
           onProviderChanged: () {
@@ -3584,6 +3688,8 @@ child: Padding(
             }
           },
         ),
+        prefixIconColor: nero.slate,
+        suffixIconColor: nero.slate,
         suffixIcon: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -3592,6 +3698,7 @@ child: Padding(
                 icon: const Icon(Icons.clear),
                 onPressed: _clearAndRefresh,
                 tooltip: context.l10n.dialogClear,
+                color: nero.slate,
               )
             else ...[
               IconButton(
@@ -3600,6 +3707,7 @@ child: Padding(
                     ? null
                     : () => _importCsv(context, ref),
                 tooltip: context.l10n.homeImportCsvTooltip,
+                color: nero.slate,
               ),
               IconButton(
                 icon: const Icon(Icons.playlist_add_rounded),
@@ -3610,18 +3718,20 @@ child: Padding(
                   ),
                 ),
                 tooltip: context.l10n.importPlaylistTooltip,
+                color: nero.slate,
               ),
               IconButton(
                 icon: const Icon(Icons.paste),
                 onPressed: _pasteFromClipboard,
                 tooltip: context.l10n.actionPaste,
+                color: nero.slate,
               ),
             ],
           ],
         ),
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 16,
+          horizontal: 14,
+          vertical: 10,
         ),
       ),
       onSubmitted: (_) => _onSearchSubmitted(),
@@ -3648,5 +3758,88 @@ child: Padding(
       _performSearch(text);
     }
     _searchFocusNode.unfocus();
+  }
+}
+
+/// Search filter chip with Liquid Glass treatment:
+/// - Selected: solid Prism Teal accent
+/// - Unselected: frosted glass over the gradient
+class _GlassFilterChip extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final NeroTheme nero;
+  final Widget? icon;
+  final VoidCallback onTap;
+
+  const _GlassFilterChip({
+    required this.label,
+    required this.selected,
+    required this.nero,
+    required this.onTap,
+    this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (selected) {
+      return LiquidGlassSurface(
+        variant: GlassVariant.pill,
+        tint: nero.prismTeal.withValues(alpha: 0.85),
+        borderRadius: BorderRadius.circular(20),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null) ...[
+                IconTheme(
+                  data: IconThemeData(color: Colors.white, size: 18),
+                  child: icon!,
+                ),
+                const SizedBox(width: 6),
+              ],
+              Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return LiquidGlassSurface(
+      variant: GlassVariant.pill,
+      borderRadius: BorderRadius.circular(20),
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) ...[
+              IconTheme(
+                data: IconThemeData(color: nero.carbon, size: 18),
+                child: icon!,
+              ),
+              const SizedBox(width: 6),
+            ],
+            Text(
+              label,
+              style: TextStyle(
+                color: nero.carbon,
+                fontWeight: FontWeight.w500,
+                fontSize: 13,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -1,7 +1,7 @@
 {
   "@@locale": "tr",
   "@@last_modified": "2026-04-28",
-  "appName": "SpotiFLAC Mobile",
+  "appName": "SiwöFlac",
   "@appName": {
     "description": "App name - DO NOT TRANSLATE"
   },
@@ -329,7 +329,7 @@
   "@aboutMobileDeveloper": {
     "description": "Role description for mobile dev"
   },
-  "aboutOriginalCreator": "Orijinal SpotiFLAC'ın kurucusu",
+  "aboutOriginalCreator": "Orijinal SiwöFlac'ın kurucusu",
   "@aboutOriginalCreator": {
     "description": "Role description for original creator"
   },
@@ -562,7 +562,7 @@
   "@setupStorageRequired": {
     "description": "Title when storage permission needed"
   },
-  "setupStorageDescription": "SpotiFLAC'ın şarkılarınızı kaydetmek için depolama iznine ihtiyacı var.",
+  "setupStorageDescription": "SiwöFlac'ın şarkılarınızı kaydetmek için depolama iznine ihtiyacı var.",
   "@setupStorageDescription": {
     "description": "Explanation for storage permission"
   },
@@ -2416,7 +2416,7 @@
   "@libraryStorageAccessRequired": {
     "description": "Dialog title for storage permission"
   },
-  "libraryStorageAccessMessage": "SpotiFLAC, müzik kitaplığınızı tarayabilmek için depolama alanına erişime ihtiyaç duyar. Lütfen ayarlar bölümünden izin verin.",
+  "libraryStorageAccessMessage": "SiwöFlac, müzik kitaplığınızı tarayabilmek için depolama alanına erişime ihtiyaç duyar. Lütfen ayarlar bölümünden izin verin.",
   "@libraryStorageAccessMessage": {
     "description": "Dialog message for storage permission"
   },
@@ -2426,7 +2426,7 @@
   },
   "librarySourceDownloaded": "Downloaded",
   "@librarySourceDownloaded": {
-    "description": "Badge for tracks downloaded via SpotiFLAC"
+    "description": "Badge for tracks downloaded via SiwöFlac"
   },
   "librarySourceLocal": "Yerel",
   "@librarySourceLocal": {
@@ -2514,7 +2514,7 @@
       }
     }
   },
-  "tutorialWelcomeTitle": "SpotiFLAC'e hoş geldiniz!",
+  "tutorialWelcomeTitle": "SiwöFlac'e hoş geldiniz!",
   "@tutorialWelcomeTitle": {
     "description": "Tutorial welcome page title"
   },
@@ -3472,7 +3472,7 @@
   "@safMigrationTitle": {
     "description": "Title of SAF migration dialog"
   },
-  "safMigrationMessage1": "SpotiFLAC now uses Android Storage Access Framework (SAF) for downloads. This fixes \"permission denied\" errors on Android 10+.",
+  "safMigrationMessage1": "SiwöFlac now uses Android Storage Access Framework (SAF) for downloads. This fixes \"permission denied\" errors on Android 10+.",
   "@safMigrationMessage1": {
     "description": "First paragraph of SAF migration dialog"
   },
@@ -3584,7 +3584,7 @@
   "@storageModeAppFolder": {
     "description": "Storage mode option - use legacy app folder"
   },
-  "storageModeAppFolderSubtitle": "Varsayılan olarak Müzik/SpotiFLAC klasörüne kaydeder",
+  "storageModeAppFolderSubtitle": "Varsayılan olarak Müzik/SiwöFlac klasörüne kaydeder",
   "@storageModeAppFolderSubtitle": {
     "description": "Subtitle for app folder storage mode"
   },
@@ -4448,7 +4448,7 @@
   "@notifLibraryScanStopped": {
     "description": "Notification body when library scan is cancelled"
   },
-  "notifDownloadingUpdate": "Downloading SpotiFLAC Mobile v{version}",
+  "notifDownloadingUpdate": "Downloading SiwöFlac v{version}",
   "@notifDownloadingUpdate": {
     "description": "Notification title while downloading an app update",
     "placeholders": {
@@ -4476,7 +4476,7 @@
   "@notifUpdateReady": {
     "description": "Notification title when app update download is complete"
   },
-  "notifUpdateReadyBody": "SpotiFLAC Mobile v{version} downloaded. Tap to install.",
+  "notifUpdateReadyBody": "SiwöFlac v{version} downloaded. Tap to install.",
   "@notifUpdateReadyBody": {
     "description": "Notification body when app update is ready to install",
     "placeholders": {
@@ -5340,7 +5340,7 @@
   "@extensionCustomUrlHandlingSubtitle": {
     "description": "Extension detail subtitle for custom URL handling"
   },
-  "extensionCustomUrlHandlingShareHint": "Share links from these sites to SpotiFLAC Mobile and this extension will handle them.",
+  "extensionCustomUrlHandlingShareHint": "Share links from these sites to SiwöFlac and this extension will handle them.",
   "@extensionCustomUrlHandlingShareHint": {
     "description": "Extension detail hint explaining share-to-app URL handling"
   },

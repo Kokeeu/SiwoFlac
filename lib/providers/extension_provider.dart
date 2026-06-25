@@ -264,6 +264,49 @@ class Extension {
   }
 }
 
+bool _isDedicatedServiceExtension(Extension extension, String serviceSlug) {
+  final slug = serviceSlug.trim().toLowerCase();
+  if (slug.isEmpty) return false;
+  if (!extension.enabled) return false;
+  if (extension.replacesBuiltInProviders.contains(slug)) return false;
+  final id = extension.id.toLowerCase();
+  final name = extension.displayName.toLowerCase();
+  return id.contains(slug) || name.contains(slug);
+}
+
+String? _dedicatedDownloadExtensionFor(
+  String serviceSlug,
+  ExtensionState state,
+) {
+  return state.extensions
+      .where((ext) => ext.enabled && ext.hasDownloadProvider)
+      .where((ext) => _isDedicatedServiceExtension(ext, serviceSlug))
+      .map((ext) => ext.id)
+      .firstOrNull;
+}
+
+String? _dedicatedMetadataExtensionFor(
+  String serviceSlug,
+  ExtensionState state,
+) {
+  return state.extensions
+      .where((ext) => ext.enabled && ext.hasMetadataProvider)
+      .where((ext) => _isDedicatedServiceExtension(ext, serviceSlug))
+      .map((ext) => ext.id)
+      .firstOrNull;
+}
+
+String? _dedicatedSearchExtensionFor(
+  String serviceSlug,
+  ExtensionState state,
+) {
+  return state.extensions
+      .where((ext) => ext.enabled && ext.hasCustomSearch)
+      .where((ext) => _isDedicatedServiceExtension(ext, serviceSlug))
+      .map((ext) => ext.id)
+      .firstOrNull;
+}
+
 String resolveEffectiveDownloadService(
   String requestedService,
   ExtensionState extensionState,
@@ -279,6 +322,14 @@ String resolveEffectiveDownloadService(
         .firstOrNull;
     if (matchingExtension != null) {
       return matchingExtension.id;
+    }
+
+    final dedicatedExtension = _dedicatedDownloadExtensionFor(
+      normalizedRequested,
+      extensionState,
+    );
+    if (dedicatedExtension != null) {
+      return dedicatedExtension;
     }
 
     final replacementExtension = enabledDownloadExtensions
@@ -309,6 +360,14 @@ String resolveEffectiveMetadataProvider(
         .firstOrNull;
     if (matchingExtension != null) {
       return matchingExtension.id;
+    }
+
+    final dedicatedExtension = _dedicatedMetadataExtensionFor(
+      normalizedRequested,
+      extensionState,
+    );
+    if (dedicatedExtension != null) {
+      return dedicatedExtension;
     }
 
     final replacementExtension = enabledMetadataExtensions
@@ -1242,6 +1301,10 @@ class ExtensionNotifier extends Notifier<ExtensionState> {
     final normalized = providerId.trim().toLowerCase();
     if (normalized.isEmpty) return null;
 
+    if (_dedicatedDownloadExtensionFor(normalized, state) != null) {
+      return null;
+    }
+
     return state.extensions
         .where(
           (ext) =>
@@ -1257,6 +1320,10 @@ class ExtensionNotifier extends Notifier<ExtensionState> {
     final normalized = providerId.trim().toLowerCase();
     if (normalized.isEmpty) return null;
 
+    if (_dedicatedSearchExtensionFor(normalized, state) != null) {
+      return null;
+    }
+
     return state.extensions
         .where(
           (ext) =>
@@ -1271,6 +1338,10 @@ class ExtensionNotifier extends Notifier<ExtensionState> {
   String? replacedBuiltInMetadataProviderFor(String providerId) {
     final normalized = providerId.trim().toLowerCase();
     if (normalized.isEmpty) return null;
+
+    if (_dedicatedMetadataExtensionFor(normalized, state) != null) {
+      return null;
+    }
 
     return state.extensions
         .where(
@@ -1314,6 +1385,20 @@ class ExtensionNotifier extends Notifier<ExtensionState> {
           'Adopted first enabled download extension as default service: $preferredExtensionId',
         );
       }
+      return;
+    }
+
+    final dedicatedExtensionId = _dedicatedDownloadExtensionFor(
+      currentService,
+      state,
+    );
+    if (dedicatedExtensionId != null) {
+      ref
+          .read(settingsProvider.notifier)
+          .setDefaultService(dedicatedExtensionId);
+      _log.d(
+        'Migrated retired built-in service $currentService to dedicated $dedicatedExtensionId',
+      );
       return;
     }
 
@@ -1362,6 +1447,20 @@ class ExtensionNotifier extends Notifier<ExtensionState> {
           'Adopted first enabled search provider as default: $preferredSearchProvider',
         );
       }
+      return;
+    }
+
+    final dedicatedExtensionId = _dedicatedSearchExtensionFor(
+      currentSearchProvider,
+      state,
+    );
+    if (dedicatedExtensionId != null) {
+      ref
+          .read(settingsProvider.notifier)
+          .setSearchProvider(dedicatedExtensionId);
+      _log.d(
+        'Migrated retired built-in search provider $currentSearchProvider to dedicated $dedicatedExtensionId',
+      );
       return;
     }
 

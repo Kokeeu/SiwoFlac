@@ -1,9 +1,10 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/widgets/priority_settings_scaffold.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class MetadataProviderPriorityPage extends ConsumerStatefulWidget {
   const MetadataProviderPriorityPage({super.key});
@@ -88,7 +89,7 @@ class _MetadataProviderPriorityPageState
   }
 
   Future<bool> _confirmDiscard(BuildContext context) async {
-    final result = await showGlassDialog<bool>(
+    final result = await showNeroDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.dialogDiscardChanges),

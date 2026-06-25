@@ -1,349 +1,517 @@
-import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:neroflac/models/theme_settings.dart';
+import 'package:neroflac/theme/nero_theme_extension.dart';
 
+/// Prisma-inspired light theme for SiwöFlac.
+///
+/// Dark mode is intentionally not supported — the entire design is
+/// calibrated for the Prisma light aesthetic with Liquid Glass chrome
+/// over a Deep Teal gradient page background.
 class AppTheme {
-  static const Color defaultSeedColor = Color(kDefaultSeedColor);
+  static const Color defaultSeedColor = Color(0xFF14B8A6); // Prism Teal
 
-  // Override Flutter's default page transitions. Recent Flutter defaults the
-  // Android route transition to PredictiveBackPageTransitionsBuilder, whose
-  // gesture detector mis-routes the predictive-back gesture to a nested
-  // Navigator instead of the topmost route (flutter#152323). That pops the page
-  // *behind* a root modal/sheet/dialog instead of closing the modal first — a
-  // regression introduced by the Flutter upgrade. Forcing a non-predictive
-  // builder restores the correct back order (close modal, then pop page), at the
-  // cost of the predictive-back preview animation.
-  static const PageTransitionsTheme _pageTransitionsTheme = PageTransitionsTheme(
-    builders: <TargetPlatform, PageTransitionsBuilder>{
-      // Android default is PredictiveBackPageTransitionsBuilder, whose
-      // _PredictiveBackGestureDetector mis-routes the back gesture to a nested
-      // Navigator (flutter#152323). For NON-gesture transitions that builder
-      // already delegates to FadeForwardsPageTransitionsBuilder, so we use it
-      // directly: identical push/pop animation, minus the buggy gesture detector.
-      TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-    },
-  );
+  static const String _displayFontFamily = 'Mona Sans';
+  static const String _bodyFontFamily = 'Inter';
+  static const String _monoFontFamily = 'JetBrains Mono';
 
-  // Dope Security radii
-  static const double _radiusCards = 19.2;
-  static const double _radiusBadgesInputs = 8;
-  static const double _radiusPill = 9999;
+  /// The single theme used across the app. Light only.
+  static ThemeData light() {
+    final scheme = ColorScheme.fromSeed(
+      seedColor: defaultSeedColor,
+      brightness: Brightness.light,
+    ).copyWith(
+      primary: NeroTheme.fallback.prismTeal,
+      onPrimary: NeroTheme.fallback.paper,
+      secondary: NeroTheme.fallback.deepTeal,
+      onSecondary: NeroTheme.fallback.paper,
+      surface: NeroTheme.fallback.paper,
+      onSurface: NeroTheme.fallback.graphite,
+      error: const Color(0xFFDC2626),
+      onError: NeroTheme.fallback.paper,
+    );
+    final nero = NeroTheme.forBrightness(Brightness.light);
+    return _build(scheme, nero);
+  }
 
-  static ThemeData light({ColorScheme? dynamicScheme, Color? seedColor}) {
-    final scheme =
-        dynamicScheme ??
-        ColorScheme.fromSeed(
-          seedColor: seedColor ?? defaultSeedColor,
-          brightness: Brightness.light,
-        );
-
+  static ThemeData _build(ColorScheme scheme, NeroTheme nero) {
     return ThemeData(
       useMaterial3: true,
       colorScheme: scheme,
       pageTransitionsTheme: _pageTransitionsTheme,
-      appBarTheme: _appBarTheme(scheme),
-      cardTheme: _cardTheme(scheme),
-      elevatedButtonTheme: _elevatedButtonTheme(scheme),
-      filledButtonTheme: _filledButtonTheme(scheme),
-      outlinedButtonTheme: _outlinedButtonTheme(scheme),
-      textButtonTheme: _textButtonTheme(scheme),
-      floatingActionButtonTheme: _fabTheme(scheme),
-      inputDecorationTheme: _inputDecorationTheme(scheme),
-      listTileTheme: _listTileTheme(scheme),
-      dialogTheme: _dialogTheme(scheme),
-      bottomSheetTheme: _bottomSheetTheme(scheme),
-      navigationBarTheme: _navigationBarTheme(scheme),
-      snackBarTheme: _snackBarTheme(scheme),
-      progressIndicatorTheme: _progressIndicatorTheme(scheme),
-      switchTheme: _switchTheme(scheme),
-      chipTheme: _chipTheme(scheme),
-      dividerTheme: _dividerTheme(scheme),
-      fontFamily: 'Inter',
+      scaffoldBackgroundColor: Colors.transparent,
+      canvasColor: nero.paper,
+      dialogTheme: _dialogTheme(scheme, nero),
+      extensions: <ThemeExtension<dynamic>>[nero],
+      textTheme: _textTheme(scheme, nero),
+      primaryTextTheme: _textTheme(scheme, nero),
+      appBarTheme: _appBarTheme(scheme, nero),
+      cardTheme: _cardTheme(scheme, nero),
+      elevatedButtonTheme: _elevatedButtonTheme(scheme, nero),
+      filledButtonTheme: _filledButtonTheme(scheme, nero),
+      outlinedButtonTheme: _outlinedButtonTheme(scheme, nero),
+      textButtonTheme: _textButtonTheme(scheme, nero),
+      floatingActionButtonTheme: _fabTheme(scheme, nero),
+      inputDecorationTheme: _inputDecorationTheme(scheme, nero),
+      listTileTheme: _listTileTheme(scheme, nero),
+      bottomSheetTheme: _bottomSheetTheme(scheme, nero),
+      navigationBarTheme: _navigationBarTheme(scheme, nero),
+      snackBarTheme: _snackBarTheme(scheme, nero),
+      progressIndicatorTheme: _progressIndicatorTheme(scheme, nero),
+      switchTheme: _switchTheme(scheme, nero),
+      chipTheme: _chipTheme(scheme, nero),
+      dividerTheme: _dividerTheme(scheme, nero),
+      iconTheme: IconThemeData(color: nero.carbonInk),
+      primaryIconTheme: IconThemeData(color: scheme.onPrimary),
+      fontFamily: _bodyFontFamily,
     );
   }
 
-  static ThemeData dark({
-    ColorScheme? dynamicScheme,
-    Color? seedColor,
-    bool isAmoled = false,
-  }) {
-    final scheme =
-        dynamicScheme ??
-        ColorScheme.fromSeed(
-          seedColor: seedColor ?? defaultSeedColor,
-          brightness: Brightness.dark,
-        );
+  static final PageTransitionsTheme _pageTransitionsTheme =
+      const PageTransitionsTheme();
 
-    return ThemeData(
-      useMaterial3: true,
-      colorScheme: scheme,
-      pageTransitionsTheme: _pageTransitionsTheme,
-      scaffoldBackgroundColor: isAmoled ? const Color(kColorVoid) : null,
-      appBarTheme: _appBarTheme(scheme, isAmoled: isAmoled),
-      cardTheme: _cardTheme(scheme),
-      elevatedButtonTheme: _elevatedButtonTheme(scheme),
-      filledButtonTheme: _filledButtonTheme(scheme),
-      outlinedButtonTheme: _outlinedButtonTheme(scheme),
-      textButtonTheme: _textButtonTheme(scheme),
-      floatingActionButtonTheme: _fabTheme(scheme),
-      inputDecorationTheme: _inputDecorationTheme(scheme),
-      listTileTheme: _listTileTheme(scheme),
-      dialogTheme: _dialogTheme(scheme),
-      bottomSheetTheme: _bottomSheetTheme(scheme),
-      navigationBarTheme: _navigationBarTheme(scheme, isAmoled: isAmoled),
-      snackBarTheme: _snackBarTheme(scheme),
-      progressIndicatorTheme: _progressIndicatorTheme(scheme),
-      switchTheme: _switchTheme(scheme),
-      chipTheme: _chipTheme(scheme),
-      dividerTheme: _dividerTheme(scheme),
-      fontFamily: 'Inter',
+  // === Typography (Prisma scale) ===
+  static TextTheme _textTheme(ColorScheme scheme, NeroTheme nero) {
+    final body = TextStyle(
+      fontFamily: _bodyFontFamily,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+      letterSpacing: 0.48,
+      color: nero.graphite,
     );
-  }
-
-  static AppBarTheme _appBarTheme(
-    ColorScheme scheme, {
-    bool isAmoled = false,
-  }) => AppBarTheme(
-    elevation: 0,
-    scrolledUnderElevation: 0,
-    backgroundColor: Colors.transparent,
-    foregroundColor: scheme.onSurface,
-    surfaceTintColor: Colors.transparent,
-    centerTitle: true,
-    titleTextStyle: TextStyle(
-      color: scheme.onSurface,
-      fontSize: 22,
-      fontWeight: FontWeight.w500,
-      fontFamily: 'Inter',
-    ),
-    systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: scheme.brightness == Brightness.dark
-          ? Brightness.light
-          : Brightness.dark,
-      systemNavigationBarColor: isAmoled
-          ? const Color(kColorVoid)
-          : scheme.surfaceContainer,
-      systemNavigationBarIconBrightness: scheme.brightness == Brightness.dark
-          ? Brightness.light
-          : Brightness.dark,
-    ),
-  );
-
-  static CardThemeData _cardTheme(ColorScheme scheme) => CardThemeData(
-    elevation: 0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(_radiusCards),
-      side: BorderSide(
-        color: scheme.outline.withValues(alpha: 0.3),
-        width: 1,
+    return TextTheme(
+      displayLarge: TextStyle(
+        fontFamily: _displayFontFamily,
+        fontSize: 64,
+        fontWeight: FontWeight.w900,
+        height: 1.13,
+        letterSpacing: 6.4,
+        color: nero.carbonInk,
       ),
-    ),
-    color: scheme.surfaceContainerLow,
-    surfaceTintColor: scheme.surfaceTint,
-  );
+      displayMedium: TextStyle(
+        fontFamily: _displayFontFamily,
+        fontSize: 40,
+        fontWeight: FontWeight.w900,
+        height: 1.2,
+        letterSpacing: 4,
+        color: nero.carbonInk,
+      ),
+      displaySmall: TextStyle(
+        fontFamily: _displayFontFamily,
+        fontSize: 36,
+        fontWeight: FontWeight.w900,
+        height: 1.13,
+        letterSpacing: 3.6,
+        color: nero.carbonInk,
+      ),
+      headlineLarge: TextStyle(
+        fontFamily: _displayFontFamily,
+        fontSize: 30,
+        fontWeight: FontWeight.w700,
+        height: 1.2,
+        letterSpacing: 3,
+        color: nero.carbonInk,
+      ),
+      headlineMedium: TextStyle(
+        fontFamily: _displayFontFamily,
+        fontSize: 24,
+        fontWeight: FontWeight.w700,
+        height: 1.33,
+        letterSpacing: 0.72,
+        color: nero.carbonInk,
+      ),
+      headlineSmall: TextStyle(
+        fontFamily: _displayFontFamily,
+        fontSize: 22,
+        fontWeight: FontWeight.w700,
+        height: 1.33,
+        letterSpacing: 0.44,
+        color: nero.carbonInk,
+      ),
+      titleLarge: TextStyle(
+        fontFamily: _displayFontFamily,
+        fontSize: 22,
+        fontWeight: FontWeight.w700,
+        height: 1.33,
+        letterSpacing: 0.44,
+        color: nero.carbonInk,
+      ),
+      titleMedium: TextStyle(
+        fontFamily: _bodyFontFamily,
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        height: 1.39,
+        letterSpacing: 0.36,
+        color: nero.carbonInk,
+      ),
+      titleSmall: TextStyle(
+        fontFamily: _bodyFontFamily,
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        height: 1.43,
+        letterSpacing: 0.32,
+        color: nero.carbonInk,
+      ),
+      bodyLarge: body.copyWith(fontSize: 18),
+      bodyMedium: body,
+      bodySmall: TextStyle(
+        fontFamily: _bodyFontFamily,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        height: 1.43,
+        letterSpacing: 0.32,
+        color: nero.slate,
+      ),
+      labelLarge: TextStyle(
+        fontFamily: _bodyFontFamily,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        height: 1.5,
+        letterSpacing: 0.48,
+        color: nero.carbonInk,
+      ),
+      labelMedium: TextStyle(
+        fontFamily: _bodyFontFamily,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        height: 1.43,
+        letterSpacing: 0.32,
+        color: nero.carbonInk,
+      ),
+      labelSmall: TextStyle(
+        fontFamily: _bodyFontFamily,
+        fontSize: 11,
+        fontWeight: FontWeight.w500,
+        height: 1.45,
+        letterSpacing: 0.33,
+        color: nero.slate,
+      ),
+    );
+  }
 
-  static ElevatedButtonThemeData _elevatedButtonTheme(ColorScheme scheme) =>
+  // === App Bar — chrome glass handled by LiquidGlassSurface directly ===
+  static AppBarTheme _appBarTheme(ColorScheme scheme, NeroTheme nero) =>
+      AppBarTheme(
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        iconTheme: IconThemeData(color: nero.carbonInk),
+        titleTextStyle: TextStyle(
+          fontFamily: _displayFontFamily,
+          fontWeight: FontWeight.w700,
+          fontSize: 18,
+          color: nero.carbonInk,
+          letterSpacing: 0.4,
+        ),
+      );
+
+  // === Cards — translucent glass surface, applied by caller via LiquidGlassSurface ===
+  static CardThemeData _cardTheme(ColorScheme scheme, NeroTheme nero) =>
+      CardThemeData(
+        elevation: 0,
+        margin: EdgeInsets.zero,
+        color: nero.glassCard,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(nero.radiusLg),
+        ),
+      );
+
+  // === Buttons ===
+  static ElevatedButtonThemeData _elevatedButtonTheme(
+          ColorScheme scheme, NeroTheme nero) =>
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          elevation: 1,
+          backgroundColor: nero.prismTeal,
+          foregroundColor: nero.paper,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(_radiusBadgesInputs),
+            borderRadius: BorderRadius.circular(nero.radiusMd),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: const TextStyle(
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w500,
+            fontFamily: _bodyFontFamily,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.32,
           ),
         ),
       );
 
-  static FilledButtonThemeData _filledButtonTheme(ColorScheme scheme) =>
+  static FilledButtonThemeData _filledButtonTheme(
+          ColorScheme scheme, NeroTheme nero) =>
       FilledButtonThemeData(
         style: FilledButton.styleFrom(
+          backgroundColor: nero.prismTeal,
+          foregroundColor: nero.paper,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(_radiusPill),
+            borderRadius: BorderRadius.circular(nero.radiusMd),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: const TextStyle(
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w500,
+            fontFamily: _bodyFontFamily,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.32,
           ),
         ),
       );
 
-  static OutlinedButtonThemeData _outlinedButtonTheme(ColorScheme scheme) =>
+  static OutlinedButtonThemeData _outlinedButtonTheme(
+          ColorScheme scheme, NeroTheme nero) =>
       OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
+          foregroundColor: nero.carbonInk,
+          side: BorderSide(color: nero.mist, width: 1),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(_radiusBadgesInputs),
+            borderRadius: BorderRadius.circular(nero.radiusMd),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: const TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: _bodyFontFamily,
+            fontSize: 14,
             fontWeight: FontWeight.w500,
+            letterSpacing: 0.32,
           ),
         ),
       );
 
-  static TextButtonThemeData _textButtonTheme(ColorScheme scheme) =>
+  static TextButtonThemeData _textButtonTheme(
+          ColorScheme scheme, NeroTheme nero) =>
       TextButtonThemeData(
         style: TextButton.styleFrom(
+          foregroundColor: nero.prismTeal,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(_radiusBadgesInputs),
+            borderRadius: BorderRadius.circular(nero.radiusMd),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           textStyle: const TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: _bodyFontFamily,
+            fontSize: 14,
             fontWeight: FontWeight.w500,
+            letterSpacing: 0.32,
           ),
         ),
       );
 
-  static FloatingActionButtonThemeData _fabTheme(ColorScheme scheme) =>
+  // === FAB ===
+  static FloatingActionButtonThemeData _fabTheme(
+          ColorScheme scheme, NeroTheme nero) =>
       FloatingActionButtonThemeData(
-        elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusCards)),
-        backgroundColor: scheme.primaryContainer,
-        foregroundColor: scheme.onPrimaryContainer,
+        backgroundColor: nero.prismTeal,
+        foregroundColor: nero.paper,
+        elevation: 0,
+        focusElevation: 0,
+        hoverElevation: 0,
+        highlightElevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(nero.radiusLg),
+        ),
       );
 
-  static InputDecorationTheme _inputDecorationTheme(ColorScheme scheme) =>
+  // === Inputs — subtle hairline border, paper fill ===
+  static InputDecorationTheme _inputDecorationTheme(
+          ColorScheme scheme, NeroTheme nero) =>
       InputDecorationTheme(
         filled: true,
-        fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        fillColor: nero.bone,
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        hintStyle: TextStyle(
+          color: nero.fog,
+          fontFamily: _bodyFontFamily,
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+        ),
+        labelStyle: TextStyle(
+          color: nero.slate,
+          fontFamily: _bodyFontFamily,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_radiusBadgesInputs),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(nero.radiusMd),
+          borderSide: BorderSide(color: nero.mist, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_radiusBadgesInputs),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(nero.radiusMd),
+          borderSide: BorderSide(color: nero.mist, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_radiusBadgesInputs),
-          borderSide: BorderSide(color: scheme.primary, width: 2),
+          borderRadius: BorderRadius.circular(nero.radiusMd),
+          borderSide: BorderSide(color: nero.prismTeal, width: 2),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(_radiusBadgesInputs),
-          borderSide: BorderSide(color: scheme.error, width: 1),
+          borderRadius: BorderRadius.circular(nero.radiusMd),
+          borderSide: const BorderSide(color: Color(0xFFDC2626), width: 1),
         ),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 16,
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(nero.radiusMd),
+          borderSide: const BorderSide(color: Color(0xFFDC2626), width: 2),
         ),
-        labelStyle: const TextStyle(fontFamily: 'Inter'),
-        hintStyle: const TextStyle(fontFamily: 'Inter'),
       );
 
-  static ListTileThemeData _listTileTheme(ColorScheme scheme) =>
+  // === List tile ===
+  static ListTileThemeData _listTileTheme(
+          ColorScheme scheme, NeroTheme nero) =>
       ListTileThemeData(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusBadgesInputs)),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        titleTextStyle: const TextStyle(fontFamily: 'Inter'),
-        subtitleTextStyle: const TextStyle(fontFamily: 'Inter'),
+        iconColor: nero.carbonInk,
+        textColor: nero.graphite,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       );
 
-  static DialogThemeData _dialogTheme(ColorScheme scheme) => DialogThemeData(
-    elevation: 0,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusCards)),
-    backgroundColor: scheme.surfaceContainerHigh.withValues(alpha: 0.78),
-    surfaceTintColor: Colors.transparent,
-    barrierColor: Colors.black.withValues(alpha: 0.45),
-    titleTextStyle: TextStyle(
-      color: scheme.onSurface,
-      fontFamily: 'Inter',
-      fontSize: 20,
-      fontWeight: FontWeight.w500,
-    ),
-    contentTextStyle: TextStyle(
-      color: scheme.onSurface,
-      fontFamily: 'Inter',
-      fontSize: 14,
-    ),
-  );
-
-  static BottomSheetThemeData _bottomSheetTheme(ColorScheme scheme) =>
+  // === Bottom sheet ===
+  static BottomSheetThemeData _bottomSheetTheme(
+          ColorScheme scheme, NeroTheme nero) =>
       BottomSheetThemeData(
         elevation: 0,
         modalElevation: 0,
-        showDragHandle: false,
-        backgroundColor: scheme.surfaceContainerHigh.withValues(alpha: 0.85),
+        
+        dragHandleColor: nero.fog,
+        backgroundColor: nero.paper,
         surfaceTintColor: Colors.transparent,
-        modalBackgroundColor: scheme.surfaceContainerHigh.withValues(alpha: 0.85),
+        modalBackgroundColor: nero.paper,
         modalBarrierColor: Colors.black.withValues(alpha: 0.4),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(_radiusCards)),
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.vertical(top: Radius.circular(nero.radius2xl)),
         ),
       );
 
+  // === NavigationBar — handled via LiquidGlassSurface in main_shell ===
   static NavigationBarThemeData _navigationBarTheme(
-    ColorScheme scheme, {
-    bool isAmoled = false,
-  }) => NavigationBarThemeData(
-    elevation: 0,
-    backgroundColor: isAmoled ? const Color(kColorVoid) : scheme.surfaceContainer,
-    indicatorColor: scheme.secondaryContainer,
-    surfaceTintColor: isAmoled ? Colors.transparent : scheme.surfaceTint,
-    labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-    labelTextStyle: WidgetStateProperty.all(
-      const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.w500),
-    ),
-  );
+          ColorScheme scheme, NeroTheme nero) =>
+      NavigationBarThemeData(
+        elevation: 0,
+        height: 72,
+        backgroundColor: Colors.transparent,
+        indicatorColor: nero.glassPill,
+        surfaceTintColor: Colors.transparent,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return IconThemeData(color: nero.deepTeal, size: 24);
+          }
+          return IconThemeData(color: nero.slate, size: 24);
+        }),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return TextStyle(
+              fontFamily: _bodyFontFamily,
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+              height: 1.0,
+              color: nero.carbonInk,
+            );
+          }
+          return TextStyle(
+            fontFamily: _bodyFontFamily,
+            fontWeight: FontWeight.w500,
+            fontSize: 12,
+            height: 1.0,
+            color: nero.slate,
+          );
+        }),
+      );
 
-  static SnackBarThemeData _snackBarTheme(ColorScheme scheme) =>
+  // === SnackBar ===
+  static SnackBarThemeData _snackBarTheme(
+          ColorScheme scheme, NeroTheme nero) =>
       SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusBadgesInputs)),
-        backgroundColor: scheme.inverseSurface.withValues(alpha: 0.78),
-        contentTextStyle: TextStyle(
-          color: scheme.onInverseSurface,
-          fontFamily: 'Inter',
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(nero.radiusMd),
         ),
-        actionTextColor: scheme.inversePrimary,
-        disabledActionTextColor: scheme.onInverseSurface.withValues(alpha: 0.4),
+        backgroundColor: nero.carbonInk,
+        contentTextStyle: TextStyle(
+          fontFamily: _bodyFontFamily,
+          fontWeight: FontWeight.w500,
+          fontSize: 14,
+          color: nero.paper,
+        ),
+        actionTextColor: nero.prismTeal,
       );
 
+  // === Progress ===
   static ProgressIndicatorThemeData _progressIndicatorTheme(
-    ColorScheme scheme,
-  ) => ProgressIndicatorThemeData(
-    color: scheme.primary,
-    linearTrackColor: scheme.surfaceContainerHighest,
-    circularTrackColor: scheme.surfaceContainerHighest,
-  );
+          ColorScheme scheme, NeroTheme nero) =>
+      ProgressIndicatorThemeData(
+        color: nero.prismTeal,
+        linearTrackColor: nero.mist,
+        circularTrackColor: nero.mist,
+      );
 
-  static SwitchThemeData _switchTheme(ColorScheme scheme) => SwitchThemeData(
-    thumbColor: WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.selected)) {
-        return scheme.onPrimary;
-      }
-      return scheme.outline;
-    }),
-    trackColor: WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.selected)) {
-        return scheme.primary;
-      }
-      return scheme.surfaceContainerHighest;
-    }),
-    thumbIcon: WidgetStateProperty.resolveWith((states) {
-      if (states.contains(WidgetState.selected)) {
-        return Icon(Icons.check, color: scheme.primary);
-      }
-      return null;
-    }),
-  );
+  // === Switch ===
+  static SwitchThemeData _switchTheme(ColorScheme scheme, NeroTheme nero) =>
+      SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) return nero.paper;
+          return nero.fog;
+        }),
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) return nero.prismTeal;
+          return nero.mist;
+        }),
+        trackOutlineColor:
+            WidgetStateProperty.all(Colors.transparent),
+      );
 
-  static ChipThemeData _chipTheme(ColorScheme scheme) => ChipThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radiusBadgesInputs)),
-    backgroundColor: scheme.surfaceContainerLow,
-    selectedColor: scheme.secondaryContainer,
-    labelStyle: const TextStyle(fontFamily: 'Inter'),
-  );
+  // === Chip ===
+  static ChipThemeData _chipTheme(ColorScheme scheme, NeroTheme nero) =>
+      ChipThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(nero.radiusMd),
+          side: BorderSide.none,
+        ),
+        backgroundColor: nero.bone,
+        selectedColor: nero.prismTeal,
+        labelStyle: TextStyle(
+          fontFamily: _bodyFontFamily,
+          fontWeight: FontWeight.w500,
+          fontSize: 12,
+          color: nero.carbonInk,
+        ),
+        secondaryLabelStyle: TextStyle(
+          fontFamily: _bodyFontFamily,
+          fontWeight: FontWeight.w500,
+          fontSize: 12,
+          color: nero.paper,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        side: BorderSide.none,
+      );
 
-  static DividerThemeData _dividerTheme(ColorScheme scheme) =>
-      DividerThemeData(color: scheme.outlineVariant, thickness: 1, space: 1);
+  // === Divider ===
+  static DividerThemeData _dividerTheme(ColorScheme scheme, NeroTheme nero) =>
+      DividerThemeData(
+        color: nero.mist,
+        thickness: 1,
+        space: 1,
+      );
+
+  // === Dialog ===
+  static DialogThemeData _dialogTheme(ColorScheme scheme, NeroTheme nero) =>
+      DialogThemeData(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(nero.radiusLg),
+        ),
+        backgroundColor: nero.paper,
+        surfaceTintColor: Colors.transparent,
+        titleTextStyle: TextStyle(
+          fontFamily: _displayFontFamily,
+          fontWeight: FontWeight.w700,
+          fontSize: 20,
+          color: nero.carbonInk,
+        ),
+        contentTextStyle: TextStyle(
+          fontFamily: _bodyFontFamily,
+          fontWeight: FontWeight.w400,
+          fontSize: 14,
+          color: nero.graphite,
+          height: 1.43,
+        ),
+      );
 }

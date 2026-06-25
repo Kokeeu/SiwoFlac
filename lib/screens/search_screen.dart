@@ -11,7 +11,7 @@ import 'package:neroflac/widgets/animation_utils.dart';
 import 'package:neroflac/utils/clickable_metadata.dart';
 import 'package:neroflac/widgets/audio_quality_badges.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
-import 'package:neroflac/widgets/glass/glass_appbar.dart';
+import 'package:neroflac/widgets/nero/nero_appbar.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   final String query;
@@ -54,7 +54,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: GlassAppBar(
+      appBar: NeroAppBar(
         child: AppBar(
         title: TextField(
           controller: _searchController,
@@ -227,7 +227,6 @@ class _SearchTrackTile extends ConsumerWidget {
               ...buildQualityBadges(
                 audioQuality: track.audioQuality,
                 audioModes: track.audioModes,
-                colorScheme: colorScheme,
               ),
             ],
           ),

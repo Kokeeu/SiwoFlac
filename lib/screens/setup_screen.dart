@@ -8,11 +8,12 @@ import 'package:go_router/go_router.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/l10n/supported_locales.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/utils/file_access.dart';
 import 'package:neroflac/utils/logger.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 final _log = AppLogger('SetupScreen');
 
@@ -164,7 +165,7 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
   }
 
   Future<bool?> _showAndroid11StorageDialog() {
-    return showGlassDialog<bool>(
+    return showNeroDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.setupStorageAccessRequired),
@@ -213,7 +214,7 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
   }
 
   Future<void> _showPermissionDeniedDialog(String permissionType) async {
-    await showGlassDialog<void>(
+    await showNeroDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.setupPermissionRequired(permissionType)),
@@ -275,7 +276,7 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
         if (_selectedTreeUri == null || _selectedTreeUri!.isEmpty) {
           final defaultDir = await _getDefaultDirectory();
           if (mounted) {
-            final useDefault = await showGlassDialog<bool>(
+            final useDefault = await showNeroDialog<bool>(
               context: context,
               builder: (context) => AlertDialog(
                 title: Text(context.l10n.setupUseDefaultFolder),
@@ -310,9 +311,9 @@ class _SetupScreenState extends ConsumerState<SetupScreen> {
 
   Future<void> _showIOSDirectoryOptions() async {
     final colorScheme = Theme.of(context).colorScheme;
-    await showGlassModalBottomSheet<void>(
+    await showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (ctx) => SafeArea(
         child: Column(
@@ -561,7 +562,7 @@ builder: (ctx) => SafeArea(
     final progress = (_currentStep + 1) / _totalSteps;
 
     return Scaffold(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Column(
           children: [
@@ -683,7 +684,7 @@ builder: (ctx) => SafeArea(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/logo-transparent.png',
+                  'assets/icon/icon.png',
                   width: logoSize,
                   height: logoSize,
                   fit: BoxFit.contain,

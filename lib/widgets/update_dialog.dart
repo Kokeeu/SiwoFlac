@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:neroflac/constants/app_info.dart';
@@ -5,7 +6,7 @@ import 'package:neroflac/services/update_checker.dart';
 import 'package:neroflac/services/apk_downloader.dart';
 import 'package:neroflac/services/notification_service.dart';
 import 'package:neroflac/l10n/l10n.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class UpdateDialog extends StatefulWidget {
   final UpdateInfo updateInfo;
@@ -400,7 +401,7 @@ Future<void> showUpdateDialog(
   required UpdateInfo updateInfo,
   required VoidCallback onDisableUpdates,
 }) async {
-  return showGlassDialog(
+  return showNeroDialog(
     context: context,
     builder: (context) => UpdateDialog(
       updateInfo: updateInfo,

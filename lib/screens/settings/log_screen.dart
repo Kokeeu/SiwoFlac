@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart' show ShareParams, SharePlus;
@@ -5,7 +6,7 @@ import 'package:neroflac/l10n/l10n.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/logger.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 final RegExp _domainPattern = RegExp(
   r'domain:\s*([^\s,]+)',
@@ -93,7 +94,7 @@ class _LogScreenState extends State<LogScreen> {
   }
 
   void _clearLogs() {
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.logClearLogsTitle),
@@ -147,7 +148,7 @@ class _LogScreenState extends State<LogScreen> {
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,

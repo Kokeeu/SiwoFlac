@@ -12,7 +12,6 @@ import 'package:neroflac/screens/settings/library_settings_page.dart';
 import 'package:neroflac/screens/settings/app_settings_page.dart';
 import 'package:neroflac/screens/settings/about_page.dart';
 import 'package:neroflac/screens/settings/cache_management_page.dart';
-import 'package:neroflac/screens/settings/donate_page.dart';
 import 'package:neroflac/screens/settings/log_screen.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
@@ -35,7 +34,7 @@ class SettingsTab extends ConsumerWidget {
           collapsedHeight: kToolbarHeight,
           floating: false,
           pinned: true,
-          backgroundColor: colorScheme.surface,
+          backgroundColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
           automaticallyImplyLeading: false,
           flexibleSpace: LayoutBuilder(
@@ -165,12 +164,6 @@ class SettingsTab extends ConsumerWidget {
                     title: l10n.logTitle,
                     subtitle: l10n.settingsLogsSubtitle,
                     onTap: () => _navigateTo(context, const LogScreen()),
-                  ),
-                  SettingsItem(
-                    icon: Icons.favorite_outline,
-                    title: l10n.settingsDonate,
-                    subtitle: l10n.settingsDonateSubtitle,
-                    onTap: () => _navigateTo(context, const DonatePage()),
                   ),
                   SettingsItem(
                     icon: Icons.info_outline,

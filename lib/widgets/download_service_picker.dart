@@ -1,10 +1,11 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/l10n/l10n.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class DownloadServicePicker extends ConsumerStatefulWidget {
   final String? trackName;
@@ -36,9 +37,9 @@ class DownloadServicePicker extends ConsumerStatefulWidget {
   }) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 isScrollControlled: true,
       builder: (context) => DownloadServicePicker(

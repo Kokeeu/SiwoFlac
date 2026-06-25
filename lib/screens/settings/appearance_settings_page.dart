@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/l10n/l10n.dart';
@@ -6,7 +7,7 @@ import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/providers/theme_provider.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class AppearanceSettingsPage extends ConsumerWidget {
   const AppearanceSettingsPage({super.key});
@@ -28,7 +29,7 @@ class AppearanceSettingsPage extends ConsumerWidget {
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -58,52 +59,13 @@ class AppearanceSettingsPage extends ConsumerWidget {
             SliverToBoxAdapter(
               child: SettingsGroup(
                 children: [
-                  SettingsSwitchItem(
+                  SettingsItem(
                     icon: Icons.wallpaper,
-                    title: context.l10n.appearanceDynamicColor,
-                    subtitle: context.l10n.appearanceDynamicColorSubtitle,
-                    value: themeSettings.useDynamicColor,
-                    onChanged: (value) => ref
-                        .read(themeProvider.notifier)
-                        .setUseDynamicColor(value),
+                    title: 'Brand color',
+                    subtitle: 'Prisma anchor — Prism Teal',
+                    trailing: _SeedSwatch(color: themeSettings.seedColor),
                     showDivider: false,
                   ),
-                ],
-              ),
-            ),
-            if (!themeSettings.useDynamicColor)
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                  child: _ColorPalettePicker(
-                    currentColor: themeSettings.seedColorValue,
-                    onColorSelected: (color) =>
-                        ref.read(themeProvider.notifier).setSeedColor(color),
-                  ),
-                ),
-              ),
-
-            SliverToBoxAdapter(
-              child: SettingsSectionHeader(title: context.l10n.sectionTheme),
-            ),
-            SliverToBoxAdapter(
-              child: SettingsGroup(
-                children: [
-                  _ThemeModeSelector(
-                    currentMode: themeSettings.themeMode,
-                    onChanged: (mode) =>
-                        ref.read(themeProvider.notifier).setThemeMode(mode),
-                  ),
-                  if (Theme.of(context).brightness == Brightness.dark)
-                    SettingsSwitchItem(
-                      icon: Icons.brightness_2,
-                      title: context.l10n.appearanceAmoledDark,
-                      subtitle: context.l10n.appearanceAmoledDarkSubtitle,
-                      value: themeSettings.useAmoled,
-                      onChanged: (value) =>
-                          ref.read(themeProvider.notifier).setUseAmoled(value),
-                      showDivider: false,
-                    ),
                 ],
               ),
             ),
@@ -323,113 +285,20 @@ class _ThemePreviewCard extends StatelessWidget {
   }
 }
 
-class _ColorPalettePicker extends StatelessWidget {
-  final int currentColor;
-  final ValueChanged<Color> onColorSelected;
-  const _ColorPalettePicker({
-    required this.currentColor,
-    required this.onColorSelected,
-  });
-
-  static const _colors = [
-    Color(0xFF1DB954),
-    Color(0xFF6750A4),
-    Color(0xFF0061A4),
-    Color(0xFF006E1C),
-    Color(0xFFBA1A1A),
-    Color(0xFF984061),
-    Color(0xFF7D5260),
-    Color(0xFF006874),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: _colors.map((color) {
-          final isSelected = color.toARGB32() == currentColor;
-          final colorHex = color
-              .toARGB32()
-              .toRadixString(16)
-              .padLeft(8, '0')
-              .toUpperCase();
-          return Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: Semantics(
-              button: true,
-              selected: isSelected,
-              label: context.l10n.appearanceSelectAccentColor(colorHex),
-              child: GestureDetector(
-                onTap: () => onColorSelected(color),
-                child: _ColorPaletteItem(color: color, isSelected: isSelected),
-              ),
-            ),
-          );
-        }).toList(),
-      ),
-    );
-  }
-}
-
-class _ColorPaletteItem extends StatelessWidget {
+class _SeedSwatch extends StatelessWidget {
   final Color color;
-  final bool isSelected;
-
-  const _ColorPaletteItem({required this.color, required this.isSelected});
+  const _SeedSwatch({required this.color});
 
   @override
   Widget build(BuildContext context) {
-    final scheme = ColorScheme.fromSeed(
-      seedColor: color,
-      brightness: Theme.of(context).brightness,
-    );
-    final size = 64.0;
-
-    return Stack(
-      children: [
-        Container(
-          width: size,
-          height: size,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(child: Container(color: scheme.primaryContainer)),
-                    Expanded(child: Container(color: scheme.tertiaryContainer)),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(color: scheme.secondaryContainer),
-                    ),
-                    Expanded(child: Container(color: scheme.surfaceContainer)),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        if (isSelected)
-          Positioned.fill(
-            child: Center(
-              child: Container(
-                padding: const EdgeInsets.all(4),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(Icons.check, size: 16, color: scheme.primary),
-              ),
-            ),
-          ),
-      ],
+    return Container(
+      width: 28,
+      height: 28,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: const Color(0xFFE6E2E3), width: 1),
+      ),
     );
   }
 }
@@ -771,10 +640,10 @@ class _LanguageSelector extends StatelessWidget {
 
   void _showLanguagePicker(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
-      backgroundColor: colorScheme.surface,
+      
+      backgroundColor: Colors.transparent,
 builder: (context) => SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,

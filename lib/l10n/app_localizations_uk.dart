@@ -9,7 +9,7 @@ class AppLocalizationsUk extends AppLocalizations {
   AppLocalizationsUk([String locale = 'uk']) : super(locale);
 
   @override
-  String get appName => 'SpotiFLAC Mobile';
+  String get appName => 'SiwöFlac';
 
   @override
   String get navHome => 'Головна';
@@ -356,7 +356,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get aboutMobileDeveloper => 'Розробник мобільної версії';
 
   @override
-  String get aboutOriginalCreator => 'Творець оригінального SpotiFLAC';
+  String get aboutOriginalCreator => 'Творець оригінального SiwöFlac';
 
   @override
   String get aboutLogoArtist =>
@@ -540,7 +540,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get setupStorageDescription =>
-      'SpotiFLAC потребує дозволу на збереження, щоб зберегти завантажені музичні файли.';
+      'SiwöFlac потребує дозволу на збереження, щоб зберегти завантажені музичні файли.';
 
   @override
   String get setupNotificationGranted => 'Дозвіл на сповіщення надано!';
@@ -2025,7 +2025,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get libraryStorageAccessMessage =>
-      'SpotiFLAC потрібен доступ до сховища для сканування вашої музичної бібліотеки. Надайте дозвіл у налаштуваннях.';
+      'SiwöFlac потрібен доступ до сховища для сканування вашої музичної бібліотеки. Надайте дозвіл у налаштуваннях.';
 
   @override
   String get libraryFolderNotExist => 'Вибрана папка не існує';
@@ -2139,7 +2139,7 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
-  String get tutorialWelcomeTitle => 'Ласкаво просимо до SpotiFLAC!';
+  String get tutorialWelcomeTitle => 'Ласкаво просимо до SiwöFlac!';
 
   @override
   String get tutorialWelcomeDesc =>
@@ -2914,7 +2914,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get safMigrationMessage1 =>
-      'SpotiFLAC тепер використовує Android Storage Access Framework (SAF) для завантажень. Це виправляє помилки «відмовлено в доступі» на Android 10+.';
+      'SiwöFlac тепер використовує Android Storage Access Framework (SAF) для завантажень. Це виправляє помилки «відмовлено в доступі» на Android 10+.';
 
   @override
   String get safMigrationMessage2 =>
@@ -2997,7 +2997,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get storageModeAppFolderSubtitle =>
-      'Saves to Music/SpotiFLAC by default';
+      'Saves to Music/SiwöFlac by default';
 
   @override
   String get storageModeSaf => 'Custom Folder (SAF)';
@@ -3637,7 +3637,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String notifDownloadingUpdate(String version) {
-    return 'Downloading SpotiFLAC Mobile v$version';
+    return 'Downloading SiwöFlac v$version';
   }
 
   @override
@@ -3650,7 +3650,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String notifUpdateReadyBody(String version) {
-    return 'SpotiFLAC Mobile v$version downloaded. Tap to install.';
+    return 'SiwöFlac v$version downloaded. Tap to install.';
   }
 
   @override
@@ -4177,7 +4177,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get extensionCustomUrlHandlingShareHint =>
-      'Share links from these sites to SpotiFLAC Mobile and this extension will handle them.';
+      'Share links from these sites to SiwöFlac and this extension will handle them.';
 
   @override
   String extensionSettingsCount(int count) {

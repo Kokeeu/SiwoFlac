@@ -1,6 +1,7 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:neroflac/l10n/l10n.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class _BatchProgress {
   final int current;
@@ -66,7 +67,7 @@ class BatchProgressDialog extends StatefulWidget {
     _activeNotifier = ValueNotifier(const _BatchProgress());
     final notifier = _activeNotifier!;
 
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (_) => BatchProgressDialog._(

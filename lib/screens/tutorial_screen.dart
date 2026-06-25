@@ -86,7 +86,7 @@ class _TutorialScreenState extends ConsumerState<TutorialScreen> {
     final actionButtonHeight = (56 * scale) + ((textScale - 1) * 6);
 
     return Scaffold(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Column(
           children: [

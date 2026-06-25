@@ -3,6 +3,7 @@ import 'dart:ui' show ImageFilter;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/models/track.dart';
 import 'package:neroflac/providers/download_queue_provider.dart';
 import 'package:neroflac/providers/extension_provider.dart';
@@ -18,10 +19,10 @@ import 'package:neroflac/widgets/download_service_picker.dart';
 import 'package:neroflac/widgets/playlist_picker_sheet.dart';
 import 'package:neroflac/widgets/track_collection_quick_actions.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
+import 'package:neroflac/widgets/nero/nero_appbar.dart';
 import 'package:neroflac/widgets/audio_quality_badges.dart';
 import 'package:neroflac/widgets/cached_cover_image.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class PlaylistScreen extends ConsumerStatefulWidget {
   final String playlistName;
@@ -268,12 +269,12 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
   Widget _buildAppBar(BuildContext context, ColorScheme colorScheme) {
     final expandedHeight = _calculateExpandedHeight(context);
 
-    return GlassSliverAppBar(
+    return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
       stretch: true,
-      backgroundColor: colorScheme.surface,
+      backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       title: AnimatedOpacity(
         duration: const Duration(milliseconds: 200),
@@ -710,7 +711,7 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
 
   void _confirmDownloadAll(BuildContext context) {
     if (_tracks.isEmpty) return;
-    showGlassDialog<void>(
+    showNeroDialog<void>(
       context: context,
       builder: (dialogContext) {
         final colorScheme = Theme.of(dialogContext).colorScheme;
@@ -958,7 +959,6 @@ class _PlaylistTrackItem extends ConsumerWidget {
               ...buildQualityBadges(
                 audioQuality: track.audioQuality,
                 audioModes: track.audioModes,
-                colorScheme: colorScheme,
               ),
               if (isInLocalLibrary || isInHistory) ...[
                 const SizedBox(width: 6),

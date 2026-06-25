@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/l10n/l10n.dart';
@@ -5,7 +6,7 @@ import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/screens/settings/lyrics_provider_priority_page.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class LyricsSettingsPage extends ConsumerWidget {
   const LyricsSettingsPage({super.key});
@@ -26,7 +27,7 @@ class LyricsSettingsPage extends ConsumerWidget {
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -239,9 +240,9 @@ class LyricsSettingsPage extends ConsumerWidget {
     String current,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 builder: (context) => SafeArea(
         child: Column(
@@ -311,9 +312,9 @@ builder: (context) => SafeArea(
     final colorScheme = Theme.of(context).colorScheme;
     final controller = TextEditingController(text: currentLanguage);
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
       backgroundColor: colorScheme.surfaceContainerHigh,
 isScrollControlled: true,
       builder: (context) => Padding(

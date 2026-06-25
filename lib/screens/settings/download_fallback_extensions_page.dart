@@ -1,3 +1,4 @@
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neroflac/l10n/l10n.dart';
@@ -5,7 +6,7 @@ import 'package:neroflac/providers/extension_provider.dart';
 import 'package:neroflac/providers/settings_provider.dart';
 import 'package:neroflac/utils/app_bar_layout.dart';
 import 'package:neroflac/widgets/settings_group.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class DownloadFallbackExtensionsPage extends ConsumerStatefulWidget {
   const DownloadFallbackExtensionsPage({super.key});
@@ -72,7 +73,7 @@ class _DownloadFallbackExtensionsPageState
               collapsedHeight: kToolbarHeight,
               floating: false,
               pinned: true,
-              backgroundColor: colorScheme.surface,
+              backgroundColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,
               leading: IconButton(
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -206,7 +207,7 @@ class _DownloadFallbackExtensionsPageState
   }
 
   Future<bool> _confirmDiscard(BuildContext context) async {
-    final result = await showGlassDialog<bool>(
+    final result = await showNeroDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.dialogDiscardChanges),

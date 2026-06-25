@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:neroflac/l10n/l10n.dart';
+import 'package:neroflac/widgets/show_helpers.dart';
 import 'package:neroflac/models/track.dart';
 import 'package:neroflac/providers/download_queue_provider.dart';
 import 'package:neroflac/providers/extension_provider.dart';
@@ -13,8 +14,7 @@ import 'package:neroflac/utils/file_access.dart';
 import 'package:neroflac/utils/image_cache_utils.dart';
 import 'package:neroflac/utils/lyrics_metadata_helper.dart';
 import 'package:neroflac/utils/nav_bar_inset.dart';
-import 'package:neroflac/widgets/glass/glass_appbar.dart';
-import 'package:neroflac/widgets/glass/glass_sliver_appbar.dart';
+import 'package:neroflac/widgets/nero/nero_appbar.dart';
 import 'package:neroflac/services/library_database.dart';
 import 'package:neroflac/services/ffmpeg_service.dart';
 import 'package:neroflac/services/replaygain_service.dart';
@@ -26,7 +26,7 @@ import 'package:neroflac/services/platform_bridge.dart';
 import 'package:neroflac/providers/local_library_provider.dart';
 import 'package:neroflac/providers/playback_provider.dart';
 import 'package:neroflac/widgets/animation_utils.dart';
-import 'package:neroflac/widgets/glass/glass_sheet.dart';
+import 'package:neroflac/widgets/nero/nero_show.dart';
 
 class LocalAlbumScreen extends ConsumerStatefulWidget {
   final String albumName;
@@ -170,7 +170,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
 
   Future<void> _deleteSelected(List<LocalLibraryItem> currentTracks) async {
     final count = _selectedIds.length;
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.downloadedAlbumDeleteSelected),
@@ -261,7 +261,7 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
 
     if (tracks.isEmpty) {
       return Scaffold(
-        appBar: GlassAppBar(child: AppBar(title: Text(widget.albumName))),
+        appBar: NeroAppBar(child: AppBar(title: Text(widget.albumName))),
         body: Center(child: Text(context.l10n.noTracksFoundForAlbum)),
       );
     }
@@ -320,12 +320,12 @@ class _LocalAlbumScreenState extends ConsumerState<LocalAlbumScreen> {
     final expandedHeight = _calculateExpandedHeight(context);
     final commonQuality = _commonQualityCache;
 
-    return GlassSliverAppBar(
+    return NeroSliverAppBar(
       child: SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
       stretch: true,
-      backgroundColor: colorScheme.surface,
+      backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       title: AnimatedOpacity(
         duration: const Duration(milliseconds: 200),
@@ -961,7 +961,7 @@ onTap: _isSelectionMode
       return;
     }
 
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.queueFlacAction),
@@ -1226,9 +1226,9 @@ onTap: _isSelectionMode
       _selectedIds.length,
     );
 
-    showGlassModalBottomSheet<void>(
+    showNeroSheet<void>(
       context: context,
-      useRootNavigator: true,
+      
 builder: (sheetContext) => BatchConvertSheet(
         formats: formats,
         title: sheetTitle,
@@ -1279,7 +1279,7 @@ builder: (sheetContext) => BatchConvertSheet(
     }
 
     final isLossless = isLosslessConversionTarget(targetFormat);
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.selectionBatchConvertConfirmTitle),
@@ -1544,7 +1544,7 @@ builder: (sheetContext) => BatchConvertSheet(
 
     if (selected.isEmpty) return;
 
-    final confirmed = await showGlassDialog<bool>(
+    final confirmed = await showNeroDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(ctx.l10n.replayGainBatchConfirmTitle),
