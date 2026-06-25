@@ -365,15 +365,6 @@ Empezar con A (ya funciona, no requiere código). Solo implementar B/C si el usu
 
 Configuración de firma de release para generar APKs firmados publicables en GitHub Releases.
 
-### 13.1 Método elegido: Local (Método A)
-
-- Keystore generado en `C:/Users/jason/keystores/neroflac.jks`
-- Alias: `neroflac`, password: `4ND3R50N` (almacenado en 1Password)
-- Datos del certificado: Kokeeu kafufu / Mobile / Kokeeu / Madrid / Madrid / ES
-- `android/key.properties` creado (NO commiteado, en `.gitignore`)
-- `android/app/build.gradle.kts` modificado para usar el keystore
-- `pubspec.yaml` bumped a `4.7.0+136`
-
 ### 13.2 Publicación
 
 - `gh` CLI instalado vía winget
