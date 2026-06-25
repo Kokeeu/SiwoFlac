@@ -67,9 +67,6 @@ ios/Flutter/Flutter.podspec
 # Extension folder
 extension/
 
-# Agent instructions
-AGENTS.md
-
 # Temp/misc
 .tmp/
 nul
